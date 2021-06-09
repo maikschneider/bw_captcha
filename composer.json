@@ -1,7 +1,7 @@
 {
   "name": "blueways/bw-captcha",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 extension that integrates gregwar/captcha into tx_forms",
+  "description": "TYPO3 extension that integrates gregwar/captcha into Form",
   "require": {
     "gregwar/captcha": "^1.1",
     "ext-json": "*"
@@ -13,7 +13,7 @@
   },
   "require-dev": {
     "typo3/cms-base-distribution": "9.5.*",
-    "bk2k/bootstrap-package": "9.1.*",
+    "bk2k/bootstrap-package": "9.1.*"
   },
   "extra": {
     "typo3/cms": {

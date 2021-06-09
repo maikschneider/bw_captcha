@@ -2,3 +2,6 @@
 public
 !Resources/Public
 .idea
+vendor
+bin
+var
