@@ -22,4 +22,12 @@ call_user_func(function () {
             ['source' => 'EXT:bw_captcha/Resources/Public/Images/form-captcha-icon.svg']
         );
     }
+
+    // register cache table
+    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'])) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'] = array();
+    }
+
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'][1571076908]
+        = \Blueways\BwCaptcha\Hooks\FormElementCaptchaHook::class;
 });
