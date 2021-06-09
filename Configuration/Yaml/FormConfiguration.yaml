@@ -75,5 +75,3 @@ TYPO3:
           validatorsDefinition:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Validation\Validator\CaptchaValidator'
-              options:
-                phrase: ''
