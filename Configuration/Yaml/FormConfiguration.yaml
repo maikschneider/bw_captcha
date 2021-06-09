@@ -22,7 +22,7 @@ TYPO3:
               renderingOptions:
                 translation:
                   translationFiles:
-                    10: 'EXT:bw_captcha/Resources/Private/Language/locallang.xlf'
+                    20: 'EXT:bw_captcha/Resources/Private/Language/locallang.xlf'
                 partialRootPaths:
                   1623227656: 'EXT:bw_captcha/Resources/Private/Frontend/Partials/'
                 templateRootPaths:
@@ -31,10 +31,46 @@ TYPO3:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Domain\Model\FormElements\CaptchaElement'
               formEditor:
-                label: formEditor.elements.Captcha
+                label: 'Captcha'
                 group: custom
                 groupSorting: 1000
                 iconIdentifier: 't3-form-captcha-element'
+                editors:
+                  100:
+                    identifier: header
+                    templateName: Inspector-FormElementHeaderEditor
+                  200:
+                    identifier: label
+                    templateName: Inspector-TextEditor
+                    label: formEditor.elements.FormElement.editor.label.label
+                    propertyPath: label
+                  230:
+                    identifier: elementDescription
+                    templateName: Inspector-TextEditor
+                    label: formEditor.elements.FormElement.editor.elementDescription.label
+                    propertyPath: properties.elementDescription
+                  700:
+                    identifier: gridColumnViewPortConfiguration
+                    templateName: Inspector-GridColumnViewPortConfigurationEditor
+                    label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.label
+                    configurationOptions:
+                      viewPorts:
+                        10:
+                          viewPortIdentifier: xs
+                          label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.xs.label
+                        20:
+                          viewPortIdentifier: sm
+                          label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.sm.label
+                        30:
+                          viewPortIdentifier: md
+                          label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.md.label
+                        40:
+                          viewPortIdentifier: lg
+                          label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.lg.label
+                      numbersOfColumnsToUse:
+                        label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.numbersOfColumnsToUse.label
+                        propertyPath: 'properties.gridColumnClassAutoConfiguration.viewPorts.{@viewPortIdentifier}.numbersOfColumnsToUse'
+                        fieldExplanationText: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.numbersOfColumnsToUse.fieldExplanationText
 
           validatorsDefinition:
             Captcha:

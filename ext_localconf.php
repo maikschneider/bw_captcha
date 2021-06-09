@@ -19,7 +19,7 @@ call_user_func(function () {
         $iconRegistry->registerIcon(
             't3-form-captcha-element',
             \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:bw_captcha/ext_icon.svg']
+            ['source' => 'EXT:bw_captcha/Resources/Public/Images/form-captcha-icon.svg']
         );
     }
 });
