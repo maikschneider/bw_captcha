@@ -20,6 +20,9 @@ TYPO3:
           formElementsDefinition:
             Form:
               renderingOptions:
+                translation:
+                  translationFiles:
+                    10: 'EXT:bw_captcha/Resources/Private/Language/locallang.xlf'
                 partialRootPaths:
                   1623227656: 'EXT:bw_captcha/Resources/Private/Frontend/Partials/'
                 templateRootPaths:
@@ -28,7 +31,7 @@ TYPO3:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Domain\Model\FormElements\CaptchaElement'
               formEditor:
-                label: 'Captcha'
+                label: formEditor.elements.Captcha
                 group: custom
                 groupSorting: 1000
                 iconIdentifier: 't3-form-captcha-element'
@@ -36,27 +39,5 @@ TYPO3:
           validatorsDefinition:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Validation\Validator\CaptchaValidator'
-#      mixins:
-#        formElementMixins:
-#          formEmailFinisherMixin:
-#            editors:
-#              1000:
-#                selectOptions:
-#                  30:
-#                    value: 'bwemail'
-#                    label: 'Responsive HTML'
-#              1117:
-#                identifier: 'template'
-#                templateName: 'Inspector-SingleSelectEditor'
-#                label: 'Responsive Email Template'
-#                propertyPath: 'options.template'
-#                selectOptions:
-#                  10:
-#                    value: 'Form/Default'
-#                    label: 'Default'
-#                  20:
-#                    value: 'Form/Default'
-#                    label: 'Custom1'
-#                  30:
-#                    value: 'Form/Default'
-#                    label: 'Custom1'
+              options:
+                phrase: ''

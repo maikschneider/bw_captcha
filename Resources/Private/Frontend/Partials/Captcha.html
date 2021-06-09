@@ -5,6 +5,7 @@
 	  data-namespace-typo3-fluid="true">
 <formvh:renderRenderable renderable="{element}">
 	<f:render partial="Field/Field" arguments="{element: element}" contentAs="elementContent">
+		<img src="{element.properties.captcha}" alt="Captcha image" /><br /><br />
 		<f:form.textfield property="{element.identifier}"
 						  id="{element.uniqueIdentifier}"
 						  class="{element.properties.elementClassAttribute} form-control"
