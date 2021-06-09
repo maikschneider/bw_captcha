@@ -6,6 +6,7 @@
 		<img src="{element.properties.captcha}" alt="Captcha image" /><br /><br />
 		<f:form.textfield property="{element.identifier}"
 						  id="{element.uniqueIdentifier}"
+						  value=""
 						  class="{element.properties.elementClassAttribute} form-control"
 						  errorClass="{element.properties.elementErrorClassAttribute}"
 						  additionalAttributes="{formvh:translateElementProperty(element: element, property: 'fluidAdditionalAttributes')}"/>

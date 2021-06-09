@@ -2,12 +2,6 @@ TYPO3:
   CMS:
     Form:
 
-      mixins:
-        formElementMixins:
-          CaptchaMixin:
-            __inheritances:
-              10: 'TYPO3.CMS.Form.mixins.formElementMixins.FormElementMixin'
-
       prototypes:
         standard:
           formEditor:
