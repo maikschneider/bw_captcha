@@ -1,0 +1,44 @@
+{
+  "name": "blueways/bw-captcha",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 extension that integrates gregwar/captcha into tx_forms",
+  "require": {
+    "gregwar/captcha": "^1.1",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Blueways\\BwCaptcha\\": "Classes"
+    }
+  },
+  "require-dev": {
+    "typo3/cms-base-distribution": "9.5.*",
+    "bk2k/bootstrap-package": "9.1.*",
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": "public",
+      "extension-key": "bw_captcha"
+    }
+  },
+  "config": {
+    "bin-dir": "bin",
+    "vendor-dir": "vendor",
+    "platform": {
+      "php": "7.4"
+    }
+  },
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Maik Schneider",
+      "email": "m.schneider@blueways.de",
+      "homepage": "https://www.blueways.de",
+      "role": "Developer"
+    }
+  ],
+  "keywords": [
+    "TYPO3"
+  ]
+}
