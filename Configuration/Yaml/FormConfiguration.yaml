@@ -1,0 +1,62 @@
+TYPO3:
+  CMS:
+    Form:
+
+      mixins:
+        formElementMixins:
+          CaptchaMixin:
+            __inheritances:
+              10: 'TYPO3.CMS.Form.mixins.formElementMixins.FormElementMixin'
+
+      prototypes:
+        standard:
+          formEditor:
+            dynamicRequireJsModules:
+              additionalViewModelModules:
+                1623227656: 'TYPO3/CMS/BwCaptcha/Backend/FormEditor/CaptchaViewModel'
+            formEditorPartials:
+              FormElement-Captcha: 'Stage/SimpleTemplate'
+
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                partialRootPaths:
+                  1623227656: 'EXT:bw_captcha/Resources/Private/Frontend/Partials/'
+                templateRootPaths:
+                  1623227656: 'EXT:bw_captcha/Resources/Private/Frontend/Templates/'
+
+            Captcha:
+              implementationClassName: 'Blueways\BwCaptcha\Domain\Model\FormElements\CaptchaElement'
+              formEditor:
+                label: 'Captcha'
+                group: custom
+                groupSorting: 1000
+                iconIdentifier: 't3-form-captcha-element'
+
+          validatorsDefinition:
+            Captcha:
+              implementationClassName: 'Blueways\BwCaptcha\Validation\Validator\CaptchaValidator'
+#      mixins:
+#        formElementMixins:
+#          formEmailFinisherMixin:
+#            editors:
+#              1000:
+#                selectOptions:
+#                  30:
+#                    value: 'bwemail'
+#                    label: 'Responsive HTML'
+#              1117:
+#                identifier: 'template'
+#                templateName: 'Inspector-SingleSelectEditor'
+#                label: 'Responsive Email Template'
+#                propertyPath: 'options.template'
+#                selectOptions:
+#                  10:
+#                    value: 'Form/Default'
+#                    label: 'Default'
+#                  20:
+#                    value: 'Form/Default'
+#                    label: 'Custom1'
+#                  30:
+#                    value: 'Form/Default'
+#                    label: 'Custom1'

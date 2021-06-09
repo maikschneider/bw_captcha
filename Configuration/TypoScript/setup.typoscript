@@ -1,0 +1,12 @@
+plugin.tx_form {
+	settings {
+		yamlConfigurations {
+			1623227656 = EXT:bw_captcha/Configuration/Yaml/FormConfiguration.yaml
+		}
+	}
+	view {
+		partialRootPaths {
+			1623227656 = EXT:bw_captcha/Resources/Private/Frontend/Partials/
+		}
+	}
+}
