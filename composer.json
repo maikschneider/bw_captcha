@@ -4,7 +4,7 @@
   "description": "TYPO3 extension that integrates gregwar/captcha into Form",
   "require": {
     "gregwar/captcha": "^1.1",
-    "ext-json": "*"
+    "typo3/cms-core": "^9.0 || ^10.0"
   },
   "autoload": {
     "psr-4": {
@@ -12,6 +12,7 @@
     }
   },
   "require-dev": {
+    "roave/security-advisories": "dev-latest",
     "typo3/cms-base-distribution": "^10.0",
     "typo3/cms-lowlevel": "^10.0",
     "bk2k/bootstrap-package": "^11.0"
@@ -30,7 +31,9 @@
       "php": "7.4"
     }
   },
-  "license": "GPL-3.0-or-later",
+  "license": [
+    "GPL-2.0-or-later"
+  ],
   "authors": [
     {
       "name": "Maik Schneider",

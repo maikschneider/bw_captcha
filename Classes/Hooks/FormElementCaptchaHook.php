@@ -3,6 +3,7 @@
 namespace Blueways\BwCaptcha\Hooks;
 
 use Gregwar\Captcha\CaptchaBuilder;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
@@ -15,15 +16,14 @@ class FormElementCaptchaHook
     {
         if ($renderable->getType() === 'Captcha') {
 
+            // build captcha and add to template
             $builder = new CaptchaBuilder;
             $builder->build();
-
             $renderable->setProperty('captcha', $builder->inline());
 
+            // save captcha secret in cache
             $phrase = $builder->getPhrase();
-            $cache = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class)->getCache('bwcaptcha');
-
-            /** @var Random $random */
+            $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
             $random = GeneralUtility::makeInstance(Random::class);
             $cacheIdentifier = $random->generateRandomHexString(32);
             $cache->set($cacheIdentifier, $phrase, [], 86400);

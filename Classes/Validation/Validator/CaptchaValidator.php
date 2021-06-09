@@ -21,6 +21,7 @@ class CaptchaValidator extends AbstractValidator
             return;
         }
 
+        // get captcha secret from cache and compare 
         $cache = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class)->getCache('bwcaptcha');
         $phrase = $cache->get($cacheIdentifier);
 
