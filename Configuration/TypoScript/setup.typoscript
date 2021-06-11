@@ -4,9 +4,14 @@ plugin.tx_form {
 			1623227656 = EXT:bw_captcha/Configuration/Yaml/FormConfiguration.yaml
 		}
 	}
+
 	view {
 		partialRootPaths {
 			1623227656 = EXT:bw_captcha/Resources/Private/Frontend/Partials/
 		}
 	}
+
+	_CSS_DEFAULT_STYLE (
+		.captcha { margin-bottom: .5rem; }
+	)
 }
