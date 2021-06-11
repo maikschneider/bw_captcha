@@ -1,0 +1,17 @@
+pipelines:
+  branches:
+    development:
+      - step:
+          name: Clean up
+          image: drud/ddev-webserver:v1.16.1
+          script:
+            - export BITBUCKET_COMMIT_SHORT=$(echo $BITBUCKET_COMMIT | cut -c1-7)
+            - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+            - git fetch origin
+            - git checkout master
+            - git merge -s ours development --no-commit --no-ff
+            - git checkout development .
+            - chmod +x Build/Scripts/cleanUp.sh && ./Build/Scripts/cleanUp.sh
+            - git add *
+            - 'git commit -a -m "build: $BITBUCKET_COMMIT_SHORT" --allow-empty'
+            - git push origin master --tags
