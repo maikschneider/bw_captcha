@@ -5,6 +5,7 @@ $EM_CONF[$_EXTKEY] = [
     'description' => 'Captcha element for the TYPO3 form component. The captcha generation uses Gregwar/Captcha, no Google or 3rd party includes.',
     'category' => 'plugin',
     'author' => 'Maik Schneider',
+    'author_company' => 'blueways',
     'author_email' => 'm.schneider@blueways.de',
     'state' => 'stable',
     'internal' => '',
