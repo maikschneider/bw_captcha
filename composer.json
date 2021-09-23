@@ -3,20 +3,19 @@
   "type": "typo3-cms-extension",
   "description": "TYPO3 extension that integrates gregwar/captcha into Form",
   "require": {
-    "gregwar/captcha": "^1.1",
     "typo3/cms-core": "^9.0 || ^10.0 || ^11.0"
   },
   "autoload": {
     "psr-4": {
-      "Blueways\\BwCaptcha\\": "Classes"
+      "Blueways\\BwCaptcha\\": "Classes",
+      "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha"
     }
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
     "typo3/cms-base-distribution": "^10.0",
     "typo3/cms-lowlevel": "^10.0",
-    "bk2k/bootstrap-package": "^11.0",
-    "clue/phar-composer": "^1.0"
+    "bk2k/bootstrap-package": "^11.0"
   },
   "extra": {
     "typo3/cms": {
