@@ -25,7 +25,7 @@ TYPO3:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Domain\Model\FormElements\CaptchaElement'
               properties:
-                showReloadButton: checkbox
+                showReloadButton:
               formEditor:
                 label: 'Captcha'
                 group: custom
