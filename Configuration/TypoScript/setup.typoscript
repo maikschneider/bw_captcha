@@ -13,5 +13,6 @@ plugin.tx_form {
 
 	_CSS_DEFAULT_STYLE (
 		.captcha { margin-bottom: .5rem; }
+		.captcha a { margin-left: .5rem; }
 	)
 }
