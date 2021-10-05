@@ -2,7 +2,7 @@
 
 namespace Blueways\BwCaptcha\Controller;
 
-use Gregwar\Captcha\CaptchaBuilder;
+use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -20,8 +20,8 @@ class CaptchaController extends ActionController
     public function refreshAction(string $cacheIdentifier)
     {
         // create new captcha
-        $builder = new CaptchaBuilder;
-        $builder->build();
+        $builder = CaptchaBuilderUtility::getBuilderFromSettings($this->settings);
+        $builder->build((int)$this->settings['width'], (int)$this->settings['height']);
         $captcha = $builder->inline();
 
         // override captcha secret in cache

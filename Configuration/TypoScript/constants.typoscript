@@ -4,6 +4,35 @@ plugin.tx_bwcaptcha {
 	}
 
 	settings {
-		refreshButton =
+		# cat=bw_captcha; type=boolean; label=Show reload button
+		refreshButton = 0
+		# cat=bw_captcha; type=int; label=The length of the captcha
+		length = 5
+		# cat=bw_captcha; type=int; label=The charset of the captcha
+		charset = abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+		# cat=bw_captcha; type=int; label=The width of the image
+		width = 150
+		# cat=bw_captcha; type=int; label=The height of the image
+		height = 40
+		# cat=bw_captcha; type=string; label=Text color (e.g. 255,0,0)
+		textColor =
+		# cat=bw_captcha; type=string; label=Line color (e.g. 0,0,0)
+        lineColor =
+        # cat=bw_captcha; type=string; label=Background color (e.g. 255,255,255)
+        backgroundColor =
+        # cat=bw_captcha; type=boolean; label=Distortion
+        distortion =
+        # cat=bw_captcha; type=int; label=The maximum number of lines to draw in front of
+        maxFrontLines =
+        # cat=bw_captcha; type=int; label=The maximum number of lines to draw behind
+        maxBehindLines =
+        # cat=bw_captcha; type=int; label=The maximum angle of char
+        maxAngle =
+        # cat=bw_captcha; type=int; label=The maximum offset of char
+        maxOffset =
+        # cat=bw_captcha; type=boolean; label=Is the interpolation enabled?
+        interpolation =
+        # cat=bw_captcha; type=boolean; label=Ignore all effects
+        ignoreAllEffects =
 	}
 }

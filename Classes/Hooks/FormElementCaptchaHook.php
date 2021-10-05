@@ -2,7 +2,7 @@
 
 namespace Blueways\BwCaptcha\Hooks;
 
-use Gregwar\Captcha\CaptchaBuilder;
+use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
@@ -22,10 +22,11 @@ class FormElementCaptchaHook
             $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
             $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
+            $settings = $typoScript['plugin']['tx_bwcaptcha']['settings'];
 
             // build captcha and add to template
-            $builder = new CaptchaBuilder;
-            $builder->build();
+            $builder = CaptchaBuilderUtility::getBuilderFromSettings($settings);
+            $builder->build((int)$settings['width'], (int)$settings['height']);
             $renderable->setProperty('captcha', $builder->inline());
 
             // save captcha secret in cache
@@ -36,7 +37,8 @@ class FormElementCaptchaHook
             $cache->set($cacheIdentifier, $phrase, [], 86400);
 
             // inject cache identifier for captcha refresh button
-            if (isset($typoScript['plugin']['tx_bwcaptcha']) && $typoScript['plugin']['tx_bwcaptcha']['settings']['refreshButton']) {
+            if (isset($typoScript['plugin']['tx_bwcaptcha']) && filter_var($settings['refreshButton'],
+                    FILTER_VALIDATE_BOOLEAN)) {
                 $renderable->setProperty('cacheIdentifier', $cacheIdentifier);
             }
 

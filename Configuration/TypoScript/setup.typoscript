@@ -28,6 +28,20 @@ plugin.tx_form {
 plugin.tx_bwcaptcha {
 	settings {
 		refreshButton = {$plugin.tx_bwcaptcha.settings.refreshButton}
+		length = {$plugin.tx_bwcaptcha.settings.length}
+		charset = {$plugin.tx_bwcaptcha.settings.charset}
+		width = {$plugin.tx_bwcaptcha.settings.width}
+		height = {$plugin.tx_bwcaptcha.settings.height}
+		textColor = {$plugin.tx_bwcaptcha.settings.textColor}
+		lineColor = {$plugin.tx_bwcaptcha.settings.lineColor}
+		backgroundColor = {$plugin.tx_bwcaptcha.settings.backgroundColor}
+		distortion = {$plugin.tx_bwcaptcha.settings.distortion}
+		maxFrontLines = {$plugin.tx_bwcaptcha.settings.maxFrontLines}
+		maxBehindLines = {$plugin.tx_bwcaptcha.settings.maxBehindLines}
+		maxAngle = {$plugin.tx_bwcaptcha.settings.maxAngle}
+		maxOffset = {$plugin.tx_bwcaptcha.settings.maxOffset}
+		interpolation = {$plugin.tx_bwcaptcha.settings.interpolation}
+		ignoreAllEffects = {$plugin.tx_bwcaptcha.settings.ignoreAllEffects}
 	}
 }
 
