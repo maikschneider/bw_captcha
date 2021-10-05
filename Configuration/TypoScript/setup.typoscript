@@ -8,6 +8,7 @@ plugin.tx_form {
 	view {
 		partialRootPaths {
 			1623227656 = EXT:bw_captcha/Resources/Private/Frontend/Partials/
+			1623227657 = {$plugin.tx_bwcaptcha.view.partialRootPath}
 		}
 	}
 
@@ -15,4 +16,23 @@ plugin.tx_form {
 		.captcha { margin-bottom: .5rem; }
 		.captcha a { margin-left: .5rem; }
 	)
+}
+
+plugin.tx_bwcaptcha {
+	settings {
+		refreshButton = {$plugin.tx_bwcaptcha.settings.refreshButton}
+	}
+}
+
+captcha = PAGE
+captcha {
+   typeNum = 3413
+   10 =< tt_content.list.20.bwcaptcha_pi1
+
+   config {
+      disableAllHeaderCode = 1
+      additionalHeaders.10.header = Content-type:application/json
+      xhtml_cleaning = 0
+      admPanel = 0
+   }
 }
