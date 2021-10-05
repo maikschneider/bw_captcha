@@ -18,7 +18,7 @@ class FormElementCaptchaHook
     {
         if ($renderable->getType() === 'Captcha') {
 
-            // get TyppoScript
+            // get TypoScript
             $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
             $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
