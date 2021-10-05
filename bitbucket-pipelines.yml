@@ -6,6 +6,7 @@ pipelines:
           image: drud/ddev-webserver:v1.16.1
           script:
             - export BITBUCKET_COMMIT_SHORT=$(echo $BITBUCKET_COMMIT | cut -c1-7)
+            - git fetch --unshallow
             - git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
             - git fetch origin
             - git checkout master
