@@ -10,7 +10,7 @@ This extension adds a captcha element for the TYPO3 form component. The captcha 
 * Activate extension
 * Include TypoScript template
 
-## Configure
+## Usage
 
 Add the captcha element via Form Editor to your form or directly to your yaml form. 
 
@@ -29,4 +29,17 @@ renderables:
         properties:
           fluidAdditionalAttributes:
             required: required
+```
+
+### Configuration
+
+To modify the captcha output, you can use the following TypoScript **constants**:
+
+```typo3_typoscript
+plugin.tx_bwcaptcha {
+    settings {
+        # show reload button
+        refreshButton = 1
+    }
+}
 ```
