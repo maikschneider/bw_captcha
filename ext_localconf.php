@@ -28,6 +28,17 @@ call_user_func(function () {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'] = array();
     }
 
+    // register hook for captcha generation
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/form']['beforeRendering'][1630333427]
         = \Blueways\BwCaptcha\Hooks\FormElementCaptchaHook::class;
+
+    // register plugin for captcha refresh endpoint
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'Blueways.BwCaptcha',
+        'Pi1',
+        [
+            \Blueways\BwCaptcha\Controller\CaptchaController::class => 'refresh'
+        ],
+        []
+    );
 });
