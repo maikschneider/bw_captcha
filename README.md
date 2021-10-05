@@ -38,8 +38,51 @@ To modify the captcha output, you can use the following TypoScript **constants**
 ```typo3_typoscript
 plugin.tx_bwcaptcha {
     settings {
-        # show reload button
-        refreshButton = 1
+        # Show reload button
+        refreshButton =
+        
+        # The length of the captcha
+        length =
+        
+        # The charset of the captcha
+        charset =
+        
+        # The width of the image
+        width =
+        
+        # The height of the image
+        height =
+        
+        # Text color (e.g. 255,0,0)
+        textColor =
+        
+        # Line color (e.g. 0,0,0)
+        lineColor =
+        
+        # Background color (e.g. 255,255,255)
+        backgroundColor =
+        
+        # Distortion
+        distortion =
+        
+        # The maximum number of lines to draw in front of
+        maxFrontLines =
+        
+        # The maximum number of lines to draw behind
+        maxBehindLines =
+        
+        # The maximum angle of char
+        maxAngle =
+        
+        # The maximum offset of char
+        maxOffset =
+        
+        # Is the interpolation enabled?
+        interpolation =
+        
+        # Ignore all effects
+        ignoreAllEffects =
+        
     }
 }
 ```
