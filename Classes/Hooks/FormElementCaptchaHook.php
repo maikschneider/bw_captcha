@@ -42,6 +42,11 @@ class FormElementCaptchaHook
                 $renderable->setProperty('cacheIdentifier', $cacheIdentifier);
             }
 
+            // add autocomplete="off"
+            $properties = $renderable->getProperties();
+            $properties['fluidAdditionalAttributes']['autocomplete'] = 'off';
+            $renderable->setProperty('fluidAdditionalAttributes', $properties['fluidAdditionalAttributes']);
+
             // write cache identifier to cookie
             $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaId', $cacheIdentifier);
             $GLOBALS['TSFE']->fe_user->storeSessionData();
