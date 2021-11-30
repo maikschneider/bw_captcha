@@ -44,6 +44,8 @@ call_user_func(function () {
         [
             $captchaControllerName => 'refresh'
         ],
-        []
+        [
+            $captchaControllerName => 'refresh'
+        ]
     );
 });
