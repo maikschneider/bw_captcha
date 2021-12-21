@@ -55,5 +55,6 @@ captcha {
       additionalHeaders.10.header = Content-type:application/json
       xhtml_cleaning = 0
       admPanel = 0
+      debug = 0
    }
 }
