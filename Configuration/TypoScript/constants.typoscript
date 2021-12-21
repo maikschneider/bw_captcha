@@ -8,7 +8,7 @@ plugin.tx_bwcaptcha {
 		refreshButton = 0
 		# cat=bw_captcha; type=int; label=The length of the captcha
 		length = 5
-		# cat=bw_captcha; type=int; label=The charset of the captcha
+		# cat=bw_captcha; type=string; label=The charset of the captcha
 		charset = abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
 		# cat=bw_captcha; type=int; label=The width of the image
 		width = 150
