@@ -29,7 +29,7 @@ call_user_func(function () {
     $captchaControllerName = $version['version_main'] > 9 ? \Blueways\BwCaptcha\Controller\CaptchaController::class : 'Captcha';
 
     // register cache table
-    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'])) {
+    if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'] = array();
     }
 
