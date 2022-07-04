@@ -47,8 +47,16 @@ class FormElementCaptchaHook
             $properties['fluidAdditionalAttributes']['autocomplete'] = 'off';
             $renderable->setProperty('fluidAdditionalAttributes', $properties['fluidAdditionalAttributes']);
 
+            // Add CaptchaId to Array
+            $currentCaptchaId = md5($formRuntime->getFormDefinition()->getPersistenceIdentifier() . $renderable->getIdentifier());
+            $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds') ?? [];
+            if (!in_array($currentCaptchaId, $captchaIds)) {
+                $captchaIds[] = $currentCaptchaId;
+                $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaIds', $captchaIds);
+            }
+
             // write cache identifier to cookie
-            $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaId', $cacheIdentifier);
+            $GLOBALS['TSFE']->fe_user->setKey('ses', $currentCaptchaId, $cacheIdentifier);
             $GLOBALS['TSFE']->fe_user->storeSessionData();
         }
     }
