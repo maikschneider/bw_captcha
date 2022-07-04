@@ -14,20 +14,40 @@ class CaptchaValidator extends AbstractValidator
 
     protected function isValid($value)
     {
-        $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaId');
+        $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds');
 
-        if (!$cacheIdentifier) {
+        if (!$captchaIds || !is_array($captchaIds) || !is_string($value)) {
             $this->displayError();
             return;
         }
 
-        // get captcha secret from cache and compare 
+        foreach ($captchaIds as $captchaId) {
+            $isValid = $this->validateCaptcha($captchaId, $value);
+            if ($isValid) {
+                return;
+            }
+        }
+
+        $this->displayError();
+    }
+
+    protected function validateCaptcha($captchaId, $value): bool
+    {
+        $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', $captchaId);
+
+        if (!$cacheIdentifier) {
+            return false;
+        }
+
+        // get captcha secret from cache and compare
         $cache = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class)->getCache('bwcaptcha');
         $phrase = $cache->get($cacheIdentifier);
 
-        if (!$phrase || !is_string($value) || $phrase !== $value) {
-            $this->displayError();
+        if ($phrase && $phrase === $value) {
+            return true;
         }
+
+        return false;
     }
 
     protected function displayError()
