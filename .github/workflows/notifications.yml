@@ -1,0 +1,9 @@
+name: Send notifications
+
+on: [ release, issues, issue_comment, watch, pull_request ]
+
+jobs:
+  notification:
+    uses: maikschneider/reusable-workflows/.github/workflows/notifications.yml@main
+    secrets:
+      teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
