@@ -15,7 +15,8 @@
     "roave/security-advisories": "dev-latest",
     "typo3/cms-base-distribution": "^12.0",
     "typo3/cms-lowlevel": "^12.0",
-    "bk2k/bootstrap-package": "dev-master"
+    "bk2k/bootstrap-package": "dev-master",
+    "ssch/typo3-rector": "dev-main"
   },
   "extra": {
     "typo3/cms": {
