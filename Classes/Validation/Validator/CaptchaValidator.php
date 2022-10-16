@@ -16,9 +16,10 @@ class CaptchaValidator extends AbstractValidator
     ];
 
     /**
+     * @param mixed $value
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    protected function isValid(mixed $value): void
+    protected function isValid($value): void
     {
         $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds');
 
