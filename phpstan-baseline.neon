@@ -1,0 +1,61 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\View\\\\ViewInterface\\:\\:setVariablesToRender\\(\\)\\.$#"
+			count: 1
+			path: Classes/Controller/CaptchaController.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Controller\\\\CaptchaController\\:\\:initializeRefreshAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/CaptchaController.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Domain\\\\Model\\\\FormElements\\\\CaptchaElement\\:\\:initializeFormElement\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Domain/Model/FormElements/CaptchaElement.php
+
+		-
+			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Form\\\\Domain\\\\Model\\\\Renderable\\\\RootRenderableInterface\\:\\:getProperties\\(\\)\\.$#"
+			count: 1
+			path: Classes/Hooks/FormElementCaptchaHook.php
+
+		-
+			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Form\\\\Domain\\\\Model\\\\Renderable\\\\RootRenderableInterface\\:\\:setProperty\\(\\)\\.$#"
+			count: 3
+			path: Classes/Hooks/FormElementCaptchaHook.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Hooks\\\\FormElementCaptchaHook\\:\\:beforeRendering\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Hooks/FormElementCaptchaHook.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Utility\\\\CaptchaBuilderUtility\\:\\:getBuilderFromSettings\\(\\) has parameter \\$settings with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Utility/CaptchaBuilderUtility.php
+
+		-
+			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Validation\\\\Validator\\\\CaptchaValidator\\:\\:displayError\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Validation\\\\Validator\\\\CaptchaValidator\\:\\:validateCaptcha\\(\\) has parameter \\$captchaId with no type specified\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
+
+		-
+			message: "#^Method Blueways\\\\BwCaptcha\\\\Validation\\\\Validator\\\\CaptchaValidator\\:\\:validateCaptcha\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
+
+		-
+			message: "#^Property Blueways\\\\BwCaptcha\\\\Validation\\\\Validator\\\\CaptchaValidator\\:\\:\\$supportedOptions type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
