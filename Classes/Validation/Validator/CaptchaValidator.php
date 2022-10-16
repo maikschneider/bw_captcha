@@ -2,6 +2,7 @@
 
 namespace Blueways\BwCaptcha\Validation\Validator;
 
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -12,7 +13,10 @@ class CaptchaValidator extends AbstractValidator
         'phrase' => ['', 'The phrase of the captcha', 'string']
     ];
 
-    protected function isValid($value)
+    /**
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     */
+    protected function isValid(mixed $value): void
     {
         $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds');
 
@@ -31,6 +35,9 @@ class CaptchaValidator extends AbstractValidator
         $this->displayError();
     }
 
+    /**
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     */
     protected function validateCaptcha($captchaId, $value): bool
     {
         $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', $captchaId);
@@ -40,7 +47,7 @@ class CaptchaValidator extends AbstractValidator
         }
 
         // get captcha secret from cache and compare
-        $cache = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class)->getCache('bwcaptcha');
+        $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
         $phrase = $cache->get($cacheIdentifier);
 
         if ($phrase && $phrase === $value) {
