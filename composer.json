@@ -11,12 +11,20 @@
       "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha"
     }
   },
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/linawolf/phpstan-typo3"
+    }
+  ],
   "require-dev": {
     "roave/security-advisories": "dev-latest",
     "typo3/cms-base-distribution": "^12.0",
     "typo3/cms-lowlevel": "^12.0",
     "bk2k/bootstrap-package": "dev-master",
-    "ssch/typo3-rector": "dev-main"
+    "ssch/typo3-rector": "dev-main",
+    "friendsofphp/php-cs-fixer": "^3.12",
+    "saschaegerer/phpstan-typo3": "12.0.x-dev"
   },
   "extra": {
     "typo3/cms": {
@@ -43,5 +51,12 @@
   ],
   "keywords": [
     "TYPO3"
-  ]
+  ],
+  "scripts": {
+    "php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix",
+    "php:stan": "php vendor/bin/phpstan --generate-baseline=phpstan-baseline.neon --allow-empty-baseline",
+    "ci:php:lint": "find *.php . -name '*.php' ! -path './vendor/*'  ! -path './var/*' ! -path '*node_modules/*' -print0 | xargs -0 -n 1 -P 4 php -l",
+    "ci:php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix --dry-run -v --show-progress=dots",
+    "ci:php:stan": "php vendor/bin/phpstan --no-progress"
+  }
 }
