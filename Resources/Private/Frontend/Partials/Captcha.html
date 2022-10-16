@@ -6,7 +6,7 @@
 		<div class="captcha">
 			<img src="{element.properties.captcha}" alt="Captcha image"/>
 			<f:if condition="{element.properties.cacheIdentifier}">
-				<a class="captcha__reload" href="#" data-reload-route="{f:uri.action(action:'refresh', controller:'Captcha',
+				<a class="captcha__reload" href="#" data-reload-route="{f:uri.action(action:'refresh', controller: element.properties.controllerName,
 					extensionName:'bwcaptcha', pluginName:'Pi1', pageType:3413,
 					arguments:{cacheIdentifier:element.properties.cacheIdentifier})}" onclick="this.parentElement.classList.add('captcha--reloading'); fetch(this.getAttribute('data-reload-route')).then(response => response.json()).then(data => { this.previousElementSibling.setAttribute('src', data.captcha); this.parentElement.classList.remove('captcha--reloading'); }); return false;">
 					<svg width="31" height="28" xmlns="http://www.w3.org/2000/svg">

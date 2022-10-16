@@ -8,7 +8,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CaptchaBuilderUtility
 {
-
+    /**
+     * @param array<string, string> $settings
+     * @return \Gregwar\Captcha\CaptchaBuilder
+     */
     public static function getBuilderFromSettings(array $settings): CaptchaBuilder
     {
         $length = $settings['length'] ?: 5;

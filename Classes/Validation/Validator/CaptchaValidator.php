@@ -2,17 +2,24 @@
 
 namespace Blueways\BwCaptcha\Validation\Validator;
 
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class CaptchaValidator extends AbstractValidator
 {
-
+    /**
+     * @var array<string, array<int, string>>
+     */
     protected $supportedOptions = [
-        'phrase' => ['', 'The phrase of the captcha', 'string']
+        'phrase' => ['', 'The phrase of the captcha', 'string'],
     ];
 
-    protected function isValid($value)
+    /**
+     * @param mixed $value
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     */
+    protected function isValid($value): void
     {
         $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds');
 
@@ -31,7 +38,10 @@ class CaptchaValidator extends AbstractValidator
         $this->displayError();
     }
 
-    protected function validateCaptcha($captchaId, $value): bool
+    /**
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     */
+    protected function validateCaptcha(string $captchaId, string $value): bool
     {
         $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', $captchaId);
 
@@ -40,7 +50,7 @@ class CaptchaValidator extends AbstractValidator
         }
 
         // get captcha secret from cache and compare
-        $cache = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Cache\CacheManager::class)->getCache('bwcaptcha');
+        $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
         $phrase = $cache->get($cacheIdentifier);
 
         if ($phrase && $phrase === $value) {
@@ -50,13 +60,13 @@ class CaptchaValidator extends AbstractValidator
         return false;
     }
 
-    protected function displayError()
+    protected function displayError(): void
     {
         $this->addError(
             $this->translateErrorMessage(
                 'validator.captcha.notvalid',
                 'bw_captcha'
-            ) ?? '',
+            ),
             1623240740
         );
     }

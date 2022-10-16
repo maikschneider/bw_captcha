@@ -1,12 +1,14 @@
 <?php
-defined('TYPO3_MODE') || die();
+
+defined('TYPO3') || die();
+
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 call_user_func(function () {
-
     /**
      * TypoScript Tempalte
      */
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+    ExtensionManagementUtility::addStaticFile(
         'bw_captcha',
         'Configuration/TypoScript',
         'Form Captcha'

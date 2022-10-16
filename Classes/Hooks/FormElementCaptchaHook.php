@@ -7,21 +7,25 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
 use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 class FormElementCaptchaHook
 {
-
-    public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable)
+    /**
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable): void
     {
         if ($renderable->getType() === 'Captcha') {
-
             // get TypoScript
             $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
-            $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
+            $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
             $settings = $typoScript['plugin']['tx_bwcaptcha']['settings'];
 
             // build captcha and add to template
@@ -37,8 +41,10 @@ class FormElementCaptchaHook
             $cache->set($cacheIdentifier, $phrase, [], 86400);
 
             // inject cache identifier for captcha refresh button
-            if (isset($typoScript['plugin']['tx_bwcaptcha']) && filter_var($settings['refreshButton'],
-                    FILTER_VALIDATE_BOOLEAN)) {
+            if (isset($typoScript['plugin']['tx_bwcaptcha']) && filter_var(
+                $settings['refreshButton'],
+                FILTER_VALIDATE_BOOLEAN
+            )) {
                 $renderable->setProperty('cacheIdentifier', $cacheIdentifier);
             }
 
@@ -54,6 +60,12 @@ class FormElementCaptchaHook
                 $captchaIds[] = $currentCaptchaId;
                 $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaIds', $captchaIds);
             }
+
+            // add controller name to element
+            $verionNumberUtility = GeneralUtility::makeInstance(VersionNumberUtility::class);
+            $version = $verionNumberUtility->convertVersionStringToArray($verionNumberUtility->getNumericTypo3Version());
+            $controllerName = $version['version_main'] < 12 ? 'Captcha' : 'CaptchaV12';
+            $renderable->setProperty('controllerName', $controllerName);
 
             // write cache identifier to cookie
             $GLOBALS['TSFE']->fe_user->setKey('ses', $currentCaptchaId, $cacheIdentifier);
