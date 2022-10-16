@@ -8,6 +8,9 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class CaptchaValidator extends AbstractValidator
 {
+    /**
+     * @var array<string, array<int, string>>
+     */
     protected $supportedOptions = [
         'phrase' => ['', 'The phrase of the captcha', 'string'],
     ];
@@ -37,7 +40,7 @@ class CaptchaValidator extends AbstractValidator
     /**
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    protected function validateCaptcha($captchaId, $value): bool
+    protected function validateCaptcha(string $captchaId, string $value): bool
     {
         $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', $captchaId);
 
@@ -56,13 +59,13 @@ class CaptchaValidator extends AbstractValidator
         return false;
     }
 
-    protected function displayError()
+    protected function displayError(): void
     {
         $this->addError(
             $this->translateErrorMessage(
                 'validator.captcha.notvalid',
                 'bw_captcha'
-            ) ?? '',
+            ),
             1623240740
         );
     }

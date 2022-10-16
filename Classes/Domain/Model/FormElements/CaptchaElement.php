@@ -6,7 +6,7 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement;
 
 class CaptchaElement extends AbstractFormElement
 {
-    public function initializeFormElement()
+    public function initializeFormElement(): void
     {
         parent::initializeFormElement();
 

@@ -13,7 +13,7 @@ class CaptchaController extends ActionController
 {
     protected $defaultViewObjectName = JsonView::class;
 
-    public function initializeRefreshAction()
+    public function initializeRefreshAction(): void
     {
         $this->defaultViewObjectName = JsonView::class;
     }

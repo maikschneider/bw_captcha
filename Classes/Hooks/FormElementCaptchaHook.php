@@ -8,18 +8,23 @@ use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
 use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 class FormElementCaptchaHook
 {
-    public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable)
+    /**
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable): void
     {
         if ($renderable->getType() === 'Captcha') {
             // get TypoScript
             $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
-            $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
+            $typoScript = $typoScriptService->convertTypoScriptArrayToPlainArray($configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT));
             $settings = $typoScript['plugin']['tx_bwcaptcha']['settings'];
 
             // build captcha and add to template
