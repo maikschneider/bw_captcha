@@ -7,6 +7,7 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\TypoScript\TypoScriptService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Form\Domain\Model\Renderable\RootRenderableInterface;
@@ -59,6 +60,12 @@ class FormElementCaptchaHook
                 $captchaIds[] = $currentCaptchaId;
                 $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaIds', $captchaIds);
             }
+
+            // add controller name to element
+            $verionNumberUtility = GeneralUtility::makeInstance(VersionNumberUtility::class);
+            $version = $verionNumberUtility->convertVersionStringToArray($verionNumberUtility->getNumericTypo3Version());
+            $controllerName = $version['version_main'] < 12 ? 'Captcha' : 'CaptchaV12';
+            $renderable->setProperty('controllerName', $controllerName);
 
             // write cache identifier to cookie
             $GLOBALS['TSFE']->fe_user->setKey('ses', $currentCaptchaId, $cacheIdentifier);

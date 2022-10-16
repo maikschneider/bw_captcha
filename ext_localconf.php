@@ -1,7 +1,7 @@
 <?php
 
 use Blueways\BwCaptcha\Controller\CaptchaController;
-use Blueways\BwCaptcha\Controller\LegacyCaptchaController;
+use Blueways\BwCaptcha\Controller\CaptchaV12Controller;
 use Blueways\BwCaptcha\Hooks\FormElementCaptchaHook;
 use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
 use TYPO3\CMS\Core\Imaging\IconRegistry;
@@ -33,7 +33,7 @@ call_user_func(function () {
     // get typo3 version
     $verionNumberUtility = GeneralUtility::makeInstance(VersionNumberUtility::class);
     $version = $verionNumberUtility->convertVersionStringToArray($verionNumberUtility->getNumericTypo3Version());
-    $captchaControllerName = $version['version_main'] < 12 ? LegacyCaptchaController::class : CaptchaController::class;
+    $captchaControllerName = $version['version_main'] < 12 ? CaptchaController::class : CaptchaV12Controller::class;
     $captchaControllerName = $version['version_main'] < 10 ? 'Captcha' : $captchaControllerName;
     $extensionName = $version['version_main'] < 11 ? 'Blueways.BwCaptcha' : 'BwCaptcha';
 

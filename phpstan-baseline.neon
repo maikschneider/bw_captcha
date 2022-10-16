@@ -8,7 +8,7 @@ parameters:
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\View\\\\ViewInterface\\:\\:setVariablesToRender\\(\\)\\.$#"
 			count: 1
-			path: Classes/Controller/LegacyCaptchaController.php
+			path: Classes/Controller/CaptchaV12Controller.php
 
 		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Form\\\\Domain\\\\Model\\\\Renderable\\\\RootRenderableInterface\\:\\:getProperties\\(\\)\\.$#"
@@ -17,5 +17,5 @@ parameters:
 
 		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Form\\\\Domain\\\\Model\\\\Renderable\\\\RootRenderableInterface\\:\\:setProperty\\(\\)\\.$#"
-			count: 3
+			count: 4
 			path: Classes/Hooks/FormElementCaptchaHook.php

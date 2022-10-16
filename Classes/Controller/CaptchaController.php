@@ -3,7 +3,6 @@
 namespace Blueways\BwCaptcha\Controller;
 
 use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
-use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -18,7 +17,7 @@ class CaptchaController extends ActionController
         $this->defaultViewObjectName = JsonView::class;
     }
 
-    public function refreshAction(string $cacheIdentifier): ResponseInterface
+    public function refreshAction(string $cacheIdentifier): void
     {
         // create new captcha
         $builder = CaptchaBuilderUtility::getBuilderFromSettings($this->settings);
@@ -33,6 +32,5 @@ class CaptchaController extends ActionController
         // return new inline captcha
         $this->view->setVariablesToRender(['captcha']);
         $this->view->assign('captcha', ['captcha' => $captcha]);
-        return $this->htmlResponse();
     }
 }
