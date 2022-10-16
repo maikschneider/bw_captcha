@@ -13,11 +13,9 @@ use TYPO3\CMS\Form\Domain\Runtime\FormRuntime;
 
 class FormElementCaptchaHook
 {
-
     public function beforeRendering(FormRuntime $formRuntime, RootRenderableInterface $renderable)
     {
         if ($renderable->getType() === 'Captcha') {
-
             // get TypoScript
             $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
             $typoScriptService = GeneralUtility::makeInstance(TypoScriptService::class);
@@ -37,8 +35,10 @@ class FormElementCaptchaHook
             $cache->set($cacheIdentifier, $phrase, [], 86400);
 
             // inject cache identifier for captcha refresh button
-            if (isset($typoScript['plugin']['tx_bwcaptcha']) && filter_var($settings['refreshButton'],
-                    FILTER_VALIDATE_BOOLEAN)) {
+            if (isset($typoScript['plugin']['tx_bwcaptcha']) && filter_var(
+                $settings['refreshButton'],
+                FILTER_VALIDATE_BOOLEAN
+            )) {
                 $renderable->setProperty('cacheIdentifier', $cacheIdentifier);
             }
 

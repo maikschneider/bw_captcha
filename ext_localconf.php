@@ -1,4 +1,5 @@
 <?php
+
 defined('TYPO3') or die();
 
 call_user_func(function () {
@@ -29,7 +30,7 @@ call_user_func(function () {
 
     // register cache table
     if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'])) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'] = array();
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'] = [];
     }
 
     // register hook for captcha generation
@@ -41,10 +42,10 @@ call_user_func(function () {
         $extensionName,
         'Pi1',
         [
-            $captchaControllerName => 'refresh'
+            $captchaControllerName => 'refresh',
         ],
         [
-            $captchaControllerName => 'refresh'
+            $captchaControllerName => 'refresh',
         ]
     );
 });

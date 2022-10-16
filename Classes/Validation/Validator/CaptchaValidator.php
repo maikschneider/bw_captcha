@@ -8,9 +8,8 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
 class CaptchaValidator extends AbstractValidator
 {
-
     protected $supportedOptions = [
-        'phrase' => ['', 'The phrase of the captcha', 'string']
+        'phrase' => ['', 'The phrase of the captcha', 'string'],
     ];
 
     /**

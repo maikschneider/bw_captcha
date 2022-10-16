@@ -6,7 +6,6 @@ use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement;
 
 class CaptchaElement extends AbstractFormElement
 {
-
     public function initializeFormElement()
     {
         parent::initializeFormElement();
@@ -14,12 +13,12 @@ class CaptchaElement extends AbstractFormElement
         $this->setOptions([
             'validators' => [
                 [
-                    'identifier' => 'NotEmpty'
+                    'identifier' => 'NotEmpty',
                 ],
                 [
-                    'identifier' => 'Captcha'
-                ]
-            ]
+                    'identifier' => 'Captcha',
+                ],
+            ],
         ]);
     }
 }

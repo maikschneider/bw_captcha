@@ -11,7 +11,6 @@ use TYPO3\CMS\Extbase\Mvc\View\JsonView;
 
 class CaptchaController extends ActionController
 {
-
     protected $defaultViewObjectName = JsonView::class;
 
     public function initializeRefreshAction()
