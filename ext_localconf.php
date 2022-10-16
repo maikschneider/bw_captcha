@@ -1,9 +1,8 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 call_user_func(function () {
-    if (TYPO3_MODE === 'BE') {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(trim('
             module.tx_form {
                 settings {
                     yamlConfigurations {
@@ -13,15 +12,14 @@ call_user_func(function () {
             }
         '));
 
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Core\Imaging\IconRegistry::class
-        );
-        $iconRegistry->registerIcon(
-            't3-form-captcha-element',
-            \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            ['source' => 'EXT:bw_captcha/Resources/Public/Images/form-captcha-icon.svg']
-        );
-    }
+    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Imaging\IconRegistry::class
+    );
+    $iconRegistry->registerIcon(
+        't3-form-captcha-element',
+        \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        ['source' => 'EXT:bw_captcha/Resources/Public/Images/form-captcha-icon.svg']
+    );
 
     // get typo3 version
     $verionNumberUtility = TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Utility\VersionNumberUtility::class);
