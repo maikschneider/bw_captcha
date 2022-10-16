@@ -25,6 +25,7 @@ call_user_func(function () {
     $verionNumberUtility = TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Utility\VersionNumberUtility::class);
     $version = $verionNumberUtility->convertVersionStringToArray($verionNumberUtility->getNumericTypo3Version());
     $captchaControllerName = $version['version_main'] > 9 ? \Blueways\BwCaptcha\Controller\CaptchaController::class : 'Captcha';
+    $extensionName = $version['version_main'] > 11 ? 'BwCaptcha' : 'Blueways.BwCaptcha';
 
     // register cache table
     if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['bwcaptcha'])) {
@@ -37,7 +38,7 @@ call_user_func(function () {
 
     // register plugin for captcha refresh endpoint
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Blueways.BwCaptcha',
+        $extensionName,
         'Pi1',
         [
             $captchaControllerName => 'refresh'
