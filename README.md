@@ -86,3 +86,20 @@ plugin.tx_bwcaptcha {
     }
 }
 ```
+
+## Migration to TYPO3 v12 with extension version v2.x
+
+New controller name: If you overrode the Captcha partial and you're using the refresh button, you need to update the refresh url (`data-reload-route` attribute):
+
+Old:
+
+```
+{f:uri.action(action:'refresh', controller: 'Captcha', ...
+```
+
+New:
+
+```
+{f:uri.action(action:'refresh', controller: element.properties.controllerName, ...
+```
+
