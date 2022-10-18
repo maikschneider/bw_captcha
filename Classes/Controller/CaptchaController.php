@@ -19,13 +19,13 @@ class CaptchaController extends ActionController
 
     public function refreshAction(string $cacheIdentifier): void
     {
+        $width = (int)$this->settings['width'];
+        $height = (int)$this->settings['height'];
+        $font = CaptchaBuilderUtility::getRandomFontFileFromSettings($this->settings);
+
         // create new captcha
         $builder = CaptchaBuilderUtility::getBuilderFromSettings($this->settings);
-        $builder->build(
-            (int)$this->settings['width'],
-            (int)$this->settings['height'],
-            CaptchaBuilderUtility::getRandomFontFileFromSettings($this->settings)
-        );
+        $builder->build($width, $height, $font);
         $captcha = $builder->inline();
 
         // override captcha secret in cache

@@ -69,22 +69,20 @@ class CaptchaBuilderUtility
     }
 
     /**
-     * @param array $settings
+     * @param array<string, string> $settings
      * @return string|null
      */
     public static function getRandomFontFileFromSettings(array $settings): ?string
     {
-        $fontFiles = GeneralUtility::trimExplode(',', $settings['fontFiles'], true);
+        $fontFiles = GeneralUtility::trimExplode(',', $settings['fontFiles'] ?? '', true);
         shuffle($fontFiles);
 
         $randomFontFile = null;
         $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
-        foreach ($fontFiles as $fontFile) {
-            try {
-                $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFile)->getPublicUrl();
-                $randomFontFile = GeneralUtility::getFileAbsFileName($randomFontFile);
-            } catch(\Exception $e) {
-            }
+        try {
+            $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFiles[0])->getPublicUrl();
+            $randomFontFile = GeneralUtility::getFileAbsFileName($randomFontFile);
+        } catch (\Exception $e) {
         }
 
         return $randomFontFile;
