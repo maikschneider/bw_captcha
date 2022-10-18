@@ -30,7 +30,11 @@ class FormElementCaptchaHook
 
             // build captcha and add to template
             $builder = CaptchaBuilderUtility::getBuilderFromSettings($settings);
-            $builder->build((int)$settings['width'], (int)$settings['height']);
+            $builder->build(
+                (int)$settings['width'],
+                (int)$settings['height'],
+                CaptchaBuilderUtility::getRandomFontFileFromSettings($settings)
+            );
             $renderable->setProperty('captcha', $builder->inline());
 
             // save captcha secret in cache

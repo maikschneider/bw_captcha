@@ -32,6 +32,7 @@ plugin.tx_bwcaptcha {
 		charset = {$plugin.tx_bwcaptcha.settings.charset}
 		width = {$plugin.tx_bwcaptcha.settings.width}
 		height = {$plugin.tx_bwcaptcha.settings.height}
+		fontFiles = {$plugin.tx_bwcaptcha.settings.fontFiles}
 		textColor = {$plugin.tx_bwcaptcha.settings.textColor}
 		lineColor = {$plugin.tx_bwcaptcha.settings.lineColor}
 		backgroundColor = {$plugin.tx_bwcaptcha.settings.backgroundColor}
