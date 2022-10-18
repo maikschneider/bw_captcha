@@ -19,3 +19,13 @@ parameters:
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Form\\\\Domain\\\\Model\\\\Renderable\\\\RootRenderableInterface\\:\\:setProperty\\(\\)\\.$#"
 			count: 4
 			path: Classes/Hooks/FormElementCaptchaHook.php
+
+		-
+			message: "#^Cannot call method getPublicUrl\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Resource\\\\File\\|TYPO3\\\\CMS\\\\Core\\\\Resource\\\\Folder\\|null\\.$#"
+			count: 1
+			path: Classes/Utility/CaptchaBuilderUtility.php
+
+		-
+			message: "#^Parameter \\#1 \\$filename of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:getFileAbsFileName\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: Classes/Utility/CaptchaBuilderUtility.php
