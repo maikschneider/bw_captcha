@@ -53,6 +53,9 @@ plugin.tx_bwcaptcha {
         # The height of the image
         height =
         
+        # Custom font file(s) to use (comma-separated)
+        fontFiles =
+        
         # Text color (e.g. 255,0,0)
         textColor =
         

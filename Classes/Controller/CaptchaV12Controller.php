@@ -22,7 +22,11 @@ class CaptchaV12Controller extends ActionController
     {
         // create new captcha
         $builder = CaptchaBuilderUtility::getBuilderFromSettings($this->settings);
-        $builder->build((int)$this->settings['width'], (int)$this->settings['height']);
+        $builder->build(
+            (int)$this->settings['width'],
+            (int)$this->settings['height'],
+            CaptchaBuilderUtility::getRandomFontFileFromSettings($this->settings)
+        );
         $captcha = $builder->inline();
 
         // override captcha secret in cache

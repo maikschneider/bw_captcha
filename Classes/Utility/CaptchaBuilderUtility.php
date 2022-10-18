@@ -4,6 +4,7 @@ namespace Blueways\BwCaptcha\Utility;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CaptchaBuilderUtility
@@ -65,5 +66,27 @@ class CaptchaBuilderUtility
         }
 
         return $captchaBuilder;
+    }
+
+    /**
+     * @param array $settings
+     * @return string|null
+     */
+    public static function getRandomFontFileFromSettings(array $settings): ?string
+    {
+        $fontFiles = GeneralUtility::trimExplode(',', $settings['fontFiles'], true);
+        shuffle($fontFiles);
+
+        $randomFontFile = null;
+        $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
+        foreach ($fontFiles as $fontFile) {
+            try {
+                $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFile)->getPublicUrl();
+                $randomFontFile = GeneralUtility::getFileAbsFileName($randomFontFile);
+            } catch(\Exception $e) {
+            }
+        }
+
+        return $randomFontFile;
     }
 }

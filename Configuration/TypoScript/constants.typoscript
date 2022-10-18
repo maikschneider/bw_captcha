@@ -14,6 +14,8 @@ plugin.tx_bwcaptcha {
 		width = 150
 		# cat=bw_captcha; type=int; label=The height of the image
 		height = 40
+		# cat=bw_captcha; type=string; label=Custom font file(s) to use (comma-seperated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"
+		fontFiles =
 		# cat=bw_captcha; type=string; label=Text color (e.g. 255,0,0)
 		textColor =
 		# cat=bw_captcha; type=string; label=Line color (e.g. 0,0,0)
