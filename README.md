@@ -53,6 +53,9 @@ plugin.tx_bwcaptcha {
         # The height of the image
         height =
         
+        # Custom font file(s) to use (comma-separated)
+        fontFiles =
+        
         # Text color (e.g. 255,0,0)
         textColor =
         
@@ -103,3 +106,19 @@ New:
 {f:uri.action(action:'refresh', controller: element.properties.controllerName, ...
 ```
 
+## Troubleshooting
+
+### Refresh button not working
+
+If your site is configured to use trailing slashes, the refresh url cannot be resolved. A simple fix is to add a setting for the pageType 3413, e.g.:
+
+```
+routeEnhancers:
+  PageTypeSuffix:
+    type: PageType
+    default: /
+    index: index
+    map:
+      /: 0
+      .captcha: 3413
+```
