@@ -29,12 +29,13 @@ class FormElementCaptchaHook
             $settings = $typoScript['plugin']['tx_bwcaptcha']['settings'];
 
             // build captcha and add to template
+            $width = (int)$settings['width'];
+            $height = (int)$settings['height'];
+            $font = CaptchaBuilderUtility::getRandomFontFileFromSettings($settings);
+
+            // create new captcha
             $builder = CaptchaBuilderUtility::getBuilderFromSettings($settings);
-            $builder->build(
-                (int)$settings['width'],
-                (int)$settings['height'],
-                CaptchaBuilderUtility::getRandomFontFileFromSettings($settings)
-            );
+            $builder->build($width, $height, $font);
             $renderable->setProperty('captcha', $builder->inline());
 
             // save captcha secret in cache
