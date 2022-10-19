@@ -81,7 +81,7 @@ class CaptchaBuilderUtility
 
         // check file for extension
         $filePathInfo = PathUtility::pathinfo($fontFiles[0]);
-        if ($filePathInfo['extension'] !== 'ttf') {
+        if (isset($filePathInfo['extension']) && $filePathInfo['extension'] !== 'ttf') {
             return null;
         }
 
@@ -96,12 +96,11 @@ class CaptchaBuilderUtility
         try {
             $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFiles[0])->getPublicUrl();
             $randomFontFile = Environment::getPublicPath() . $randomFontFile;
-
         } catch (\Exception $e) {
         }
 
         // check for existence
-        if (file_exists($randomFontFile)) {
+        if ($randomFontFile && file_exists($randomFontFile)) {
             return $randomFontFile;
         }
 
