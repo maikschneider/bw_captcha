@@ -4,8 +4,10 @@ namespace Blueways\BwCaptcha\Utility;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Gregwar\Captcha\PhraseBuilder;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 class CaptchaBuilderUtility
 {
@@ -77,14 +79,32 @@ class CaptchaBuilderUtility
         $fontFiles = GeneralUtility::trimExplode(',', $settings['fontFiles'] ?? '', true);
         shuffle($fontFiles);
 
-        $randomFontFile = null;
+        // check file for extension
+        $filePathInfo = PathUtility::pathinfo($fontFiles[0]);
+        if ($filePathInfo['extension'] !== 'ttf') {
+            return null;
+        }
+
+        // check EXT: path
+        $randomFontFile = GeneralUtility::getFileAbsFileName($fontFiles[0]);
+        if (file_exists($randomFontFile)) {
+            return $randomFontFile;
+        }
+
+        // check 1: file storage path
         $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
         try {
             $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFiles[0])->getPublicUrl();
-            $randomFontFile = GeneralUtility::getFileAbsFileName($randomFontFile);
+            $randomFontFile = Environment::getPublicPath() . $randomFontFile;
+
         } catch (\Exception $e) {
         }
 
-        return $randomFontFile;
+        // check for existence
+        if (file_exists($randomFontFile)) {
+            return $randomFontFile;
+        }
+
+        return null;
     }
 }
