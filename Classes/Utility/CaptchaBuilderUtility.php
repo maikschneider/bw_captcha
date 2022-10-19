@@ -79,7 +79,11 @@ class CaptchaBuilderUtility
         $fontFiles = GeneralUtility::trimExplode(',', $settings['fontFiles'] ?? '', true);
         shuffle($fontFiles);
 
-        // check file for extension
+        if (!count($fontFiles)) {
+            return null;
+        }
+
+        // check for file extension
         $filePathInfo = PathUtility::pathinfo($fontFiles[0]);
         if (isset($filePathInfo['extension']) && $filePathInfo['extension'] !== 'ttf') {
             return null;
