@@ -1,0 +1,13 @@
+name: release
+
+on: [ push ]
+
+jobs:
+
+  release-v9:
+    if: github.ref == 'refs/heads/9.x-dev'
+    uses: maikschneider/reusable-workflows/.github/workflows/release-typo3-extension.yml@main
+    secrets:
+      teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+    with:
+      base-branch: 9.x
