@@ -96,7 +96,7 @@ class CaptchaBuilderUtility
         $resourceFactory = GeneralUtility::makeInstance(ResourceFactory::class);
         try {
             $randomFontFile = $resourceFactory->retrieveFileOrFolderObject($fontFiles[0])->getPublicUrl();
-            $randomFontFile = Environment::getPublicPath() . $randomFontFile;
+            $randomFontFile = Environment::getPublicPath() . '/' . $randomFontFile;
         } catch (\Exception $e) {
         }
 
