@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="nl" datatype="plaintext" original="EXT:bw_captcha/Resources/Private/Language/locallang.xlf"
+		  date="2012-10-26T12:00:32Z" product-name="bw_captcha">
+		<header/>
+		<body>
+			<trans-unit id="validator.captcha.notvalid" resname="validator.captcha.notvalid">
+				<source>The entered captcha is not correct.</source>
+				<target>De ingevoerde captcha is niet correct.</target>
+			</trans-unit>
+			<trans-unit id="formEditor.elements.Captcha" resname="formEditor.elements.Captcha">
+				<source>Captcha</source>
+				<target>Captcha</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
