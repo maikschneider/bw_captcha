@@ -58,12 +58,12 @@ class FormElementCaptchaHook
             $properties['fluidAdditionalAttributes']['autocomplete'] = 'off';
             $renderable->setProperty('fluidAdditionalAttributes', $properties['fluidAdditionalAttributes']);
 
-            // Add CaptchaId to Array
-            $currentCaptchaId = md5($formRuntime->getFormDefinition()->getPersistenceIdentifier() . $renderable->getIdentifier());
+            // Add cache identifier to captchaIds array + write it to cookie
             $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds') ?? [];
-            if (!in_array($currentCaptchaId, $captchaIds)) {
-                $captchaIds[] = $currentCaptchaId;
+            if (!in_array($cacheIdentifier, $captchaIds)) {
+                $captchaIds[] = $cacheIdentifier;
                 $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaIds', $captchaIds);
+                $GLOBALS['TSFE']->fe_user->storeSessionData();
             }
 
             // add controller name to element
@@ -71,10 +71,6 @@ class FormElementCaptchaHook
             $version = $verionNumberUtility->convertVersionStringToArray($verionNumberUtility->getNumericTypo3Version());
             $controllerName = $version['version_main'] < 12 ? 'Captcha' : 'CaptchaV12';
             $renderable->setProperty('controllerName', $controllerName);
-
-            // write cache identifier to cookie
-            $GLOBALS['TSFE']->fe_user->setKey('ses', $currentCaptchaId, $cacheIdentifier);
-            $GLOBALS['TSFE']->fe_user->storeSessionData();
         }
     }
 }

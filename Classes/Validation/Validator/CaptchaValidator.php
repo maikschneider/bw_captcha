@@ -28,8 +28,8 @@ class CaptchaValidator extends AbstractValidator
             return;
         }
 
-        foreach ($captchaIds as $captchaId) {
-            $isValid = $this->validateCaptcha($captchaId, $value);
+        foreach ($captchaIds as $captchaCacheIdentifier) {
+            $isValid = $this->validateCaptcha($captchaCacheIdentifier, $value);
             if ($isValid) {
                 return;
             }
@@ -41,17 +41,15 @@ class CaptchaValidator extends AbstractValidator
     /**
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
-    protected function validateCaptcha(string $captchaId, string $value): bool
+    protected function validateCaptcha(string $captchaCacheIdentifier, string $value): bool
     {
-        $cacheIdentifier = $GLOBALS['TSFE']->fe_user->getKey('ses', $captchaId);
-
-        if (!$cacheIdentifier) {
+        if (!$captchaCacheIdentifier) {
             return false;
         }
 
         // get captcha secret from cache and compare
         $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
-        $phrase = $cache->get($cacheIdentifier);
+        $phrase = $cache->get($captchaCacheIdentifier);
 
         if ($phrase && $phrase === $value) {
             return true;
