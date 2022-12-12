@@ -195,6 +195,10 @@ class CaptchaBuilder implements CaptchaBuilderInterface
      */
     public function getPhrase()
     {
+        $bwCaptchaPhrases = $GLOBALS['TSFE']->fe_user->getKey('ses', 'bwCaptchaPhrases') ?? [];
+        $bwCaptchaPhrases[] = $this->phrase;
+        $GLOBALS['TSFE']->fe_user->setKey('ses', 'bwCaptchaPhrases', $bwCaptchaPhrases);
+
         return $this->phrase;
     }
 

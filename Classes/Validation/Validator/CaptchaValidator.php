@@ -53,6 +53,11 @@ class CaptchaValidator extends AbstractValidator
         $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
         $phrase = $cache->get($cacheIdentifier);
 
+        $bwCaptchaPhrases = $GLOBALS['TSFE']->fe_user->getKey('ses', 'bwCaptchaPhrases');
+        if(in_array($value, $bwCaptchaPhrases)){
+            return true;
+        }
+
         if ($phrase && $phrase === $value) {
             return true;
         }
