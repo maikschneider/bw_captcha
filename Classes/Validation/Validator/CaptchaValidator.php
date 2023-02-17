@@ -2,9 +2,8 @@
 
 namespace Blueways\BwCaptcha\Validation\Validator;
 
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class CaptchaValidator extends AbstractValidator
 {
@@ -17,20 +16,34 @@ class CaptchaValidator extends AbstractValidator
 
     /**
      * @param mixed $value
+     *
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     protected function isValid($value): void
     {
-        $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds');
+        $captchaPhrases = $this->getFeUser()->getKey('ses', 'captchaPhrases');
 
-        if (!$captchaIds || !is_array($captchaIds) || !is_string($value)) {
+        if (!$captchaPhrases || !is_array($captchaPhrases) || !is_string($value)) {
             $this->displayError();
             return;
         }
 
-        foreach ($captchaIds as $captchaCacheIdentifier) {
-            $isValid = $this->validateCaptcha($captchaCacheIdentifier, $value);
+        $time = time();
+        $captchaPhrases = array_filter(
+            $captchaPhrases,
+            function ($captchaLifetime) use ($time) {
+                return $captchaLifetime > $time;
+            },
+            ARRAY_FILTER_USE_KEY
+        );
+
+        foreach ($captchaPhrases as $lifetime => $captchaPhrase) {
+            $isValid = !empty($captchaPhrase) && $captchaPhrase === $value;
             if ($isValid) {
+                // remove solved captcha
+                unset($captchaPhrases[$lifetime]);
+                $this->getFeUser()->setKey('ses', 'captchaPhrases', $captchaPhrases);
+                $this->getFeUser()->storeSessionData();
                 return;
             }
         }
@@ -38,25 +51,6 @@ class CaptchaValidator extends AbstractValidator
         $this->displayError();
     }
 
-    /**
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
-     */
-    protected function validateCaptcha(string $captchaCacheIdentifier, string $value): bool
-    {
-        if (!$captchaCacheIdentifier) {
-            return false;
-        }
-
-        // get captcha secret from cache and compare
-        $cache = GeneralUtility::makeInstance(CacheManager::class)->getCache('bwcaptcha');
-        $phrase = $cache->get($captchaCacheIdentifier);
-
-        if ($phrase && $phrase === $value) {
-            return true;
-        }
-
-        return false;
-    }
 
     protected function displayError(): void
     {
@@ -67,5 +61,10 @@ class CaptchaValidator extends AbstractValidator
             ),
             1623240740
         );
+    }
+
+    protected function getFeUser(): FrontendUserAuthentication
+    {
+        return $GLOBALS['TSFE']->fe_user;
     }
 }

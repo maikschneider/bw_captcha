@@ -8,7 +8,7 @@ plugin.tx_form {
 	view {
 		partialRootPaths {
 			1623227656 = EXT:bw_captcha/Resources/Private/Frontend/Partials/
-			1623227657 = {$plugin.tx_bwcaptcha.view.partialRootPath}
+			1623227657 = {$module.tx_bwcaptcha.view.partialRootPath}
 		}
 	}
 
@@ -25,37 +25,36 @@ plugin.tx_form {
 	)
 }
 
-plugin.tx_bwcaptcha {
+module.tx_bwcaptcha {
 	settings {
-		refreshButton = {$plugin.tx_bwcaptcha.settings.refreshButton}
-		length = {$plugin.tx_bwcaptcha.settings.length}
-		charset = {$plugin.tx_bwcaptcha.settings.charset}
-		width = {$plugin.tx_bwcaptcha.settings.width}
-		height = {$plugin.tx_bwcaptcha.settings.height}
-		fontFiles = {$plugin.tx_bwcaptcha.settings.fontFiles}
-		textColor = {$plugin.tx_bwcaptcha.settings.textColor}
-		lineColor = {$plugin.tx_bwcaptcha.settings.lineColor}
-		backgroundColor = {$plugin.tx_bwcaptcha.settings.backgroundColor}
-		distortion = {$plugin.tx_bwcaptcha.settings.distortion}
-		maxFrontLines = {$plugin.tx_bwcaptcha.settings.maxFrontLines}
-		maxBehindLines = {$plugin.tx_bwcaptcha.settings.maxBehindLines}
-		maxAngle = {$plugin.tx_bwcaptcha.settings.maxAngle}
-		maxOffset = {$plugin.tx_bwcaptcha.settings.maxOffset}
-		interpolation = {$plugin.tx_bwcaptcha.settings.interpolation}
-		ignoreAllEffects = {$plugin.tx_bwcaptcha.settings.ignoreAllEffects}
+		lifetime = {$module.tx_bwcaptcha.settings.lifetime}
+		refreshButton = {$module.tx_bwcaptcha.settings.refreshButton}
+		length = {$module.tx_bwcaptcha.settings.length}
+		charset = {$module.tx_bwcaptcha.settings.charset}
+		width = {$module.tx_bwcaptcha.settings.width}
+		height = {$module.tx_bwcaptcha.settings.height}
+		fontFiles = {$module.tx_bwcaptcha.settings.fontFiles}
+		textColor = {$module.tx_bwcaptcha.settings.textColor}
+		lineColor = {$module.tx_bwcaptcha.settings.lineColor}
+		backgroundColor = {$module.tx_bwcaptcha.settings.backgroundColor}
+		distortion = {$module.tx_bwcaptcha.settings.distortion}
+		maxFrontLines = {$module.tx_bwcaptcha.settings.maxFrontLines}
+		maxBehindLines = {$module.tx_bwcaptcha.settings.maxBehindLines}
+		maxAngle = {$module.tx_bwcaptcha.settings.maxAngle}
+		maxOffset = {$module.tx_bwcaptcha.settings.maxOffset}
+		interpolation = {$module.tx_bwcaptcha.settings.interpolation}
+		ignoreAllEffects = {$module.tx_bwcaptcha.settings.ignoreAllEffects}
 	}
 }
 
 captcha = PAGE
 captcha {
-   typeNum = 3413
-   10 =< tt_content.list.20.bwcaptcha_pi1
+	typeNum = 3413
 
-   config {
-      disableAllHeaderCode = 1
-      additionalHeaders.10.header = Content-type:application/json
-      xhtml_cleaning = 0
-      admPanel = 0
-      debug = 0
-   }
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
+    }
 }

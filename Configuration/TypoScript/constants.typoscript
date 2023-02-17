@@ -1,9 +1,11 @@
-plugin.tx_bwcaptcha {
+module.tx_bwcaptcha {
 	view {
 		partialRootPath =
 	}
 
 	settings {
+		# cat=bw_captcha; type=int; label=Seconds until captchas are invalid
+		lifetime = 3600
 		# cat=bw_captcha; type=boolean; label=Show reload button
 		refreshButton = 0
 		# cat=bw_captcha; type=int; label=The length of the captcha

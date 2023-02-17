@@ -65,6 +65,9 @@ TYPO3:
                         label: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.numbersOfColumnsToUse.label
                         propertyPath: 'properties.gridColumnClassAutoConfiguration.viewPorts.{@viewPortIdentifier}.numbersOfColumnsToUse'
                         fieldExplanationText: formEditor.elements.FormElement.editor.gridColumnViewPortConfiguration.numbersOfColumnsToUse.fieldExplanationText
+              properties:
+                fluidAdditionalAttributes:
+                  autocomplete: 'off'
 
           validatorsDefinition:
             Captcha:
