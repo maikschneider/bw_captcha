@@ -23,7 +23,7 @@ class Captcha implements MiddlewareInterface
     public function __construct(
         ResponseFactoryInterface $responseFactory,
         ConfigurationManager $configurationManager,
-        TypoScriptFrontendController $tsfe,
+        TypoScriptFrontendController $tsfe
     ) {
         $this->responseFactory = $responseFactory;
         $this->configurationManager = $configurationManager;
