@@ -112,7 +112,7 @@ New:
 
 If your site is configured to use trailing slashes, the refresh url cannot be resolved. A simple fix is to add a setting for the pageType 3413, e.g.:
 
-```
+```yaml
 routeEnhancers:
   PageTypeSuffix:
     type: PageType
