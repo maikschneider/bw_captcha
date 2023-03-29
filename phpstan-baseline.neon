@@ -6,7 +6,17 @@ parameters:
 			path: Classes/Controller/CaptchaController.php
 
 		-
+			message: "#^Call to an undefined method object\\:\\:getCache\\(\\)\\.$#"
+			count: 1
+			path: Classes/Controller/CaptchaController.php
+
+		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\View\\\\ViewInterface\\:\\:setVariablesToRender\\(\\)\\.$#"
+			count: 1
+			path: Classes/Controller/CaptchaV12Controller.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getCache\\(\\)\\.$#"
 			count: 1
 			path: Classes/Controller/CaptchaV12Controller.php
 
@@ -21,46 +31,41 @@ parameters:
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot access offset 'height' on mixed\\.$#"
+			message: "#^Call to an undefined method object\\:\\:convertTypoScriptArrayToPlainArray\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot access offset 'refreshButton' on mixed\\.$#"
+			message: "#^Call to an undefined method object\\:\\:convertVersionStringToArray\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot access offset 'settings' on mixed\\.$#"
+			message: "#^Call to an undefined method object\\:\\:generateRandomHexString\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot access offset 'tx_bwcaptcha' on mixed\\.$#"
-			count: 2
-			path: Classes/Hooks/FormElementCaptchaHook.php
-
-		-
-			message: "#^Cannot access offset 'width' on mixed\\.$#"
+			message: "#^Call to an undefined method object\\:\\:getCache\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
-			count: 2
-			path: Classes/Hooks/FormElementCaptchaHook.php
-
-		-
-			message: "#^Parameter \\#1 \\$settings of static method Blueways\\\\BwCaptcha\\\\Utility\\\\CaptchaBuilderUtility\\:\\:getBuilderFromSettings\\(\\) expects array\\<string, string\\>, mixed given\\.$#"
+			message: "#^Call to an undefined method object\\:\\:getConfiguration\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Parameter \\#1 \\$settings of static method Blueways\\\\BwCaptcha\\\\Utility\\\\CaptchaBuilderUtility\\:\\:getRandomFontFileFromSettings\\(\\) expects array\\<string, string\\>, mixed given\\.$#"
+			message: "#^Call to an undefined method object\\:\\:getNumericTypo3Version\\(\\)\\.$#"
 			count: 1
 			path: Classes/Hooks/FormElementCaptchaHook.php
 
 		-
-			message: "#^Cannot call method getPublicUrl\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Resource\\\\File\\|TYPO3\\\\CMS\\\\Core\\\\Resource\\\\Folder\\|null\\.$#"
+			message: "#^Call to an undefined method object\\:\\:retrieveFileOrFolderObject\\(\\)\\.$#"
 			count: 1
 			path: Classes/Utility/CaptchaBuilderUtility.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getCache\\(\\)\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
