@@ -59,11 +59,14 @@ class FormElementCaptchaHook
             $renderable->setProperty('fluidAdditionalAttributes', $properties['fluidAdditionalAttributes']);
 
             // Add cache identifier to captchaIds array + write it to cookie
-            $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds') ?? [];
-            if (!in_array($cacheIdentifier, $captchaIds)) {
-                $captchaIds[] = $cacheIdentifier;
-                $GLOBALS['TSFE']->fe_user->setKey('ses', 'captchaIds', $captchaIds);
-                $GLOBALS['TSFE']->fe_user->storeSessionData();
+            $tsfe = $GLOBALS['TSFE'] ?? null;
+            if ($tsfe) {
+                $captchaIds = $GLOBALS['TSFE']->fe_user->getKey('ses', 'captchaIds') ?? [];
+                if (!in_array($cacheIdentifier, $captchaIds)) {
+                    $captchaIds[] = $cacheIdentifier;
+                    $tsfe->fe_user->setKey('ses', 'captchaIds', $captchaIds);
+                    $tsfe->fe_user->storeSessionData();
+                }
             }
 
             // add controller name to element
