@@ -7,7 +7,7 @@ plugin.tx_bwcaptcha {
 		# cat=bw_captcha; type=int; label=Seconds until captchas are invalid
 		lifetime = 3600
 		# cat=bw_captcha; type=boolean; label=Show reload button
-		refreshButton = 0
+		refreshButton = 1
 		# cat=bw_captcha; type=int; label=The length of the captcha
 		length = 5
 		# cat=bw_captcha; type=string; label=The charset of the captcha
