@@ -51,7 +51,6 @@ class CaptchaValidator extends AbstractValidator
         $this->displayError();
     }
 
-
     protected function displayError(): void
     {
         $this->addError(
