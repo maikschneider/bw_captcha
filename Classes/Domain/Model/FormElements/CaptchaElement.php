@@ -30,7 +30,7 @@ class CaptchaElement extends AbstractFormElement
         $ts = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $settings = $ts['module.']['tx_bwcaptcha.']['settings.'];
+        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
         $this->setProperty('showRefresh', (bool)$settings['refreshButton']);
     }
 }

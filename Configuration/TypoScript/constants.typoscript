@@ -1,4 +1,4 @@
-module.tx_bwcaptcha {
+plugin.tx_bwcaptcha {
 	view {
 		partialRootPath =
 	}

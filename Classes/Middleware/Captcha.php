@@ -44,7 +44,7 @@ class Captcha implements MiddlewareInterface
         $ts = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $settings = $ts['module.']['tx_bwcaptcha.']['settings.'];
+        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
         $width = (int)$settings['width'];
         $height = (int)$settings['height'];
         $lifetime = (int)$settings['lifetime'];
