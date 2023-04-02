@@ -4,7 +4,7 @@
 <formvh:renderRenderable renderable="{element}">
 	<f:render partial="Field/Field" arguments="{element: element}" contentAs="elementContent">
 		<div class="captcha">
-			<img src="{f:uri.page(pageType:3413)}" alt="Captcha image"/>
+			<img src="{f:uri.page(pageType:3413)}" alt="Captcha image" loading="lazy"/>
 			<f:if condition="{element.properties.showRefresh}">
 				<a class="captcha__reload" href="#" data-url="{f:uri.page(pageType:3413)}" onclick="this.parentElement.classList.add('captcha--reloading'); let captchaUrl = this.dataset.url; this.previousElementSibling.setAttribute('src', captchaUrl + (/\?/.test(captchaUrl) ? '&' : '?') + Date.now()); this.parentElement.classList.remove('captcha--reloading'); return false;">
 					<svg width="31" height="28" xmlns="http://www.w3.org/2000/svg">
