@@ -17,17 +17,15 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class Captcha implements MiddlewareInterface
 {
     protected ResponseFactoryInterface $responseFactory;
+
     protected ConfigurationManager $configurationManager;
-    protected TypoScriptFrontendController $tsfe;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,
-        ConfigurationManager $configurationManager,
-        TypoScriptFrontendController $tsfe
+        ConfigurationManager $configurationManager
     ) {
         $this->responseFactory = $responseFactory;
         $this->configurationManager = $configurationManager;
-        $this->tsfe = $tsfe;
     }
 
     public function process(
@@ -53,8 +51,8 @@ class Captcha implements MiddlewareInterface
         // create new captcha
         $builder = CaptchaBuilderUtility::getBuilderFromSettings($settings);
         $builder->build($width, $height, $font);
-        $newPhrase = $builder->getPhrase();
-        $this->storePhraseToSession($newPhrase, $lifetime);
+        $newPhrase = $builder->getPhrase() ?? '';
+        $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
         // render captcha image
         $response = $this->responseFactory->createResponse()
@@ -63,15 +61,10 @@ class Captcha implements MiddlewareInterface
         return $response;
     }
 
-    protected function getFeUser(): FrontendUserAuthentication
-    {
-        return $this->tsfe->fe_user;
-    }
-
-    protected function storePhraseToSession($newPhrase, $lifetime = 3600): void
+    protected function storePhraseToSession(string $newPhrase, ServerRequestInterface $request, int $lifetime = 3600): void
     {
         // write data to session
-        $feUser = $this->getFeUser();
+        $feUser = $request->getAttribute('frontend.controller')->fe_user;
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
         if (empty($captchaPhrases)) {
             $captchaPhrases = [];
