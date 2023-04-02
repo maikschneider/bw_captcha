@@ -27,6 +27,7 @@ plugin.tx_form {
 
 plugin.tx_bwcaptcha {
 	settings {
+		lifetime = {$plugin.tx_bwcaptcha.settings.lifetime}
 		refreshButton = {$plugin.tx_bwcaptcha.settings.refreshButton}
 		length = {$plugin.tx_bwcaptcha.settings.length}
 		charset = {$plugin.tx_bwcaptcha.settings.charset}
@@ -48,14 +49,12 @@ plugin.tx_bwcaptcha {
 
 captcha = PAGE
 captcha {
-   typeNum = 3413
-   10 =< tt_content.list.20.bwcaptcha_pi1
+	typeNum = 3413
 
-   config {
-      disableAllHeaderCode = 1
-      additionalHeaders.10.header = Content-type:application/json
-      xhtml_cleaning = 0
-      admPanel = 0
-      debug = 0
-   }
+	config {
+		disableAllHeaderCode = 1
+		xhtml_cleaning = 0
+		admPanel = 0
+		debug = 0
+    }
 }

@@ -8,5 +8,5 @@ services:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
 
-  Blueways\BwCaptcha\Controller\CaptchaController:
+  Blueways\BwCaptcha\Middleware\Captcha:
     public: true

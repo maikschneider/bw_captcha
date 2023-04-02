@@ -4,8 +4,10 @@ plugin.tx_bwcaptcha {
 	}
 
 	settings {
+		# cat=bw_captcha; type=int; label=Seconds until captchas are invalid
+		lifetime = 3600
 		# cat=bw_captcha; type=boolean; label=Show reload button
-		refreshButton = 0
+		refreshButton = 1
 		# cat=bw_captcha; type=int; label=The length of the captcha
 		length = 5
 		# cat=bw_captcha; type=string; label=The charset of the captcha
@@ -15,7 +17,7 @@ plugin.tx_bwcaptcha {
 		# cat=bw_captcha; type=int; label=The height of the image
 		height = 40
 		# cat=bw_captcha; type=string; label=Custom font file(s) to use (comma-seperated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"
-		fontFiles =
+		fontFiles = EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf
 		# cat=bw_captcha; type=string; label=Text color (e.g. 255,0,0)
 		textColor =
 		# cat=bw_captcha; type=string; label=Line color (e.g. 0,0,0)
