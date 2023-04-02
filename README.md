@@ -90,21 +90,15 @@ plugin.tx_bwcaptcha {
 }
 ```
 
-## Migration to TYPO3 v12 with extension version v2.x
+## Migration from version 2.x to 3.x 
 
-New controller name: If you overrode the Captcha partial and you're using the refresh button, you need to update the refresh url (`data-reload-route` attribute):
+The generation of the captcha moved to a middleware, which solves a lot of caching issues. Therefore, adjustments to the form element partial have been made. If you've modified the partial, you need to update the image tag and refresh button link.
 
-Old:
+**tl;dr**:
 
-```
-{f:uri.action(action:'refresh', controller: 'Captcha', ...
-```
-
-New:
-
-```
-{f:uri.action(action:'refresh', controller: element.properties.controllerName, ...
-```
+* Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+* Reload button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.refreshButton`)
+* You can re-enable the page cache, if disabled it because of this element 
 
 ## Troubleshooting
 
@@ -123,3 +117,10 @@ routeEnhancers:
       .captcha: 3413
 ```
 
+## Contribute
+
+This extension was made by Maik Schneider: Feel free to contribute!
+
+* [Github-Repository](https://github.com/maikschneider/bw_captcha)
+
+Thanks to [blueways](https://www.blueways.de/) and [XIMA](https://www.xima.de/)!
