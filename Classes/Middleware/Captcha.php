@@ -62,7 +62,8 @@ class Captcha implements MiddlewareInterface
     protected function storePhraseToSession(string $newPhrase, ServerRequestInterface $request, int $lifetime = 3600): void
     {
         // write data to session
-        $feUser = $request->getAttribute('frontend.controller')->fe_user ?? $GLOBALS['TSFE']->fe_user;
+        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
+        $feUser = $tsfe->fe_user;
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
         if (empty($captchaPhrases)) {
             $captchaPhrases = [];
