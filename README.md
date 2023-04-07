@@ -90,6 +90,23 @@ plugin.tx_bwcaptcha {
 }
 ```
 
+### Overriding the captcha element
+
+To override the captcha partial, copy it to your extension and add the partial path to your [form setup](https://docs.typo3.org/c/typo3/cms-form/main/en-us/I/Concepts/Configuration/Index.html#yaml-registration-for-the-frontend):
+
+```yaml
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                partialRootPaths:
+                  1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
+```
+
 ## Migration from version 2.x to 3.x 
 
 The generation of the captcha moved to a middleware, which solves a lot of caching issues. Therefore, adjustments to the form element partial have been made. If you've modified the partial, you need to update the image tag and refresh button link.
