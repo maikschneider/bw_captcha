@@ -5,13 +5,6 @@ plugin.tx_form {
 		}
 	}
 
-	view {
-		partialRootPaths {
-			1623227656 = EXT:bw_captcha/Resources/Private/Frontend/Partials/
-			1623227657 = {$plugin.tx_bwcaptcha.view.partialRootPath}
-		}
-	}
-
 	_CSS_DEFAULT_STYLE (
 		.captcha { margin-bottom: .5rem; }
 		.captcha a { margin-left: .5rem; }
