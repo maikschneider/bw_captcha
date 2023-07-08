@@ -34,5 +34,7 @@ plugin.tx_bwcaptcha {
 		interpolation =
 		# cat=bw_captcha; type=boolean; label=Ignore all effects
 		ignoreAllEffects =
+		# cat=bw_captcha; type=boolean; label=Show audio button for speech output
+		audioButton = 0
 	}
 }

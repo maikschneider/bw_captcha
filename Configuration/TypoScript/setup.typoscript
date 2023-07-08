@@ -37,6 +37,7 @@ plugin.tx_bwcaptcha {
 		maxOffset = {$plugin.tx_bwcaptcha.settings.maxOffset}
 		interpolation = {$plugin.tx_bwcaptcha.settings.interpolation}
 		ignoreAllEffects = {$plugin.tx_bwcaptcha.settings.ignoreAllEffects}
+		audioButton = {$plugin.tx_bwcaptcha.settings.audioButton}
 	}
 }
 
