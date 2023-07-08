@@ -52,3 +52,6 @@ captcha {
 		debug = 0
     }
 }
+
+audio < captcha
+audio.typeNum = 3414
