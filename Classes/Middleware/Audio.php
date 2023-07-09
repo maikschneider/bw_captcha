@@ -2,7 +2,7 @@
 
 namespace Blueways\BwCaptcha\Middleware;
 
-use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
+use Blueways\BwCaptcha\Utility\AudioBuilderUtility;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -43,36 +43,26 @@ class Audio implements MiddlewareInterface
         );
         $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
 
-        $soundFile = file_get_contents(GeneralUtility::getFileAbsFileName('EXT:bw_captcha/Resources/Private/Sounds/de/a.mp3'));
+        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
+        $feUser = $tsfe->fe_user;
+        $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
+
+        if (!$captchaPhrases || !is_array($captchaPhrases)) {
+            // @TODO: handle error
+            return $handler->handle($request);
+        }
+
+        $languageCode = $request->getAttribute('language')->getTwoLetterIsoCode();
+        $latestCaptcha = array_pop($captchaPhrases);
+
+        $soundFile = AudioBuilderUtility::createAudioCode($latestCaptcha, $languageCode);
+
+        //$soundFile = file_get_contents(GeneralUtility::getFileAbsFileName('EXT:bw_captcha/Resources/Private/Sounds/de/a.mp3'));
 
         // render captcha image
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', 'audio/mp3');
         $response->getBody()->write($soundFile);
         return $response;
-    }
-
-    protected function storePhraseToSession(string $newPhrase, ServerRequestInterface $request, int $lifetime = 3600): void
-    {
-        // write data to session
-        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
-        $feUser = $tsfe->fe_user;
-        $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
-        if (empty($captchaPhrases)) {
-            $captchaPhrases = [];
-        }
-
-        $time = time();
-        $captchaPhrases = array_filter(
-            $captchaPhrases,
-            function ($captchaLifetime) use ($time) {
-                return $captchaLifetime > $time;
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        $captchaPhrases[$time + $lifetime] = $newPhrase;
-        $feUser->setKey('ses', 'captchaPhrases', $captchaPhrases);
-        $feUser->storeSessionData();
     }
 }
