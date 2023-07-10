@@ -8,7 +8,7 @@ class AudioBuilderUtility
 {
     public static function createAudioCode(string $code, string $language): string
     {
-        $languageCode = in_array($language, ['de']) ? $language : 'de';
+        $languageCode = in_array($language, ['de', 'en']) ? $language : 'en';
         $silentSecond = GeneralUtility::getFileAbsFileName('EXT:bw_captcha/Resources/Private/Sounds/silence.wav');
         $letterAudioPaths = [];
 
