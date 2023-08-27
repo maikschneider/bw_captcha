@@ -3,7 +3,8 @@
   "type": "typo3-cms-extension",
   "description": "TYPO3 extension that integrates gregwar/captcha into Form",
   "require": {
-    "typo3/cms-core": "^10.0 || ^11.0 || ^12.0"
+    "typo3/cms-core": "^10.0 || ^11.0 || ^12.0",
+    "maikschneider/steganography": "@dev"
   },
   "autoload": {
     "psr-4": {
@@ -15,6 +16,10 @@
     {
       "type": "git",
       "url": "https://github.com/linawolf/phpstan-typo3"
+    },
+    {
+      "type": "path",
+      "url": "packages/*"
     }
   ],
   "require-dev": {
@@ -23,7 +28,8 @@
     "typo3/cms-lowlevel": "^12.0",
     "bk2k/bootstrap-package": "dev-master",
     "friendsofphp/php-cs-fixer": "^3.12",
-    "saschaegerer/phpstan-typo3": "12.0.x-dev"
+    "saschaegerer/phpstan-typo3": "12.0.x-dev",
+    "helhum/typo3-console": "^8.0"
   },
   "extra": {
     "typo3/cms": {
