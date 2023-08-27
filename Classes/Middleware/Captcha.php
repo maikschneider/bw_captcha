@@ -62,17 +62,22 @@ class Captcha implements MiddlewareInterface
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
         // encode encrypted phrase into image
-        $processor = new Processor();
-        $hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)->getDefaultHashInstance('FE');
-        $hashedPassword = $hashInstance->getHashedPassword($newPhrase);
-        $image = $processor->encode($builder->getGd(), $hashedPassword);
-
-        $encodedCaptchaImage = $image->get();
+        if ($settings['useSteganography']) {
+            $processor = new Processor();
+            /** @var PasswordHashFactory $hashFactory */
+            $hashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
+            $hashInstance = $hashFactory->getDefaultHashInstance('FE');
+            $hashedPassword = $hashInstance->getHashedPassword($newPhrase) ?? '';
+            $image = $processor->encode($builder->getGd(), $hashedPassword);
+            $captchaImage = $image->get();
+        } else {
+            $captchaImage = $builder->get();
+        }
 
         // render captcha image
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', 'image/png');
-        $response->getBody()->write($encodedCaptchaImage);
+        $response->getBody()->write($captchaImage);
         return $response;
     }
 
