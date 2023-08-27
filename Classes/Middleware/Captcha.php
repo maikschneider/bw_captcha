@@ -3,14 +3,19 @@
 namespace Blueways\BwCaptcha\Middleware;
 
 use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
+use MaikSchneider\Steganography\Processor;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
 use TYPO3\CMS\Core\Routing\PageArguments;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 
 class Captcha implements MiddlewareInterface
 {
@@ -26,6 +31,10 @@ class Captcha implements MiddlewareInterface
         $this->configurationManager = $configurationManager;
     }
 
+    /**
+     * @throws InvalidConfigurationTypeException
+     * @throws InvalidPasswordHashException
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
@@ -52,10 +61,18 @@ class Captcha implements MiddlewareInterface
         $newPhrase = $builder->getPhrase() ?? '';
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
+        // encode encrypted phrase into image
+        $processor = new Processor();
+        $hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)->getDefaultHashInstance('FE');
+        $hashedPassword = $hashInstance->getHashedPassword($newPhrase);
+        $image = $processor->encode($builder->getGd(), $hashedPassword);
+
+        $encodedCaptchaImage = $image->get();
+
         // render captcha image
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', 'image/jpeg');
-        $response->getBody()->write($builder->get());
+            ->withHeader('Content-Type', 'image/png');
+        $response->getBody()->write($encodedCaptchaImage);
         return $response;
     }
 

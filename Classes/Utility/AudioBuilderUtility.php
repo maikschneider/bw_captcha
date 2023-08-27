@@ -22,7 +22,10 @@ class AudioBuilderUtility
         return self::joinwavs($letterAudioPaths);
     }
 
-    public static function joinwavs($wavs): string
+    /**
+     * @param string[] $wavs
+     */
+    public static function joinwavs(array $wavs): string
     {
         $fields = implode('/', [
             'H8ChunkID',
@@ -37,19 +40,22 @@ class AudioBuilderUtility
             'vBlockAlign',
             'vBitsPerSample',
         ]);
-        $data = '';
+        $data = $header = '';
         foreach ($wavs as $wav) {
             $fp = fopen($wav, 'rb');
-            $header = fread($fp, 36);
+            if (!$fp) {
+                continue;
+            }
+            $header = fread($fp, 36) ?: '';
             $info = unpack($fields, $header);
             // read optional extra stuff
-            if ($info['Subchunk1Size'] > 16) {
+            if (isset($info['Subchunk1Size']) && $info['Subchunk1Size'] > 16) {
                 $header .= fread($fp, ($info['Subchunk1Size'] - 16));
             }
             // read SubChunk2ID
             $header .= fread($fp, 4);
             // read Subchunk2Size
-            $size = unpack('vsize', fread($fp, 4));
+            $size = unpack('vsize', fread($fp, 4) ?: '') ?: [];
             $size = $size['size'];
             // read data
             $data .= fread($fp, $size);
