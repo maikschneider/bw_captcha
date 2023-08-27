@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07a2e540a2b95fa1113570a8e82f79cd",
+    "content-hash": "0cdec5922c791c3e286aee0e70b91497",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1233,11 +1233,17 @@
         },
         {
             "name": "maikschneider/steganography",
-            "version": "dev-master",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maikschneider/steganography.git",
+                "reference": "1c0b886a9239ed662cb5c4fb439aa4a61d580424"
+            },
             "dist": {
-                "type": "path",
-                "url": "packages/steganography",
-                "reference": "7ed97ad867671fb1286b431cfd5568c326c5aaed"
+                "type": "zip",
+                "url": "https://api.github.com/repos/maikschneider/steganography/zipball/1c0b886a9239ed662cb5c4fb439aa4a61d580424",
+                "reference": "1c0b886a9239ed662cb5c4fb439aa4a61d580424",
+                "shasum": ""
             },
             "require": {
                 "ext-gd": "*",
@@ -1245,10 +1251,10 @@
                 "symfony/options-resolver": ">4.0"
             },
             "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.12",
                 "php-coveralls/php-coveralls": "^2.0",
                 "phpunit/phpunit": "^10.3",
-                "rector/rector": "^0.18.0",
-                "sensiolabs/security-checker": "dev-master"
+                "rector/rector": "^0.18.0"
             },
             "type": "library",
             "autoload": {
@@ -1256,19 +1262,7 @@
                     "MaikSchneider\\Steganography\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "MaikSchneider\\Steganography\\Test\\": "test/"
-                }
-            },
-            "scripts": {
-                "test:phpunit": [
-                    "vendor/bin/phpunit -c phpunit.xml.dist"
-                ],
-                "test:coverage": [
-                    "vendor/bin/coveralls"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1282,9 +1276,10 @@
             "keywords": [
                 "steganography"
             ],
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "source": "https://github.com/maikschneider/steganography/tree/v1.0.0"
+            },
+            "time": "2023-08-27T13:48:46+00:00"
         },
         {
             "name": "masterminds/html5",
@@ -8908,7 +8903,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "maikschneider/steganography": 20,
         "roave/security-advisories": 20,
         "bk2k/bootstrap-package": 20,
         "saschaegerer/phpstan-typo3": 20
