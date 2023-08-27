@@ -11,14 +11,14 @@ parameters:
 			path: Classes/Middleware/Audio.php
 
 		-
-			message: "#^There is no request attribute \"frontend\\.controller\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
+			message: "#^Parameter \\#2 \\$saltedHashPW of method TYPO3\\\\CMS\\\\Core\\\\Crypto\\\\PasswordHashing\\\\PasswordHashInterface\\:\\:checkPassword\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: Classes/Middleware/Audio.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:getDefaultHashInstance\\(\\)\\.$#"
+			message: "#^There is no request attribute \"frontend\\.controller\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
 			count: 1
-			path: Classes/Middleware/Captcha.php
+			path: Classes/Middleware/Audio.php
 
 		-
 			message: "#^There is no request attribute \"frontend\\.controller\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
