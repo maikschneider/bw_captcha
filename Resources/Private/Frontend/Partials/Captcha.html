@@ -6,11 +6,15 @@
 		<div class="captcha">
 			<img src="{f:uri.page(pageType:3413)}"
 				 alt="Captcha image"
+				 aria-live="polite"
 				 loading="lazy"
 				 onload="this.parentElement.classList.remove('captcha--reloading'); return false;"/>
 			<f:if condition="{element.properties.showRefresh}">
 				<a class="captcha__reload"
 				   href="#"
+				   title="{f:translate(extensionName:'bw_captcha',key:'partial.refresh.title')}"
+				   aria-label="{f:translate(extensionName:'bw_captcha',key:'partial.refresh.label')}"
+				   role="button"
 				   data-url="{f:uri.page(pageType:3413)}"
 				   onclick="const div = this.parentElement; div.classList.add('captcha--reloading', 'captcha--spin'); let captchaUrl = this.dataset.url; this.previousElementSibling.setAttribute('src', captchaUrl + (/\?/.test(captchaUrl) ? '&' : '?') + Date.now()); setTimeout(function(){div.classList.remove('captcha--spin')},400); return false;">
 					<svg width="31" height="28" xmlns="http://www.w3.org/2000/svg">
@@ -24,6 +28,9 @@
 				<a class="captcha__audio"
 				   href="#"
 				   data-url="{f:uri.page(pageType:3414)}"
+				   title="{f:translate(extensionName:'bw_captcha',key:'partial.audio.title')}"
+				   aria-label="{f:translate(extensionName:'bw_captcha',key:'partial.audio.label')}"
+				   role="button"
 				   onclick="const div = this.parentElement;window.captchaAudio = window.captchaAudio ? window.captchaAudio : new Audio();window.captchaAudio.addEventListener('ended', () => div.classList.remove('captcha--playing'));if (window.captchaAudio.paused) {	div.classList.add('captcha--playing');	const img = div.querySelector('img');	const c = document.createElement('canvas');	const ctx = c.getContext('2d');	const data = new FormData();	c.width = img.naturalWidth;	c.height = img.naturalHeight;	ctx.drawImage(img, 0, 0);	data.append('captchaDataUrl', c.toDataURL());fetch('{f:uri.page(pageType:3414)}', {method: 'POST',body: data}).then(response => response.blob()).then(blob => {	window.captchaAudio.src = window.URL.createObjectURL(blob);	window.captchaAudio.play();	});} else {	window.captchaAudio.pause();div.classList.remove('captcha--playing')} return false;">
 					<svg xmlns="http://www.w3.org/2000/svg" height="35" fill="none" viewBox="0 0 115 100">
 						<path fill="#000"
