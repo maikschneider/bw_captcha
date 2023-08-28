@@ -7,7 +7,6 @@ This extension adds a captcha element for the TYPO3 form component. The captcha 
 ## Install
 
 * ```composer require blueways/bw-captcha```
-* Activate extension
 * Include TypoScript template
 
 ## Usage
@@ -29,6 +28,7 @@ renderables:
         properties:
           fluidAdditionalAttributes:
             required: required
+            autocomplete: 'off'
 ```
 
 ### Configuration
@@ -40,6 +40,9 @@ plugin.tx_bwcaptcha {
     settings {
         # Show reload button
         refreshButton =
+
+        # Show audio button for speech output
+        audioButton =
         
         # The length of the captcha
         length =
@@ -85,7 +88,9 @@ plugin.tx_bwcaptcha {
         
         # Ignore all effects
         ignoreAllEffects =
-        
+
+        # Enable this for audio captcha support when using multiple captchas on one site
+        useSteganography =
     }
 }
 ```
@@ -132,7 +137,12 @@ routeEnhancers:
     map:
       /: 0
       .captcha: 3413
+      .audio: 3414
 ```
+
+### Audio captcha: Wrong output
+
+Due to the implementation, the audio sound of the played captcha is consistently the most recent one generated. When multiple captchas are utilized on a single page, along with the reload and audio features, there is a potential for the generation of one captcha to disrupt the generation of the second one. To circumvent this issue, you can activate the useSteganography TypoScript setting. This particular setting encodes the present captcha within the image that is used to determine the accurate captcha during the audio request.
 
 ## Contribute
 
