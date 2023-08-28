@@ -1233,16 +1233,16 @@
         },
         {
             "name": "maikschneider/steganography",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maikschneider/steganography.git",
-                "reference": "1c0b886a9239ed662cb5c4fb439aa4a61d580424"
+                "reference": "bbc200575960d8fad74ef87ee6f4c00c201c5a8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maikschneider/steganography/zipball/1c0b886a9239ed662cb5c4fb439aa4a61d580424",
-                "reference": "1c0b886a9239ed662cb5c4fb439aa4a61d580424",
+                "url": "https://api.github.com/repos/maikschneider/steganography/zipball/bbc200575960d8fad74ef87ee6f4c00c201c5a8b",
+                "reference": "bbc200575960d8fad74ef87ee6f4c00c201c5a8b",
                 "shasum": ""
             },
             "require": {
@@ -1277,9 +1277,9 @@
                 "steganography"
             ],
             "support": {
-                "source": "https://github.com/maikschneider/steganography/tree/v1.0.0"
+                "source": "https://github.com/maikschneider/steganography/tree/v1.0.1"
             },
-            "time": "2023-08-27T13:48:46+00:00"
+            "time": "2023-08-28T06:43:17+00:00"
         },
         {
             "name": "masterminds/html5",
