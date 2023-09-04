@@ -52,18 +52,22 @@ class Captcha implements MiddlewareInterface
         $newPhrase = $builder->getPhrase() ?? '';
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
-        // calculate content length
-        $binaryImage = $builder->get();
-        $contentLength = floor((strlen($binaryImage) + 2) / 3) * 4;
-
         // render captcha image
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', 'image/jpeg')
             ->withHeader('Cache-Control', 'no-cache')
             ->withHeader('Cache-Directive', 'no-cache')
             ->withHeader('Pragma-Directive', 'no-cache')
-            ->withHeader('Expires', '0')
-            ->withHeader('Content-Length', (string)$contentLength);
+            ->withHeader('Expires', '0');
+
+        // add Content-Length header in case of onload request (no reload)
+        $binaryImage = $builder->get();
+        $params = $request->getQueryParams();
+        if (!isset($params['now'])) {
+            $contentLength = floor((strlen($binaryImage) + 2) / 3) * 4;
+            $response = $response->withHeader('Content-Length', (string)$contentLength);
+        }
+
         $response->getBody()->write($binaryImage);
         return $response;
     }
