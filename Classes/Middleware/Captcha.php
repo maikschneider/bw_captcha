@@ -60,10 +60,10 @@ class Captcha implements MiddlewareInterface
             ->withHeader('Pragma-Directive', 'no-cache')
             ->withHeader('Expires', '0');
 
-        // add Content-Length header in case of onload request (no reload)
+        // add Content-Length header in case of onload request (no reload) or logged in backend user
         $binaryImage = $builder->get();
         $params = $request->getQueryParams();
-        if (!isset($params['now'])) {
+        if (!isset($params['now']) || isset($GLOBALS['BE_USER'])) {
             $contentLength = floor((strlen($binaryImage) + 2) / 3) * 4;
             $response = $response->withHeader('Content-Length', (string)$contentLength);
         }
