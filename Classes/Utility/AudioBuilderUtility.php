@@ -57,6 +57,10 @@ class AudioBuilderUtility
             // read Subchunk2Size
             $size = unpack('vsize', fread($fp, 4) ?: '') ?: [];
             $size = $size['size'];
+            // dirty hack to fix problems with some german capital letters: obtained size is way too small
+            if (strpos($wav, '-upper.wav')) {
+                $size = 80000;
+            }
             // read data
             $data .= fread($fp, $size);
         }
