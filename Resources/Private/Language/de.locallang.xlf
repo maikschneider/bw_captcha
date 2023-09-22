@@ -12,6 +12,22 @@
 				<source>Captcha</source>
 				<target>Captcha</target>
 			</trans-unit>
+			<trans-unit id="partial.refresh.title">
+				<source>Load new captcha</source>
+				<target>Neues Captcha laden</target>
+			</trans-unit>
+			<trans-unit id="partial.refresh.label">
+				<source>Refresh</source>
+				<target>Erneuern</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.title">
+				<source>Read captcha aloud</source>
+				<target>Captcha vorlesen</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.label">
+				<source>Read</source>
+				<target>Vorlesen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

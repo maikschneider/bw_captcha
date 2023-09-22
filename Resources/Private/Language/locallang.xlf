@@ -10,6 +10,18 @@
 			<trans-unit id="formEditor.elements.Captcha" resname="formEditor.elements.Captcha">
 				<source>Captcha</source>
 			</trans-unit>
+			<trans-unit id="partial.refresh.title">
+				<source>Load new captcha</source>
+			</trans-unit>
+			<trans-unit id="partial.refresh.label">
+				<source>Refresh</source>
+			</trans-unit>
+			<trans-unit id="partial.audio.title">
+				<source>Read captcha aloud</source>
+			</trans-unit>
+			<trans-unit id="partial.audio.label">
+				<source>Read</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
