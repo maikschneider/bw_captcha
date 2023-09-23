@@ -1,18 +1,18 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = [
-    'title' => 'Form Captcha',
-    'description' => 'Captcha element for the TYPO3 form component. The captcha generation uses Gregwar/Captcha, no Google or 3rd party includes.',
+    'title' => 'Accessible Form Captcha',
+    'description' => 'Captcha element with audio support for TYPO3 form components. The captcha generation does not rely on Google or third-party integrations.',
     'category' => 'plugin',
     'author' => 'Maik Schneider',
     'author_company' => 'XIMA Media GmbH',
     'author_email' => 'maik.schneider@xima.de',
     'state' => 'stable',
     'clearCacheOnLoad' => true,
-    'version' => '3.1.0',
+    'version' => '4.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '10.0.0-12.99.99',
+            'typo3' => '11.0.0-13.99.99',
         ],
         'conflicts' => [],
         'suggests' => [],

@@ -2,12 +2,11 @@
 
 This extension adds a captcha element for the TYPO3 form component. The captcha generation uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd party** includes.  
 
-![Frontend Captcha example](Documentation/Images/Example.png)
+![Frontend Captcha example](Documentation/Images/Example.jpg)
 
 ## Install
 
 * ```composer require blueways/bw-captcha```
-* Activate extension
 * Include TypoScript template
 
 ## Usage
@@ -29,6 +28,7 @@ renderables:
         properties:
           fluidAdditionalAttributes:
             required: required
+            autocomplete: 'off'
 ```
 
 ### Configuration
@@ -40,6 +40,9 @@ plugin.tx_bwcaptcha {
     settings {
         # Show reload button
         refreshButton =
+
+        # Show audio button for speech output
+        audioButton =
         
         # The length of the captcha
         length =
@@ -85,7 +88,6 @@ plugin.tx_bwcaptcha {
         
         # Ignore all effects
         ignoreAllEffects =
-        
     }
 }
 ```
@@ -106,6 +108,13 @@ TYPO3:
                 partialRootPaths:
                   1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
 ```
+
+## Migration from version 3.x to 4.x
+
+This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the current captcha code. Missing `ARIA` properties have been added.
+
+* Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+* Audio button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.audioButton`)
 
 ## Migration from version 2.x to 3.x 
 
@@ -132,6 +141,7 @@ routeEnhancers:
     map:
       /: 0
       .captcha: 3413
+      .audio: 3414
 ```
 
 ## Contribute

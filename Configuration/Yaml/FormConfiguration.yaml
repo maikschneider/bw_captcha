@@ -68,6 +68,19 @@ TYPO3:
               properties:
                 fluidAdditionalAttributes:
                   autocomplete: 'off'
+              variants:
+                - identifier: template-variant
+                  condition: 'getRootFormProperty("renderingOptions.templateVariant") == "version2"'
+                  properties:
+                    containerClassAttribute: 'form-element form-element-text mb-3'
+                    elementClassAttribute: form-control
+                    elementErrorClassAttribute: 'is-invalid'
+                    labelClassAttribute: form-label
+                    errorMsgClassAttribute: invalid-feedback
+                    errorClassAttribute: is-invalid
+                    descriptionClassAttribute: form-text
+                    requiredMarkClassAttribute: required
+                    visuallyHiddenClassAttribute: visually-hidden
 
           validatorsDefinition:
             Captcha:

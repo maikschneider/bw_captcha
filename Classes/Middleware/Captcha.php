@@ -3,6 +3,7 @@
 namespace Blueways\BwCaptcha\Middleware;
 
 use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
+use MaikSchneider\Steganography\Processor;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,6 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 
 class Captcha implements MiddlewareInterface
 {
@@ -26,6 +28,9 @@ class Captcha implements MiddlewareInterface
         $this->configurationManager = $configurationManager;
     }
 
+    /**
+     * @throws InvalidConfigurationTypeException
+     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
@@ -52,28 +57,42 @@ class Captcha implements MiddlewareInterface
         $newPhrase = $builder->getPhrase() ?? '';
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
-        // render captcha image
+        // encode encrypted phrase into image
+        if ((int)$settings['audioButton']) {
+            $processor = new Processor();
+            $image = $processor->encode($builder->getGd(), $newPhrase);
+            $captchaImage = $image->get();
+            $mimeType = 'image/png';
+        } else {
+            $captchaImage = $builder->get();
+            $mimeType = 'image/jpeg';
+        }
+
+        // construct response
         $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', 'image/jpeg')
+            ->withHeader('Content-Type', $mimeType)
             ->withHeader('Cache-Control', 'no-cache')
             ->withHeader('Cache-Directive', 'no-cache')
             ->withHeader('Pragma-Directive', 'no-cache')
             ->withHeader('Expires', '0');
 
         // add Content-Length header in case of onload request (no reload)
-        $binaryImage = $builder->get();
         $params = $request->getQueryParams();
         if (!isset($params['now'])) {
-            $contentLength = floor((strlen($binaryImage) + 2) / 3) * 4;
+            $contentLength = floor((strlen($captchaImage) + 2) / 3) * 4;
             $response = $response->withHeader('Content-Length', (string)$contentLength);
         }
 
-        $response->getBody()->write($binaryImage);
+        // render captcha image
+        $response->getBody()->write($captchaImage);
         return $response;
     }
 
-    protected function storePhraseToSession(string $newPhrase, ServerRequestInterface $request, int $lifetime = 3600): void
-    {
+    protected function storePhraseToSession(
+        string $newPhrase,
+        ServerRequestInterface $request,
+        int $lifetime = 3600
+    ): void {
         // write data to session
         $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
         $feUser = $tsfe->fe_user;
