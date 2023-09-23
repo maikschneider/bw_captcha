@@ -111,7 +111,7 @@ TYPO3:
 
 ## Migration from version 3.x to 4.x
 
-This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the current captcha code.
+This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the current captcha code. Missing `ARIA` properties have been added.
 
 * Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
 * Audio button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.audioButton`)
