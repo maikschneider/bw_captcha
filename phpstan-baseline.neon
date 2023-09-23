@@ -6,9 +6,24 @@ parameters:
 			path: Classes/Domain/Model/FormElements/CaptchaElement.php
 
 		-
+			message: "#^Cannot call method getTwoLetterIsoCode\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Site\\\\Entity\\\\SiteLanguage\\|null\\.$#"
+			count: 1
+			path: Classes/Middleware/Audio.php
+
+		-
+			message: "#^There is no request attribute \"frontend\\.controller\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
+			count: 1
+			path: Classes/Middleware/Audio.php
+
+		-
 			message: "#^There is no request attribute \"frontend\\.controller\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
 			count: 1
 			path: Classes/Middleware/Captcha.php
+
+		-
+			message: "#^Parameter \\#2 \\$length of function fread expects int\\<0, max\\>, \\(float\\|int\\) given\\.$#"
+			count: 1
+			path: Classes/Utility/AudioBuilderUtility.php
 
 		-
 			message: "#^Call to an undefined method object\\:\\:retrieveFileOrFolderObject\\(\\)\\.$#"

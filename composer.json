@@ -1,14 +1,17 @@
 {
   "name": "blueways/bw-captcha",
   "type": "typo3-cms-extension",
-  "description": "TYPO3 extension that integrates gregwar/captcha into Form",
+  "description": "Captcha element with audio support for TYPO3 form components. The captcha generation does not rely on Google or third-party integrations.",
   "require": {
-    "typo3/cms-core": "^10.0 || ^11.0 || ^12.0"
+    "php": "^8.1",
+    "typo3/cms-core": "^11.0 || ^12.0 || ^13.0",
+    "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {
       "Blueways\\BwCaptcha\\": "Classes",
-      "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha"
+      "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha",
+      "MaikSchneider\\Steganography\\": "Libraries/Steganography/src"
     }
   },
   "repositories": [
@@ -23,7 +26,8 @@
     "typo3/cms-lowlevel": "^12.0",
     "bk2k/bootstrap-package": "dev-master",
     "friendsofphp/php-cs-fixer": "^3.12",
-    "saschaegerer/phpstan-typo3": "12.0.x-dev"
+    "saschaegerer/phpstan-typo3": "12.0.x-dev",
+    "helhum/typo3-console": "^8.0"
   },
   "extra": {
     "typo3/cms": {

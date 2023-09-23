@@ -1,5 +1,4 @@
 base: 'https://bw-captcha.ddev.site/'
-errorHandling: {  }
 languages:
   -
     title: English
@@ -13,5 +12,17 @@ languages:
     hreflang: en-us
     direction: ltr
     flag: us
+  -
+    title: German
+    enabled: true
+    locale: de_DE
+    hreflang: ''
+    base: /de/
+    websiteTitle: ''
+    navigationTitle: Deutsch
+    fallbackType: strict
+    fallbacks: ''
+    flag: de
+    languageId: 1
 rootPageId: 1
-routes: {  }
+websiteTitle: ''

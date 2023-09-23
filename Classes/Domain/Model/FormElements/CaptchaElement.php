@@ -32,5 +32,6 @@ class CaptchaElement extends AbstractFormElement
         );
         $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
         $this->setProperty('showRefresh', (bool)$settings['refreshButton']);
+        $this->setProperty('showAudio', (bool)$settings['audioButton']);
     }
 }

@@ -16,8 +16,6 @@ class CaptchaValidator extends AbstractValidator
 
     /**
      * @param mixed $value
-     *
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
      */
     protected function isValid($value): void
     {
