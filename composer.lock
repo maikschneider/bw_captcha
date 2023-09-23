@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22772f55c4a76102cb952b30d133dd11",
+    "content-hash": "0511316a4b725a8ab5ee802eb7b430e1",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1230,56 +1230,6 @@
                 "source": "https://github.com/lolli42/FineDiff/tree/1.0.2"
             },
             "time": "2022-05-23T07:44:28+00:00"
-        },
-        {
-            "name": "maikschneider/steganography",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maikschneider/steganography.git",
-                "reference": "bbc200575960d8fad74ef87ee6f4c00c201c5a8b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maikschneider/steganography/zipball/bbc200575960d8fad74ef87ee6f4c00c201c5a8b",
-                "reference": "bbc200575960d8fad74ef87ee6f4c00c201c5a8b",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "ext-zlib": "*",
-                "symfony/options-resolver": ">4.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.12",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^10.3",
-                "rector/rector": "^0.18.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MaikSchneider\\Steganography\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Maik Schneider",
-                    "email": "schneider.maik@me.com"
-                }
-            ],
-            "description": "Simple implementation of Steganography (Hiding a hidden message within an image)",
-            "keywords": [
-                "steganography"
-            ],
-            "support": {
-                "source": "https://github.com/maikschneider/steganography/tree/v1.0.1"
-            },
-            "time": "2023-08-28T06:43:17+00:00"
         },
         {
             "name": "masterminds/html5",

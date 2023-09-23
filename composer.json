@@ -5,13 +5,13 @@
   "require": {
     "php": "^8.1",
     "typo3/cms-core": "^11.0 || ^12.0 || ^13.0",
-    "maikschneider/steganography": "^1.0",
     "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {
       "Blueways\\BwCaptcha\\": "Classes",
-      "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha"
+      "Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha",
+      "MaikSchneider\\Steganography\\": "Libraries/Steganography/src"
     }
   },
   "repositories": [
