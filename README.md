@@ -2,7 +2,7 @@
 
 This extension adds a captcha element for the TYPO3 form component. The captcha generation uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd party** includes.  
 
-![Frontend Captcha example](Documentation/Images/Example.png)
+![Frontend Captcha example](Documentation/Images/Example.jpg)
 
 ## Install
 
