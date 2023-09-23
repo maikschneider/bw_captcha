@@ -41,7 +41,6 @@ plugin.tx_bwcaptcha {
 		interpolation = {$plugin.tx_bwcaptcha.settings.interpolation}
 		ignoreAllEffects = {$plugin.tx_bwcaptcha.settings.ignoreAllEffects}
 		audioButton = {$plugin.tx_bwcaptcha.settings.audioButton}
-		useSteganography = {$plugin.tx_bwcaptcha.settings.useSteganography}
 	}
 }
 

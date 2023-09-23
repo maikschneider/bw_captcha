@@ -140,10 +140,6 @@ routeEnhancers:
       .audio: 3414
 ```
 
-### Audio captcha: Wrong output
-
-Due to the implementation, the audio sound of the played captcha is consistently the most recent one generated. When multiple captchas are utilized on a single page, along with the reload and audio features, there is a potential for the generation of one captcha to disrupt the generation of the second one. To circumvent this issue, you can activate the useSteganography TypoScript setting. This particular setting encodes the present captcha within the image that is used to determine the accurate captcha during the audio request.
-
 ## Contribute
 
 This extension was made by Maik Schneider: Feel free to contribute!

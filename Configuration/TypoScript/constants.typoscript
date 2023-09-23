@@ -35,8 +35,6 @@ plugin.tx_bwcaptcha {
 		# cat=bw_captcha; type=boolean; label=Ignore all effects
 		ignoreAllEffects =
 		# cat=bw_captcha; type=boolean; label=Show audio button for speech output
-		audioButton = 0
-		# cat=bw_captcha; type=boolean; label=Enable this for audio captcha support when using multiple captchas on one site
-		useSteganography = 0
+		audioButton = 1
 	}
 }

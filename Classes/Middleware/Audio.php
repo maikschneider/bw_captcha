@@ -64,9 +64,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $latestCaptcha = '';
-
-        if ($settings['useSteganography'] && isset($body['captchaDataUrl'])) {
+        if ((int)$settings['audioButton'] && isset($body['captchaDataUrl'])) {
             // get image data from post request
             $dataUrl = $body['captchaDataUrl'];
             [, $dataUrl] = explode(';', $dataUrl);
@@ -76,17 +74,7 @@ class Audio implements MiddlewareInterface
             // decode image
             $img = imagecreatefromstring($imageData);
             $processor = new Processor();
-            $encryptedCaptchaPhrase = $processor->decode($img);
-
-            /** @var PasswordHashFactory $hashFactory */
-            $hashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
-            $hashInstance = $hashFactory->getDefaultHashInstance('FE');
-            foreach (array_reverse($captchaPhrases) as $captchaPhrase) {
-                if ($hashInstance->checkPassword($captchaPhrase, $encryptedCaptchaPhrase)) {
-                    $latestCaptcha = $captchaPhrase;
-                    break;
-                }
-            }
+            $latestCaptcha = $processor->decode($img);
         } else {
             // use latest captcha
             $latestCaptcha = array_pop($captchaPhrases);

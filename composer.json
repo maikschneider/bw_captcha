@@ -4,7 +4,8 @@
   "description": "TYPO3 extension that integrates gregwar/captcha into Form",
   "require": {
     "typo3/cms-core": "^10.0 || ^11.0 || ^12.0",
-    "maikschneider/steganography": "^1.0"
+    "maikschneider/steganography": "^1.0",
+    "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {

@@ -62,13 +62,9 @@ class Captcha implements MiddlewareInterface
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
         // encode encrypted phrase into image
-        if ($settings['useSteganography']) {
+        if ((int)$settings['audioButton']) {
             $processor = new Processor();
-            /** @var PasswordHashFactory $hashFactory */
-            $hashFactory = GeneralUtility::makeInstance(PasswordHashFactory::class);
-            $hashInstance = $hashFactory->getDefaultHashInstance('FE');
-            $hashedPassword = $hashInstance->getHashedPassword($newPhrase) ?? '';
-            $image = $processor->encode($builder->getGd(), $hashedPassword);
+            $image = $processor->encode($builder->getGd(), $newPhrase);
             $captchaImage = $image->get();
         } else {
             $captchaImage = $builder->get();
@@ -81,8 +77,11 @@ class Captcha implements MiddlewareInterface
         return $response;
     }
 
-    protected function storePhraseToSession(string $newPhrase, ServerRequestInterface $request, int $lifetime = 3600): void
-    {
+    protected function storePhraseToSession(
+        string $newPhrase,
+        ServerRequestInterface $request,
+        int $lifetime = 3600
+    ): void {
         // write data to session
         $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
         $feUser = $tsfe->fe_user;
