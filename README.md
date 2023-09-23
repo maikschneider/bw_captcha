@@ -88,9 +88,6 @@ plugin.tx_bwcaptcha {
         
         # Ignore all effects
         ignoreAllEffects =
-
-        # Enable this for audio captcha support when using multiple captchas on one site
-        useSteganography =
     }
 }
 ```
@@ -111,6 +108,13 @@ TYPO3:
                 partialRootPaths:
                   1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
 ```
+
+## Migration from version 3.x to 4.x
+
+This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the current captcha code.
+
+* Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+* Audio button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.audioButton`)
 
 ## Migration from version 2.x to 3.x 
 
