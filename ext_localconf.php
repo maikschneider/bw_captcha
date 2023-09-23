@@ -19,4 +19,10 @@ call_user_func(function () {
         \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         ['source' => 'EXT:bw_captcha/Resources/Public/Images/form-captcha-icon.svg']
     );
+
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'] ??= [];
+    \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'],
+        ['now']
+    );
 });

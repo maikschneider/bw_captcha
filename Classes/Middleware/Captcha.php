@@ -62,13 +62,28 @@ class Captcha implements MiddlewareInterface
             $processor = new Processor();
             $image = $processor->encode($builder->getGd(), $newPhrase);
             $captchaImage = $image->get();
+            $mimeType = 'image/png';
         } else {
             $captchaImage = $builder->get();
+            $mimeType = 'image/jpeg';
+        }
+
+        // construct response
+        $response = $this->responseFactory->createResponse()
+            ->withHeader('Content-Type', $mimeType)
+            ->withHeader('Cache-Control', 'no-cache')
+            ->withHeader('Cache-Directive', 'no-cache')
+            ->withHeader('Pragma-Directive', 'no-cache')
+            ->withHeader('Expires', '0');
+
+        // add Content-Length header in case of onload request (no reload)
+        $params = $request->getQueryParams();
+        if (!isset($params['now'])) {
+            $contentLength = floor((strlen($captchaImage) + 2) / 3) * 4;
+            $response = $response->withHeader('Content-Length', (string)$contentLength);
         }
 
         // render captcha image
-        $response = $this->responseFactory->createResponse()
-            ->withHeader('Content-Type', 'image/png');
         $response->getBody()->write($captchaImage);
         return $response;
     }
