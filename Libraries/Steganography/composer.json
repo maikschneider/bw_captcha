@@ -1,0 +1,39 @@
+{
+    "name": "maikschneider/steganography",
+    "description": "Simple implementation of Steganography (Hiding a hidden message within an image)",
+    "license": "MIT",
+    "keywords": ["steganography"],
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Maik Schneider",
+            "email": "schneider.maik@me.com"
+        }
+    ],
+    "require": {
+        "ext-gd": "*",
+        "ext-zlib": "*",
+        "symfony/options-resolver": ">4.0"
+    },
+    "require-dev": {
+        "php-coveralls/php-coveralls": "^2.0",
+        "phpunit/phpunit": "^10.3",
+        "rector/rector": "^0.18.0",
+        "friendsofphp/php-cs-fixer": "^3.12"
+    },
+    "autoload": {
+        "psr-4": {
+            "MaikSchneider\\Steganography\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MaikSchneider\\Steganography\\Test\\": "test/"
+        }
+    },
+    "scripts": {
+        "test:phpunit": "vendor/bin/phpunit -c phpunit.xml.dist --coverage-text",
+        "test:coverage": "vendor/bin/coveralls",
+        "php:fixer": "php vendor/bin/php-cs-fixer --config=php-cs-fixer.php fix"
+    }
+}
