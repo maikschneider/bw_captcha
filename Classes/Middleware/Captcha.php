@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -20,12 +21,16 @@ class Captcha implements MiddlewareInterface
 
     protected ConfigurationManager $configurationManager;
 
+    protected Context $context;
+
     public function __construct(
         ResponseFactoryInterface $responseFactory,
-        ConfigurationManager $configurationManager
+        ConfigurationManager $configurationManager,
+        Context $context,
     ) {
         $this->responseFactory = $responseFactory;
         $this->configurationManager = $configurationManager;
+        $this->context = $context;
     }
 
     /**
@@ -68,20 +73,16 @@ class Captcha implements MiddlewareInterface
             $mimeType = 'image/jpeg';
         }
 
+        // remove backend authentication for request (to avoid cache header override)
+        $this->context->unsetAspect('backend.user');
+
         // construct response
         $response = $this->responseFactory->createResponse()
             ->withHeader('Content-Type', $mimeType)
-            ->withHeader('Cache-Control', 'no-cache')
+            ->withHeader('Cache-Control', 'no-cache, no-store, private')
             ->withHeader('Cache-Directive', 'no-cache')
             ->withHeader('Pragma-Directive', 'no-cache')
             ->withHeader('Expires', '0');
-
-        // add Content-Length header in case of onload request (no reload)
-        $params = $request->getQueryParams();
-        if (!isset($params['now'])) {
-            $contentLength = floor((strlen($captchaImage) + 2) / 3) * 4;
-            $response = $response->withHeader('Content-Length', (string)$contentLength);
-        }
 
         // render captcha image
         $response->getBody()->write($captchaImage);
