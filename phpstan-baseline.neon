@@ -1,16 +1,2 @@
 parameters:
-	ignoreErrors:
-		-
-			message: "#^Cannot call method getTwoLetterIsoCode\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Site\\\\Entity\\\\SiteLanguage\\|null\\.$#"
-			count: 1
-			path: Classes/Middleware/Audio.php
-
-		-
-			message: "#^Parameter \\#2 \\$length of function fread expects int\\<0, max\\>, \\(float\\|int\\) given\\.$#"
-			count: 1
-			path: Classes/Utility/AudioBuilderUtility.php
-
-		-
-			message: "#^Cannot call method getPublicUrl\\(\\) on TYPO3\\\\CMS\\\\Core\\\\Resource\\\\File\\|TYPO3\\\\CMS\\\\Core\\\\Resource\\\\Folder\\|null\\.$#"
-			count: 1
-			path: Classes/Utility/CaptchaBuilderUtility.php
+	ignoreErrors: []
