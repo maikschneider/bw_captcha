@@ -1,6 +1,7 @@
 # Captcha extension for TYPO3 form
 
-This extension adds a captcha element for the TYPO3 form component. The captcha generation uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd party** includes.  
+This extension adds a captcha element for the TYPO3 form component. The captcha generation
+uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd party** includes.
 
 ![Frontend Captcha example](Documentation/Images/Example.jpg)
 
@@ -11,7 +12,7 @@ This extension adds a captcha element for the TYPO3 form component. The captcha 
 
 ## Usage
 
-Add the captcha element via Form Editor to your form or directly to your yaml form. 
+Add the captcha element via Form Editor to your form or directly to your yaml form.
 
 ### Via Form Editor
 
@@ -21,14 +22,13 @@ Add the captcha element via Form Editor to your form or directly to your yaml fo
 
 ```yaml
 renderables:
-     -
-        type: Captcha
-        identifier: captcha
-        label: Captcha
-        properties:
-          fluidAdditionalAttributes:
-            required: required
-            autocomplete: 'off'
+  - type: Captcha
+    identifier: captcha
+    label: Captcha
+    properties:
+      fluidAdditionalAttributes:
+        required: required
+        autocomplete: 'off'
 ```
 
 ### Configuration
@@ -43,49 +43,49 @@ plugin.tx_bwcaptcha {
 
         # Show audio button for speech output
         audioButton =
-        
+
         # The length of the captcha
         length =
-        
+
         # The charset of the captcha
         charset =
-        
+
         # The width of the image
         width =
-        
+
         # The height of the image
         height =
-        
+
         # Custom font file(s) to use (comma-separated)
         fontFiles =
-        
+
         # Text color (e.g. 255,0,0)
         textColor =
-        
+
         # Line color (e.g. 0,0,0)
         lineColor =
-        
+
         # Background color (e.g. 255,255,255)
         backgroundColor =
-        
+
         # Distortion
         distortion =
-        
+
         # The maximum number of lines to draw in front of
         maxFrontLines =
-        
+
         # The maximum number of lines to draw behind
         maxBehindLines =
-        
+
         # The maximum angle of char
         maxAngle =
-        
+
         # The maximum offset of char
         maxOffset =
-        
+
         # Is the interpolation enabled?
         interpolation =
-        
+
         # Ignore all effects
         ignoreAllEffects =
     }
@@ -94,7 +94,8 @@ plugin.tx_bwcaptcha {
 
 ### Overriding the captcha element
 
-To override the captcha partial, copy it to your extension and add the partial path to your [form setup](https://docs.typo3.org/c/typo3/cms-form/main/en-us/I/Concepts/Configuration/Index.html#yaml-registration-for-the-frontend):
+To override the captcha partial, copy it to your extension and add the partial path to
+your [form setup](https://docs.typo3.org/c/typo3/cms-form/main/en-us/I/Concepts/Configuration/Index.html#yaml-registration-for-the-frontend):
 
 ```yaml
 TYPO3:
@@ -111,26 +112,32 @@ TYPO3:
 
 ## Migration from version 3.x to 4.x
 
-This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the current captcha code. Missing `ARIA` properties have been added.
+This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the
+current captcha code. Missing `ARIA` properties have been added.
 
-* Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+* Check out
+  the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
 * Audio button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.audioButton`)
 
-## Migration from version 2.x to 3.x 
+## Migration from version 2.x to 3.x
 
-The generation of the captcha moved to a middleware, which solves a lot of caching issues. Therefore, adjustments to the form element partial have been made. If you've modified the partial, you need to update the image tag and refresh button link.
+The generation of the captcha moved to a middleware, which solves a lot of caching issues. Therefore, adjustments to the
+form element partial have been made. If you've modified the partial, you need to update the image tag and refresh button
+link.
 
 **tl;dr**:
 
-* Check out the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+* Check out
+  the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
 * Reload button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.refreshButton`)
-* You can re-enable the page cache, if disabled it because of this element 
+* You can re-enable the page cache, if disabled it because of this element
 
 ## Troubleshooting
 
 ### Refresh button not working
 
-If your site is configured to use trailing slashes, the refresh url cannot be resolved. A simple fix is to add a setting for the pageType 3413, e.g.:
+If your site is configured to use trailing slashes, the refresh url cannot be resolved. A simple fix is to add a setting
+for the pageType 3413, e.g.:
 
 ```yaml
 routeEnhancers:
