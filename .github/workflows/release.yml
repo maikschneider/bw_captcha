@@ -4,55 +4,18 @@ on: [ push ]
 
 jobs:
 
-  php-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-      - run: composer install
-      - run: composer run ci:php:lint
-
-  php-fixer:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-      - run: composer install
-      - run: composer run ci:php:fixer
-
-  php-stan:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-      - run: composer install
-      - run: composer run ci:php:stan
+  tests-sca:
+    uses: maikschneider/reusable-workflows/.github/workflows/sca.yml@main
+    with:
+      php-version: 8.1
 
   release:
     if: github.ref == 'refs/heads/development'
     needs:
-      - php-fixer
-      - php-lint
-      - php-stan
+      - tests-sca
     uses: maikschneider/reusable-workflows/.github/workflows/release-typo3-extension.yml@main
     secrets:
       teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
     with:
       base-branch: master
-
-  release-v9:
-    if: github.ref == 'refs/heads/9.x-dev'
-    uses: maikschneider/reusable-workflows/.github/workflows/release-typo3-extension.yml@main
-    secrets:
-      teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
-    with:
-      base-branch: 9.x
+      publish-ter: true
