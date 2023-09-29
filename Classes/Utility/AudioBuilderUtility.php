@@ -50,7 +50,7 @@ class AudioBuilderUtility
             $info = unpack($fields, $header);
             // read optional extra stuff
             if (isset($info['Subchunk1Size']) && $info['Subchunk1Size'] > 16) {
-                $header .= fread($fp, ($info['Subchunk1Size'] - 16));
+                $header .= fread($fp, max(0, (int)$info['Subchunk1Size'] - 16));
             }
             // read SubChunk2ID
             $header .= fread($fp, 4);
