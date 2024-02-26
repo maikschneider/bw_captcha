@@ -39,7 +39,7 @@ class Audio implements MiddlewareInterface
     ): ResponseInterface {
         /** @var PageArguments $pageArguments */
         $pageArguments = $request->getAttribute('routing', null);
-        if ($pageArguments->getPageType() !== '3414') {
+        if ($pageArguments->getPageType() !== '3414' || $request->getMethod() !== 'POST') {
             // pipe request to other middleware handlers
             return $handler->handle($request);
         }
