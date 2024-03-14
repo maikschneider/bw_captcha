@@ -22,6 +22,9 @@
 			<trans-unit id="partial.audio.label">
 				<source>Read</source>
 			</trans-unit>
+			<trans-unit id="a11y.captcha.description">
+				<source>Enter the character string shown in the picture</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
