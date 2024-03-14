@@ -5,7 +5,7 @@
 	<f:render partial="Field/Field" arguments="{element: element}" contentAs="elementContent">
 		<div class="captcha">
 			<img src="{f:uri.page(pageType:3413)}"
-				 alt="{f:translate(extensionName:'bw_captcha',key:'a11y.captcha.description')}"
+				 alt="{f:translate(extensionName:'bw_captcha',key:'partial.image.alt')}"
 				 aria-live="polite"
 				 loading="lazy"
 				 onload="this.parentElement.classList.remove('captcha--reloading'); return false;"/>

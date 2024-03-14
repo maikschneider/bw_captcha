@@ -22,7 +22,7 @@
 			<trans-unit id="partial.audio.label">
 				<source>Read</source>
 			</trans-unit>
-			<trans-unit id="a11y.captcha.description">
+			<trans-unit id="partial.image.alt">
 				<source>Enter the character string shown in the picture</source>
 			</trans-unit>
 		</body>

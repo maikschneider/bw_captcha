@@ -28,7 +28,7 @@
 				<source>Read</source>
 				<target>Vorlesen</target>
 			</trans-unit>
-			<trans-unit id="a11y.captcha.description">
+			<trans-unit id="partial.image.alt">
 				<source>Enter the character string shown in the picture</source>
 				<target>Geben sie die im Bild dargestellte Zeichenfolge ein</target>
 			</trans-unit>
