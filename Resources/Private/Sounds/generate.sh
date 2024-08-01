@@ -1,33 +1,39 @@
 #!/bin/bash
-for x in {A..Z}
-do
-  lowerX=$(echo "$x" |  tr '[:upper:]' '[:lower:]' )
-  say "$lowerX" -v Anna -o "de/$lowerX.aiff"
-  say "$lowerX" -o "en/$lowerX.aiff"
-  say "$x" -v Anna -o "de/$lowerX-upper.aiff"
-  say "$x" -o "en/$lowerX-upper.aiff"
 
-  ffmpeg -i "de/$lowerX.aiff" -map_metadata -1 -fflags +bitexact "de/$lowerX.wav"
-  ffmpeg -i "en/$lowerX.aiff" -map_metadata -1 -fflags +bitexact "en/$lowerX.wav"
-  ffmpeg -i "de/$lowerX-upper.aiff" -map_metadata -1 -fflags +bitexact "de/$lowerX-upper.wav"
-  ffmpeg -i "en/$lowerX-upper.aiff" -map_metadata -1 -fflags +bitexact "en/$lowerX-upper.wav"
+languages=(
+    'en::Daniel'
+    'de::Anna'
+    'fr::Thomas'
+)
 
-  rm "de/$lowerX.aiff"
-  rm "en/$lowerX.aiff"
-  rm "de/$lowerX-upper.aiff"
-  rm "en/$lowerX-upper.aiff"
-done
+for index in "${languages[@]}" ; do
+  LANGUAGE="${index%%::*}"
+  VOICE="${index##*::}"
 
-for x in {0..9}
-do
-  say "$x" -v Anna -o "de/$x.aiff"
-  say "$x" -o "en/$x.aiff"
+  mkdir -p "$LANGUAGE"
 
-  ffmpeg -i "de/$x.aiff" -map_metadata -1 -fflags +bitexact "de/$x.wav"
-  ffmpeg -i "en/$x.aiff" -map_metadata -1 -fflags +bitexact "en/$x.wav"
+  for x in {A..Z}
+  do
+    lowerX=$(echo "$x" |  tr '[:upper:]' '[:lower:]' )
+    say "$lowerX" -v $VOICE -o "$LANGUAGE/$lowerX.aiff"
+    say "$x" -v $VOICE -o "$LANGUAGE/$lowerX-upper.aiff"
 
-  rm "de/$x.aiff"
-  rm "en/$x.aiff"
+    ffmpeg -i "$LANGUAGE/$lowerX.aiff" -map_metadata -1 -fflags +bitexact "$LANGUAGE/$lowerX.wav"
+    ffmpeg -i "$LANGUAGE/$lowerX-upper.aiff" -map_metadata -1 -fflags +bitexact "$LANGUAGE/$lowerX-upper.wav"
+
+    rm "$LANGUAGE/$lowerX.aiff"
+    rm "$LANGUAGE/$lowerX-upper.aiff"
+  done
+
+  for x in {0..9}
+  do
+    say "$x" -v $VOICE -o "$LANGUAGE/$x.aiff"
+
+    ffmpeg -i "$LANGUAGE/$x.aiff" -map_metadata -1 -fflags +bitexact "$LANGUAGE/$x.wav"
+
+    rm "$LANGUAGE/$x.aiff"
+  done
+
 done
 
 say "[[slnc 400]]" -o "silence.aiff"
