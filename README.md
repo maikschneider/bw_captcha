@@ -4,11 +4,11 @@
 
 # TYPO3 extension `bw_captcha`
 
-[![Latest Stable Version](http://poser.pugx.org/blueways/bw-captcha/v)](https://packagist.org/packages/blueways/bw-captcha)
+![Latest version](https://typo3-badges.dev/badge/bw_captcha/version/shields.svg)
 [![Supported TYPO3 versions](https://typo3-badges.dev/badge/xima_typo3_mailcatcher/typo3/shields.svg)](https://extensions.typo3.org/extension/xima_typo3_mailcatcher)
-[![Total Downloads](http://poser.pugx.org/blueways/bw-captcha/downloads)](https://packagist.org/packages/blueways/bw-captcha)
-[![PHP Version Require](http://poser.pugx.org/blueways/bw-captcha/require/php)](https://packagist.org/packages/blueways/bw-captcha)
-![Composer](https://typo3-badges.dev/badge/xima_typo3_mailcatcher/composer/shields.svg)
+![Total downloads](https://typo3-badges.dev/badge/bw_captcha/downloads/shields.svg)
+![TYPO3 extension](https://typo3-badges.dev/badge/bw_captcha/extension/shields.svg)
+![Composer](https://typo3-badges.dev/badge/bw_captcha/composer/shields.svg)
 
 </div>
 
