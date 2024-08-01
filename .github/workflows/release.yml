@@ -1,21 +1,13 @@
-name: test-build-release
-
-on: [ push ]
+name: Release
+on:
+  push:
+    tags:
+      - '*'
 
 jobs:
-
-  tests-sca:
-    uses: maikschneider/reusable-workflows/.github/workflows/sca.yml@main
-    with:
-      php-version: 8.1
-
-  release:
-    if: github.ref == 'refs/heads/development'
-    needs:
-      - tests-sca
-    uses: maikschneider/reusable-workflows/.github/workflows/release-typo3-extension.yml@main
+  ter-publish:
+    uses: maikschneider/reusable-workflows/.github/workflows/release.yml@main
     secrets:
-      teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+      typo3-api-token: ${{ secrets.TYPO3_API_TOKEN }}
     with:
-      base-branch: master
-      publish-ter: true
+      typo3-extension-key: 'bw_captcha'
