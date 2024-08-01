@@ -12,6 +12,26 @@
 				<source>Captcha</source>
 				<target>Captcha</target>
 			</trans-unit>
+			<trans-unit id="partial.refresh.title">
+				<source>Load new captcha</source>
+				<target>Recharger le captcha</target>
+			</trans-unit>
+			<trans-unit id="partial.refresh.label">
+				<source>Refresh</source>
+				<target>Recharger</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.title">
+				<source>Read captcha aloud</source>
+				<target>Lire le captcha à voix haute</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.label">
+				<source>Read</source>
+				<target>Lire</target>
+			</trans-unit>
+			<trans-unit id="partial.image.alt">
+				<source>Enter the character string shown in the picture</source>
+				<target>Saisissez la chaine de caractères affichée dans l'image</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
