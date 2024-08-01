@@ -5,10 +5,10 @@
 # TYPO3 extension `bw_captcha`
 
 ![Latest version](https://typo3-badges.dev/badge/bw_captcha/version/shields.svg)
-[![Supported TYPO3 versions](https://typo3-badges.dev/badge/xima_typo3_mailcatcher/typo3/shields.svg)](https://extensions.typo3.org/extension/xima_typo3_mailcatcher)
+[![Supported TYPO3 versions](https://typo3-badges.dev/badge/bw_captcha/typo3/shields.svg)](https://extensions.typo3.org/extension/bw_captcha)
 ![Total downloads](https://typo3-badges.dev/badge/bw_captcha/downloads/shields.svg)
-![TYPO3 extension](https://typo3-badges.dev/badge/bw_captcha/extension/shields.svg)
-![Composer](https://typo3-badges.dev/badge/bw_captcha/composer/shields.svg)
+[![TYPO3 extension](https://typo3-badges.dev/badge/bw_captcha/extension/shields.svg)](https://extensions.typo3.org/extension/bw_captcha)
+[![Composer](https://typo3-badges.dev/badge/bw_captcha/composer/shields.svg)](https://packagist.org/packages/blueways/bw-captcha)
 
 </div>
 
