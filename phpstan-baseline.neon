@@ -1,2 +1,11 @@
 parameters:
-	ignoreErrors: []
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset 'captchaDataUrl' on array\\|object\\.$#"
+			count: 1
+			path: Classes/Middleware/Audio.php
+
+		-
+			message: "#^Parameter \\#2 \\$length of function fread expects int\\<1, max\\>, int\\<0, max\\> given\\.$#"
+			count: 1
+			path: Classes/Utility/AudioBuilderUtility.php
