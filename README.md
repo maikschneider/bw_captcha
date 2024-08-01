@@ -1,4 +1,16 @@
-# Captcha extension for TYPO3 form
+<div align="center">
+
+![Extension icon](Resources/Public/Icons/Extension.svg)
+
+# TYPO3 extension `bw_captcha`
+
+[![Latest Stable Version](http://poser.pugx.org/blueways/bw-captcha/v)](https://packagist.org/packages/blueways/bw-captcha)
+[![Supported TYPO3 versions](https://typo3-badges.dev/badge/xima_typo3_mailcatcher/typo3/shields.svg)](https://extensions.typo3.org/extension/xima_typo3_mailcatcher)
+[![Total Downloads](http://poser.pugx.org/blueways/bw-captcha/downloads)](https://packagist.org/packages/blueways/bw-captcha)
+[![PHP Version Require](http://poser.pugx.org/blueways/bw-captcha/require/php)](https://packagist.org/packages/blueways/bw-captcha)
+![Composer](https://typo3-badges.dev/badge/xima_typo3_mailcatcher/composer/shields.svg)
+
+</div>
 
 This extension adds a captcha element for the TYPO3 form component. The captcha generation
 uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd party** includes.
@@ -7,8 +19,18 @@ uses [Gregwar/Captcha](https://github.com/Gregwar/Captcha), **no Google or 3rd p
 
 ## Install
 
-* ```composer require blueways/bw-captcha```
-* Include TypoScript template
+### Composer
+
+```bash
+composer require blueways/bw-captcha
+```
+
+### TER
+
+[![TER version](https://typo3-badges.dev/badge/bw_captcha/version/shields.svg)](https://extensions.typo3.org/extension/bw_captcha)
+
+Download the zip file from
+[TYPO3 extension repository (TER)](https://extensions.typo3.org/extension/bw_captcha).
 
 ## Usage
 
@@ -31,7 +53,9 @@ renderables:
         autocomplete: 'off'
 ```
 
-### Configuration
+## Configuration
+
+After installation, include the static TypoScript template or include **setup** and **constants** manually.
 
 To modify the captcha output, you can use the following TypoScript **constants**:
 
