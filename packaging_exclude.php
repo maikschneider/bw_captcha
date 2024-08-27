@@ -10,7 +10,6 @@ return [
         '.github',
         'bin',
         'build',
-        'config',
         'public',
         'tailor-version-upload',
         'Tests',
