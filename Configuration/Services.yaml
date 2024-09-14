@@ -10,3 +10,8 @@ services:
 
   Blueways\BwCaptcha\Middleware\Captcha:
     public: true
+
+  Blueways\BwCaptcha\EventListener\ModifyRegistrationValidatorResultEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'bw-captcha/sf-event-mgt-registration'
