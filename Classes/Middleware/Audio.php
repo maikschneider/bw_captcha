@@ -53,8 +53,7 @@ class Audio implements MiddlewareInterface
         $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
 
         // get all phrases from session
-        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
-        $feUser = $tsfe->fe_user;
+        $feUser = $request->getAttribute('frontend.user');
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
 
         // @TODO: handle error

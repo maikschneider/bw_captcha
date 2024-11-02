@@ -62,6 +62,6 @@ class CaptchaValidator extends AbstractValidator
 
     protected function getFeUser(): FrontendUserAuthentication
     {
-        return $GLOBALS['TSFE']->fe_user;
+        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user');
     }
 }
