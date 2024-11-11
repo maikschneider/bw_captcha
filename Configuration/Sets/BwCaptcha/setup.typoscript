@@ -1,1 +1,1 @@
-@import 'EXT:bw_captach/Configuration/TypoScript/setup.typoscript'
+@import 'EXT:bw_captcha/Configuration/TypoScript/setup.typoscript'
