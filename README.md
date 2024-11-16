@@ -142,8 +142,6 @@ If you want to override the shipped [BwCaptcha.html](https://github.com/maikschn
 plugin.tx_sfeventmgt.view.partialRootPaths.9999999 = EXT:your_ext/Resources/Private/Partials/
 ```
 
-```yaml
-
 ### Overriding the captcha element
 
 To override the captcha partial, copy it to your extension and add the partial path to
