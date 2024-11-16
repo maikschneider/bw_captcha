@@ -22,7 +22,7 @@
     "friendsofphp/php-cs-fixer": "^3.12",
     "saschaegerer/phpstan-typo3": "^1.9",
     "helhum/typo3-console": "^8.0",
-    "derhansen/sf_event_mgt": "^7.6"
+    "derhansen/sf_event_mgt": "^7.6 || ^8.0"
   },
   "extra": {
     "typo3/cms": {
