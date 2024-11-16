@@ -116,6 +116,34 @@ plugin.tx_bwcaptcha {
 }
 ```
 
+### Usage in other Extensions
+
+#### sf_event_mgt
+
+To use the captcha element in the [sf_event_mgt](https://github.com/derhansen/sf_event_mgt/) extension, add the following TypoScript:
+
+```
+plugin.tx_sfeventmgt {
+  settings {
+    registration {
+      requiredFields = captcha
+      captcha {
+        enabled = 1
+        type = bwCaptcha
+      }
+    }
+  }
+}
+```
+
+If you want to override the shipped [BwCaptcha.html](https://github.com/maikschneider/bw_captcha/blob/main/Resources/Private/SfEventMgt/Registration/Captcha/BwCaptcha.html) partial, you need to configure the partialRootPaths with a higher index:
+
+```
+plugin.tx_sfeventmgt.view.partialRootPaths.9999999 = EXT:your_ext/Resources/Private/Partials/
+```
+
+```yaml
+
 ### Overriding the captcha element
 
 To override the captcha partial, copy it to your extension and add the partial path to
