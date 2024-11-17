@@ -39,14 +39,14 @@ class Audio implements MiddlewareInterface
     ): ResponseInterface {
         /** @var PageArguments $pageArguments */
         $pageArguments = $request->getAttribute('routing', null);
-        if ($pageArguments->getPageType() !== '3414' || $request->getMethod() !== 'POST') {
+        if ($pageArguments->getPageType() !== '3414' || $request->getMethod() !== 'POST' || $request->getAttribute('frontend.user') === null) {
             // pipe request to other middleware handlers
             return $handler->handle($request);
         }
 
         $locale = $request->getAttribute('language')?->getLocale();
         if ($locale instanceof \TYPO3\CMS\Core\Localization\Locale) {
-            $languageCode = $locale->getCountryCode();
+            $languageCode = $locale->getCountryCode() ?? '';
         } else {
             $languageCode = $request->getAttribute('language')?->getTwoLetterIsoCode() ?? '';
         }
@@ -67,7 +67,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if ((int)$settings['audioButton'] && isset($body['captchaDataUrl'])) {
+        if ((int)$settings['audioButton'] && is_array($body)  && isset($body['captchaDataUrl'])) {
             // get image data from post request
             $dataUrl = $body['captchaDataUrl'];
             [, $dataUrl] = explode(';', $dataUrl);

@@ -94,6 +94,10 @@ class Captcha implements MiddlewareInterface
         ServerRequestInterface $request,
         int $lifetime = 3600
     ): void {
+        if ($request->getAttribute('frontend.user') === null) {
+            return;
+        }
+
         // write data to session
         $feUser = $request->getAttribute('frontend.user');
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
