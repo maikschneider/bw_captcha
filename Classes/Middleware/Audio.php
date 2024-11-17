@@ -44,13 +44,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $locale = $request->getAttribute('language')?->getLocale();
-        if ($locale instanceof \TYPO3\CMS\Core\Localization\Locale) {
-            $languageCode = $locale->getCountryCode() ?? '';
-        } else {
-            $languageCode = $request->getAttribute('language')?->getTwoLetterIsoCode() ?? '';
-        }
-
+        $languageCode = $request->getAttribute('language')?->getLocale()->getCountryCode() ?? '';
         $body = $request->getParsedBody();
 
         $ts = $this->configurationManager->getConfiguration(
