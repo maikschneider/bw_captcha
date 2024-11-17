@@ -1,0 +1,2 @@
+# cat=basic/enable/050; type=boolean; label=sf_event_mgt: Enable to use bw_captcha with sf_event_mgt
+sfEventMgt = 0
