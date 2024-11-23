@@ -68,6 +68,7 @@ TYPO3:
               properties:
                 fluidAdditionalAttributes:
                   autocomplete: 'off'
+                  required: 'required'
               variants:
                 - identifier: template-variant
                   condition: 'getRootFormProperty("renderingOptions.templateVariant") == "version2"'
