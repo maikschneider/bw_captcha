@@ -1,0 +1,143 @@
+categories:
+  BwCaptcha:
+    label: 'Accessible Form Captcha'
+  BwCaptcha.general:
+    label: 'General'
+    parent: BwCaptcha
+  BwCaptcha.image:
+    label: 'Image'
+    parent: BwCaptcha
+
+settings:
+  bwCaptcha.refreshButton:
+    category: BwCaptcha.general
+    label: 'Refresh button'
+    type: bool
+    description: 'Show reload button'
+    default: true
+
+  bwCaptcha.audioButton:
+    category: BwCaptcha.general
+    label: 'AudioButton'
+    type: bool
+    description: 'Show audio button for speech output'
+    default: true
+
+  bwCaptcha.sfEventMgt:
+    category: BwCaptcha.general
+    label: 'EXT:sfEventMgt support'
+    type: bool
+    description: 'Enable to use bw_captcha in the sfEventMgt extension'
+    default: false
+
+  bwCaptcha.lifetime:
+    category: BwCaptcha.image
+    label: 'Lifetime'
+    type: int
+    description: 'Seconds until captchas are invalid'
+    default: 3600
+
+  bwCaptcha.length:
+    category: BwCaptcha.image
+    label: 'Length'
+    type: int
+    description: 'The length of the captcha'
+    default: 5
+
+  bwCaptcha.charset:
+    category: BwCaptcha.image
+    label: 'Charset'
+    type: string
+    description: 'The charset of the captcha'
+    default: abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+  bwCaptcha.width:
+    category: BwCaptcha.image
+    label: 'Width'
+    type: int
+    description: 'The width of the image'
+    default: 150
+
+  bwCaptcha.height:
+    category: BwCaptcha.image
+    label: 'Height'
+    type: int
+    description: 'The height of the image'
+    default: 40
+
+  bwCaptcha.fontFiles:
+    category: BwCaptcha.image
+    label: 'FontFiles'
+    type: stringlist
+    description: 'Custom font file(s) to use (comma-seperated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"'
+    default: EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf
+
+  bwCaptcha.textColor:
+    category: BwCaptcha.image
+    label: 'TextColor'
+    type: string
+    description: 'Text color (e.g. 255,0,0)'
+    default: ''
+
+  bwCaptcha.lineColor:
+    category: BwCaptcha.image
+    label: 'LineColor'
+    type: string
+    description: 'Line color (e.g. 0,0,0)'
+    default: ''
+
+  bwCaptcha.backgroundColor:
+    category: BwCaptcha.image
+    label: 'BackgroundColor'
+    type: string
+    description: 'Background color (e.g. 255,255,255)'
+    default: ''
+
+  bwCaptcha.distortion:
+    category: BwCaptcha.image
+    label: 'Distortion'
+    type: bool
+    description: 'Distortion'
+    default: true
+
+  bwCaptcha.maxFrontLines:
+    category: BwCaptcha.image
+    label: 'Max front lines'
+    type: int
+    description: 'The maximum number of lines to draw in front of'
+    default: 0
+
+  bwCaptcha.maxBehindLines:
+    category: BwCaptcha.image
+    label: 'Max behind lines'
+    type: int
+    description: 'The maximum number of lines to draw behind'
+    default: 0
+
+  bwCaptcha.maxAngle:
+    category: BwCaptcha.image
+    label: 'Max angle'
+    type: int
+    description: 'The maximum angle of char'
+    default: 8
+
+  bwCaptcha.maxOffset:
+    category: BwCaptcha.image
+    label: 'Max offset'
+    type: int
+    description: 'The maximum offset of char'
+    default: 5
+
+  bwCaptcha.interpolation:
+    category: BwCaptcha.image
+    label: 'Interpolation'
+    type: bool
+    description: 'Is the interpolation enabled?'
+    default: true
+
+  bwCaptcha.ignoreAllEffects:
+    category: BwCaptcha.image
+    label: 'IgnoreAllEffects'
+    type: bool
+    description: 'Ignore all effects'
+    default: false
