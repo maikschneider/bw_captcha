@@ -4,7 +4,7 @@
   "description": "Captcha element with audio support for TYPO3 form components. The captcha generation does not rely on Google or third-party integrations.",
   "require": {
     "php": "^8.1",
-    "typo3/cms-core": "^11.0 || ^12.0 || ^13.0",
+    "typo3/cms-core": "^12.0 || ^13.0",
     "ext-gd": "*"
   },
   "autoload": {
@@ -16,13 +16,13 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "typo3/cms-base-distribution": "^12.0",
-    "typo3/cms-lowlevel": "^12.0",
+    "typo3/cms-base-distribution": "^12.4 || ^13.4",
+    "typo3/cms-lowlevel": "^12.4 || ^13.4",
     "bk2k/bootstrap-package": "^15.0",
     "friendsofphp/php-cs-fixer": "^3.12",
     "saschaegerer/phpstan-typo3": "^1.9",
-    "helhum/typo3-console": "^8.0",
-    "derhansen/sf_event_mgt": "^7.6"
+    "helhum/typo3-console": "^7.0 || ^8.0",
+    "derhansen/sf_event_mgt": "^7.6 || ^8.0"
   },
   "extra": {
     "typo3/cms": {

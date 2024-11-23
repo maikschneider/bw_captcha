@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -30,8 +31,8 @@ class Audio implements MiddlewareInterface
     }
 
     /**
-     * @throws InvalidConfigurationTypeException
-     * @throws InvalidPasswordHashException
+     * @throws InvalidConfigurationTypeException&Throwable
+     * @throws InvalidPasswordHashException&Throwable
      */
     public function process(
         ServerRequestInterface $request,
@@ -44,13 +45,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $locale = $request->getAttribute('language')?->getLocale();
-        if ($locale instanceof \TYPO3\CMS\Core\Localization\Locale) {
-            $languageCode = $locale->getCountryCode() ?? '';
-        } else {
-            $languageCode = $request->getAttribute('language')?->getTwoLetterIsoCode() ?? '';
-        }
-
+        $languageCode = $request->getAttribute('language')?->getLocale()->getCountryCode() ?? '';
         $body = $request->getParsedBody();
 
         $ts = $this->configurationManager->getConfiguration(
