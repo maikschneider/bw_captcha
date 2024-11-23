@@ -1,5 +1,5 @@
 /**
- * Module: @my-vendor/my-site-package/backend/form-editor/view-model.js
+ * Module: @blueways/bw-captcha/Backend/FormEditor/CaptchaViewModel.js
  */
 import $ from 'jquery';
 import * as Helper from '@typo3/form/backend/form-editor/helper.js'
@@ -94,14 +94,6 @@ function _subscribeEvents() {
       getFormEditorApp().getViewModel().getStage().renderSimpleTemplateWithValidators(args[0], args[1]);
     }
   });
-};
-
-/**
- * @private
- *
- * @return void
- */
-function myCustomCode() {
 };
 
 /**

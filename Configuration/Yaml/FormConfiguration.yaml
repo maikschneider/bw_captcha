@@ -7,7 +7,7 @@ TYPO3:
           formEditor:
             dynamicJavaScriptModules:
               additionalViewModelModules:
-                1623227656: '@blueways/bw-captcha/FormEditor/CaptchaViewModel.js'
+                1623227656: '@blueways/bw-captcha/Backend/FormEditor/CaptchaViewModel.js'
             formEditorPartials:
               FormElement-Captcha: 'Stage/SimpleTemplate'
 
