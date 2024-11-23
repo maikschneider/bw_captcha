@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -34,7 +35,7 @@ class Captcha implements MiddlewareInterface
     }
 
     /**
-     * @throws InvalidConfigurationTypeException
+     * @throws InvalidConfigurationTypeException&Throwable
      */
     public function process(
         ServerRequestInterface $request,
@@ -94,9 +95,12 @@ class Captcha implements MiddlewareInterface
         ServerRequestInterface $request,
         int $lifetime = 3600
     ): void {
+        if ($request->getAttribute('frontend.user') === null) {
+            return;
+        }
+
         // write data to session
-        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
-        $feUser = $tsfe->fe_user;
+        $feUser = $request->getAttribute('frontend.user');
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
         if (empty($captchaPhrases)) {
             $captchaPhrases = [];

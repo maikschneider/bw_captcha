@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -30,8 +31,8 @@ class Audio implements MiddlewareInterface
     }
 
     /**
-     * @throws InvalidConfigurationTypeException
-     * @throws InvalidPasswordHashException
+     * @throws InvalidConfigurationTypeException&Throwable
+     * @throws InvalidPasswordHashException&Throwable
      */
     public function process(
         ServerRequestInterface $request,
@@ -39,12 +40,12 @@ class Audio implements MiddlewareInterface
     ): ResponseInterface {
         /** @var PageArguments $pageArguments */
         $pageArguments = $request->getAttribute('routing', null);
-        if ($pageArguments->getPageType() !== '3414' || $request->getMethod() !== 'POST') {
+        if ($pageArguments->getPageType() !== '3414' || $request->getMethod() !== 'POST' || $request->getAttribute('frontend.user') === null) {
             // pipe request to other middleware handlers
             return $handler->handle($request);
         }
 
-        $languageCode = $request->getAttribute('language')?->getTwoLetterIsoCode() ?? '';
+        $languageCode = $request->getAttribute('language')?->getLocale()->getCountryCode() ?? '';
         $body = $request->getParsedBody();
 
         $ts = $this->configurationManager->getConfiguration(
@@ -53,8 +54,7 @@ class Audio implements MiddlewareInterface
         $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
 
         // get all phrases from session
-        $tsfe = $request->getAttribute('frontend.controller') ?? $GLOBALS['TSFE'];
-        $feUser = $tsfe->fe_user;
+        $feUser = $request->getAttribute('frontend.user');
         $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
 
         // @TODO: handle error
@@ -62,7 +62,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if ((int)$settings['audioButton'] && isset($body['captchaDataUrl'])) {
+        if ((int)$settings['audioButton'] && is_array($body)  && isset($body['captchaDataUrl'])) {
             // get image data from post request
             $dataUrl = $body['captchaDataUrl'];
             [, $dataUrl] = explode(';', $dataUrl);

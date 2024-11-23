@@ -116,6 +116,24 @@ plugin.tx_bwcaptcha {
 }
 ```
 
+### Usage in other Extensions
+
+#### sf_event_mgt
+
+To use the captcha element in the [sf_event_mgt](https://github.com/derhansen/sf_event_mgt/) extension, you need to include the captcha
+partial in your custom event [Registration](https://github.com/derhansen/sf_event_mgt/blob/main/Resources/Private/Templates/Event/Registration.html) template and activate the **sfEventMgt** feature in the extension settings:
+
+```diff
+<f:form>
+    ...
++  <f:render partial="Registration/Captcha/BwCaptcha.html" arguments="{_all}" />
+</f:form>
+```
+
+```php
+$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['bw_captcha']['sfEventMgt'] = 1;
+```
+
 ### Overriding the captcha element
 
 To override the captcha partial, copy it to your extension and add the partial path to

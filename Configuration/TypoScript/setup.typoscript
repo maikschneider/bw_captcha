@@ -44,6 +44,15 @@ plugin.tx_bwcaptcha {
 	}
 }
 
+plugin.tx_sfeventmgt {
+	view {
+		partialRootPaths.999999 = EXT:bw_captcha/Resources/Private/SfEventMgt/
+	}
+	settings.registration.captcha {
+		bwCaptcha < plugin.tx_bwcaptcha.settings
+	}
+}
+
 captcha = PAGE
 captcha {
 	typeNum = 3413
