@@ -9,133 +9,133 @@ categories:
     parent: BwCaptcha
 
 settings:
-  bwCaptcha.refreshButton:
+  plugin.tx_bwcaptcha.settings.refreshButton:
     category: BwCaptcha.general
     label: 'Refresh button'
     type: bool
     description: 'Show reload button'
     default: true
 
-  bwCaptcha.audioButton:
+  plugin.tx_bwcaptcha.settings.audioButton:
     category: BwCaptcha.general
     label: 'AudioButton'
     type: bool
     description: 'Show audio button for speech output'
     default: true
 
-  bwCaptcha.sfEventMgt:
+  plugin.tx_bwcaptcha.settings.sfEventMgt:
     category: BwCaptcha.general
     label: 'EXT:sfEventMgt support'
     type: bool
     description: 'Enable to use bw_captcha in the sfEventMgt extension'
     default: false
 
-  bwCaptcha.lifetime:
+  plugin.tx_bwcaptcha.settings.lifetime:
     category: BwCaptcha.image
     label: 'Lifetime'
     type: int
     description: 'Seconds until captchas are invalid'
     default: 3600
 
-  bwCaptcha.length:
+  plugin.tx_bwcaptcha.settings.length:
     category: BwCaptcha.image
     label: 'Length'
     type: int
     description: 'The length of the captcha'
     default: 5
 
-  bwCaptcha.charset:
+  plugin.tx_bwcaptcha.settings.charset:
     category: BwCaptcha.image
     label: 'Charset'
     type: string
     description: 'The charset of the captcha'
     default: abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
-  bwCaptcha.width:
+  plugin.tx_bwcaptcha.settings.width:
     category: BwCaptcha.image
     label: 'Width'
     type: int
     description: 'The width of the image'
     default: 150
 
-  bwCaptcha.height:
+  plugin.tx_bwcaptcha.settings.height:
     category: BwCaptcha.image
     label: 'Height'
     type: int
     description: 'The height of the image'
     default: 40
 
-  bwCaptcha.fontFiles:
+  plugin.tx_bwcaptcha.settings.fontFiles:
     category: BwCaptcha.image
     label: 'FontFiles'
     type: stringlist
     description: 'Custom font file(s) to use (comma-seperated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"'
     default: EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf
 
-  bwCaptcha.textColor:
+  plugin.tx_bwcaptcha.settings.textColor:
     category: BwCaptcha.image
     label: 'TextColor'
     type: string
     description: 'Text color (e.g. 255,0,0)'
     default: ''
 
-  bwCaptcha.lineColor:
+  plugin.tx_bwcaptcha.settings.lineColor:
     category: BwCaptcha.image
     label: 'LineColor'
     type: string
     description: 'Line color (e.g. 0,0,0)'
     default: ''
 
-  bwCaptcha.backgroundColor:
+  plugin.tx_bwcaptcha.settings.backgroundColor:
     category: BwCaptcha.image
     label: 'BackgroundColor'
     type: string
     description: 'Background color (e.g. 255,255,255)'
     default: ''
 
-  bwCaptcha.distortion:
+  plugin.tx_bwcaptcha.settings.distortion:
     category: BwCaptcha.image
     label: 'Distortion'
     type: bool
     description: 'Distortion'
     default: true
 
-  bwCaptcha.maxFrontLines:
+  plugin.tx_bwcaptcha.settings.maxFrontLines:
     category: BwCaptcha.image
     label: 'Max front lines'
     type: int
     description: 'The maximum number of lines to draw in front of'
     default: 0
 
-  bwCaptcha.maxBehindLines:
+  plugin.tx_bwcaptcha.settings.maxBehindLines:
     category: BwCaptcha.image
     label: 'Max behind lines'
     type: int
     description: 'The maximum number of lines to draw behind'
     default: 0
 
-  bwCaptcha.maxAngle:
+  plugin.tx_bwcaptcha.settings.maxAngle:
     category: BwCaptcha.image
     label: 'Max angle'
     type: int
     description: 'The maximum angle of char'
     default: 8
 
-  bwCaptcha.maxOffset:
+  plugin.tx_bwcaptcha.settings.maxOffset:
     category: BwCaptcha.image
     label: 'Max offset'
     type: int
     description: 'The maximum offset of char'
     default: 5
 
-  bwCaptcha.interpolation:
+  plugin.tx_bwcaptcha.settings.interpolation:
     category: BwCaptcha.image
     label: 'Interpolation'
     type: bool
     description: 'Is the interpolation enabled?'
     default: true
 
-  bwCaptcha.ignoreAllEffects:
+  plugin.tx_bwcaptcha.settings.ignoreAllEffects:
     category: BwCaptcha.image
     label: 'IgnoreAllEffects'
     type: bool
