@@ -160,7 +160,7 @@ This version aims to make solving the captcha more accessible. It introduces a n
 current captcha code. Missing `ARIA` properties have been added.
 
 * Check out
-  the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
 * Audio button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.audioButton`)
 
 ## Migration from version 2.x to 3.x
@@ -172,7 +172,7 @@ link.
 **tl;dr**:
 
 * Check out
-  the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
+the [new captcha partial](https://github.com/maikschneider/bw_captcha/blob/master/Resources/Private/Frontend/Partials/Captcha.html)
 * Reload button is enabled by default (can be disabled via `plugin.tx_bwcaptcha.settings.refreshButton`)
 * You can re-enable the page cache, if disabled it because of this element
 
