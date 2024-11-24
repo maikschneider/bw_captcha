@@ -193,10 +193,12 @@ routeEnhancers:
       .audio: 3414
 ```
 
+## License
+
+This project is licensed under [GNU General Public License 2.0 (or later)](LICENSE.md).
+
 ## Contribute
 
 This extension was made by Maik Schneider: Feel free to contribute!
-
-* [Github-Repository](https://github.com/maikschneider/bw_captcha)
 
 Thanks to [blueways](https://www.blueways.de/) and [XIMA](https://www.xima.de/)!
