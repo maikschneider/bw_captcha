@@ -1,80 +1,80 @@
 /**
- * Module: @blueways/bw-captcha/Backend/FormEditor/CaptchaViewModel.js
- */
+* Module: @blueways/bw-captcha/Backend/FormEditor/CaptchaViewModel.js
+*/
 import $ from 'jquery';
 import * as Helper from '@typo3/form/backend/form-editor/helper.js'
 
 /**
- * @private
- *
- * @var object
- */
+* @private
+*
+* @var object
+*/
 let _formEditorApp = null;
 
 /**
- * @private
- *
- * @return object
- */
+* @private
+*
+* @return object
+*/
 function getFormEditorApp() {
   return _formEditorApp;
 };
 
 /**
- * @private
- *
- * @return object
- */
+* @private
+*
+* @return object
+*/
 function getPublisherSubscriber() {
   return getFormEditorApp().getPublisherSubscriber();
 };
 
 /**
- * @private
- *
- * @return object
- */
+* @private
+*
+* @return object
+*/
 function getUtility() {
   return getFormEditorApp().getUtility();
 };
 
 /**
- * @private
- *
- * @param object
- * @return object
- */
+* @private
+*
+* @param object
+* @return object
+*/
 function getHelper() {
   return Helper;
 };
 
 /**
- * @private
- *
- * @return object
- */
+* @private
+*
+* @return object
+*/
 function getCurrentlySelectedFormElement() {
   return getFormEditorApp().getCurrentlySelectedFormElement();
 };
 
 /**
- * @private
- *
- * @param mixed test
- * @param string message
- * @param int messageCode
- * @return void
- */
+* @private
+*
+* @param mixed test
+* @param string message
+* @param int messageCode
+* @return void
+*/
 function assert(test, message, messageCode) {
   return getFormEditorApp().assert(test, message, messageCode);
 };
 
 /**
- * @private
- *
- * @return void
- * @throws 1491643380
- */
+* @private
+*
+* @return void
+* @throws 1491643380
+*/
 function _helperSetup() {
   assert('function' === $.type(Helper.bootstrap),
     'The view model helper does not implement the method "bootstrap"',
@@ -84,10 +84,10 @@ function _helperSetup() {
 };
 
 /**
- * @private
- *
- * @return void
- */
+* @private
+*
+* @return void
+*/
 function _subscribeEvents() {
   getPublisherSubscriber().subscribe('view/stage/abstract/render/template/perform', function (topic, args) {
     if (args[0].get('type') === 'Captcha') {
@@ -97,11 +97,11 @@ function _subscribeEvents() {
 };
 
 /**
- * @public
- *
- * @param object formEditorApp
- * @return void
- */
+* @public
+*
+* @param object formEditorApp
+* @return void
+*/
 export function bootstrap(formEditorApp) {
   _formEditorApp = formEditorApp;
   _helperSetup();

@@ -44,13 +44,13 @@ Add the captcha element via Form Editor to your form or directly to your yaml fo
 
 ```yaml
 renderables:
-  - type: Captcha
-    identifier: captcha
-    label: Captcha
-    properties:
-      fluidAdditionalAttributes:
-        required: required
-        autocomplete: 'off'
+    -   type: Captcha
+        identifier: captcha
+        label: Captcha
+        properties:
+        fluidAdditionalAttributes:
+            required: required
+            autocomplete: 'off'
 ```
 
 ## Configuration
@@ -121,7 +121,9 @@ plugin.tx_bwcaptcha {
 #### sf_event_mgt
 
 To use the captcha element in the [sf_event_mgt](https://github.com/derhansen/sf_event_mgt/) extension, you need to include the captcha
-partial in your custom event [Registration](https://github.com/derhansen/sf_event_mgt/blob/main/Resources/Private/Templates/Event/Registration.html) template and activate the **sfEventMgt** feature in the extension settings:
+partial in your custom
+event [Registration](https://github.com/derhansen/sf_event_mgt/blob/main/Resources/Private/Templates/Event/Registration.html) template and
+activate the **sfEventMgt** feature in the extension settings:
 
 ```diff
 <f:form>
@@ -141,15 +143,15 @@ your [form setup](https://docs.typo3.org/c/typo3/cms-form/main/en-us/I/Concepts/
 
 ```yaml
 TYPO3:
-  CMS:
-    Form:
-      prototypes:
-        standard:
-          formElementsDefinition:
-            Form:
-              renderingOptions:
-                partialRootPaths:
-                  1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
+    CMS:
+        Form:
+        prototypes:
+            standard:
+            formElementsDefinition:
+                Form:
+                renderingOptions:
+                    partialRootPaths:
+                    1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
 ```
 
 ## Migration from version 3.x to 4.x
@@ -183,14 +185,14 @@ for the pageType 3413, e.g.:
 
 ```yaml
 routeEnhancers:
-  PageTypeSuffix:
-    type: PageType
-    default: /
-    index: index
-    map:
-      /: 0
-      .captcha: 3413
-      .audio: 3414
+    PageTypeSuffix:
+        type: PageType
+        default: /
+        index: index
+        map:
+            /: 0
+            .captcha: 3413
+            .audio: 3414
 ```
 
 ## License

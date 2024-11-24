@@ -7,13 +7,13 @@ languages=(
 )
 
 for index in "${languages[@]}" ; do
-  LANGUAGE="${index%%::*}"
-  VOICE="${index##*::}"
+LANGUAGE="${index%%::*}"
+VOICE="${index##*::}"
 
-  mkdir -p "$LANGUAGE"
+mkdir -p "$LANGUAGE"
 
-  for x in {A..Z}
-  do
+for x in {A..Z}
+do
     lowerX=$(echo "$x" |  tr '[:upper:]' '[:lower:]' )
     say "$lowerX" -v $VOICE -o "$LANGUAGE/$lowerX.aiff"
     say "$x" -v $VOICE -o "$LANGUAGE/$lowerX-upper.aiff"
@@ -23,16 +23,16 @@ for index in "${languages[@]}" ; do
 
     rm "$LANGUAGE/$lowerX.aiff"
     rm "$LANGUAGE/$lowerX-upper.aiff"
-  done
+done
 
-  for x in {0..9}
-  do
+for x in {0..9}
+do
     say "$x" -v $VOICE -o "$LANGUAGE/$x.aiff"
 
     ffmpeg -i "$LANGUAGE/$x.aiff" -map_metadata -1 -fflags +bitexact "$LANGUAGE/$x.wav"
 
     rm "$LANGUAGE/$x.aiff"
-  done
+done
 
 done
 
