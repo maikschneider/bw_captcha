@@ -45,7 +45,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $languageCode = $request->getAttribute('language')?->getLocale()->getCountryCode() ?? '';
+        $languageCode = $request->getAttribute('language')?->getLocale()->getLanguageCode() ?? '';
         $body = $request->getParsedBody();
 
         $ts = $this->configurationManager->getConfiguration(
