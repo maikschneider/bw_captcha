@@ -30,7 +30,7 @@
 		"helmich/typo3-typoscript-lint": "^3.2",
 		"roave/security-advisories": "dev-latest",
 		"saschaegerer/phpstan-typo3": "^1.9",
-		"ssch/typo3-rector": "^2.10",
+		"ssch/typo3-rector": "^2.10 || ^3.0",
 		"symfony/translation": "^7.1",
 		"typo3/cms-base-distribution": "^12.4 || ^13.4",
 		"typo3/cms-lowlevel": "^12.4 || ^13.4"
