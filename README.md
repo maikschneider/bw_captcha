@@ -154,6 +154,17 @@ TYPO3:
                     1680889288: 'EXT:your_ext/Resources/Private/Frontend/Partials/'
 ```
 
+## Migration from version 4.x to 5.x
+
+In this version the inline JavaScript has been moved to a separate file to better comply with a Content Security Policy (CSP). If you dynamically
+load or display the captcha element, you probably need to initialize the captcha manually:
+
+```javascript
+window.BwCaptcha.init();
+```
+
+Make sure the [JavaScript file](Resources/Public/JavaScript/Frontend/Captcha.js) is included in your page: `EXT:bw_captcha/Resources/Public/JavaScript/Frontend/Captcha.js`
+
 ## Migration from version 3.x to 4.x
 
 This version aims to make solving the captcha more accessible. It introduces a new audio feature that reads out the
