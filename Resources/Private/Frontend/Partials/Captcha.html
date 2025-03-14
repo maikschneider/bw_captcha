@@ -33,8 +33,7 @@
                     data-url="{f:uri.page(pageType:3414)}"
                     title="{f:translate(extensionName:'bw_captcha',key:'partial.audio.title')}"
                     aria-label="{f:translate(extensionName:'bw_captcha',key:'partial.audio.label')}"
-                    role="button"
-                    onclick="const div = this.parentElement;window.captchaAudio = window.captchaAudio ? window.captchaAudio : new Audio();window.captchaAudio.addEventListener('ended', () => div.classList.remove('captcha--playing'));if (window.captchaAudio.paused) {	div.classList.add('captcha--playing');	const img = div.querySelector('img');	const c = document.createElement('canvas');	const ctx = c.getContext('2d');	const data = new FormData();	c.width = img.naturalWidth;	c.height = img.naturalHeight;	ctx.drawImage(img, 0, 0);	data.append('captchaDataUrl', c.toDataURL());fetch('{f:uri.page(pageType:3414)}', {method: 'POST',body: data}).then(response => response.blob()).then(blob => {	window.captchaAudio.src = window.URL.createObjectURL(blob);	window.captchaAudio.play();	});} else {	window.captchaAudio.pause();div.classList.remove('captcha--playing')} return false;">
+                    role="button">
                     <svg xmlns="http://www.w3.org/2000/svg" height="35" fill="none" viewBox="0 0 115 100">
                         <path
                             fill="#000"
@@ -53,6 +52,7 @@
                             d="M81.333 51.667a25.566 25.566 0 0 1-6.562 16 10.73 10.73 0 0 1-1.6 1.588 3.71 3.71 0 0 1-4.88-.323A3.603 3.603 0 0 1 68 64.24c.375-.547.865-1 1.333-1.506a19.157 19.157 0 0 0-.172-25.495c-.307-.359-.65-.682-.932-1.051a3.695 3.695 0 0 1 .318-5.084 3.749 3.749 0 0 1 5.104.203c.86.85 1.646 1.766 2.349 2.745 3.495 4.64 5.333 10.177 5.333 17.615Z" />
                     </svg>
                 </a>
+                <f:asset.script identifier="tx_bwcaptcha_audio" src="EXT:bw_captcha/Resources/Public/JavaScript/Frontend/CaptchaAudio.js" />
             </f:if>
         </div>
         <f:form.textfield
