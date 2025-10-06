@@ -9,34 +9,24 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Throwable;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class Captcha implements MiddlewareInterface
 {
     protected ResponseFactoryInterface $responseFactory;
 
-    protected ConfigurationManager $configurationManager;
-
     protected Context $context;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,
-        ConfigurationManager $configurationManager,
         Context $context,
     ) {
         $this->responseFactory = $responseFactory;
-        $this->configurationManager = $configurationManager;
         $this->context = $context;
     }
 
-    /**
-     * @throws InvalidConfigurationTypeException&Throwable
-     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
@@ -48,9 +38,9 @@ class Captcha implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $ts = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
+        /** @var TypoScriptFrontendController $tsfe */
+        $tsfe = $request->getAttribute('frontend.controller');
+        $ts = $tsfe->tmpl->setup;
         $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
         $width = (int)$settings['width'];
         $height = (int)$settings['height'];
