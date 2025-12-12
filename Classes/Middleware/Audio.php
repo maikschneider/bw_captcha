@@ -13,8 +13,8 @@ use Throwable;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class Audio implements MiddlewareInterface
 {
@@ -48,10 +48,10 @@ class Audio implements MiddlewareInterface
         $languageCode = $request->getAttribute('language')?->getLocale()->getLanguageCode() ?? '';
         $body = $request->getParsedBody();
 
-        $ts = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
-        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
+        /** @var TypoScriptFrontendController $tsfe */
+        $tsfe = $request->getAttribute('frontend.controller');
+        $ts = $tsfe->tmpl->setup;
+        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
 
         // get all phrases from session
         $feUser = $request->getAttribute('frontend.user');
@@ -62,7 +62,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if ((int)$settings['audioButton'] && is_array($body)  && isset($body['captchaDataUrl'])) {
+        if ((int)($settings['audioButton'] ?? 1) && is_array($body)  && isset($body['captchaDataUrl'])) {
             // get image data from post request
             $dataUrl = $body['captchaDataUrl'];
             [, $dataUrl] = explode(';', $dataUrl);
