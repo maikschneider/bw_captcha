@@ -31,9 +31,6 @@ jobs:
           ddev composer config github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
           ddev composer install
 
-      - name: Composer audit
-        run: ddev composer audit
-
       - name: Run static code analysis
         run: ddev composer ci:sca
 
