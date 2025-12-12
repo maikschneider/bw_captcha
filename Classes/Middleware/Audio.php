@@ -12,7 +12,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -20,14 +19,10 @@ class Audio implements MiddlewareInterface
 {
     protected ResponseFactoryInterface $responseFactory;
 
-    protected ConfigurationManager $configurationManager;
-
     public function __construct(
-        ResponseFactoryInterface $responseFactory,
-        ConfigurationManager $configurationManager
+        ResponseFactoryInterface $responseFactory
     ) {
         $this->responseFactory = $responseFactory;
-        $this->configurationManager = $configurationManager;
     }
 
     /**
@@ -62,7 +57,7 @@ class Audio implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        if ((int)($settings['audioButton'] ?? 1) && is_array($body)  && isset($body['captchaDataUrl'])) {
+        if ((int)($settings['audioButton'] ?? 1) && is_array($body) && isset($body['captchaDataUrl'])) {
             // get image data from post request
             $dataUrl = $body['captchaDataUrl'];
             [, $dataUrl] = explode(';', $dataUrl);
