@@ -38,10 +38,13 @@ class Captcha implements MiddlewareInterface
             return $handler->handle($request);
         }
 
+        $settings = [];
         /** @var TypoScriptFrontendController $tsfe */
         $tsfe = $request->getAttribute('frontend.controller');
-        $ts = $tsfe->tmpl->setup;
-        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        if ($tsfe instanceof TypoScriptFrontendController && $tsfe->tmpl !== null) {
+            $ts = $tsfe->tmpl->setup;
+            $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        }
         $width = (int)($settings['width'] ?? 150);
         $height = (int)($settings['height'] ?? 40);
         $lifetime = (int)($settings['lifetime'] ?? 3600);

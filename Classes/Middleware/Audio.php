@@ -43,10 +43,13 @@ class Audio implements MiddlewareInterface
         $languageCode = $request->getAttribute('language')?->getLocale()->getLanguageCode() ?? '';
         $body = $request->getParsedBody();
 
+        $settings = [];
         /** @var TypoScriptFrontendController $tsfe */
         $tsfe = $request->getAttribute('frontend.controller');
-        $ts = $tsfe->tmpl->setup;
-        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        if ($tsfe instanceof TypoScriptFrontendController && $tsfe->tmpl !== null) {
+            $ts = $tsfe->tmpl->setup;
+            $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        }
 
         // get all phrases from session
         $feUser = $request->getAttribute('frontend.user');
