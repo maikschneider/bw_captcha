@@ -17,8 +17,10 @@ class CaptchaBuilderUtility
      */
     public static function getBuilderFromSettings(array $settings): CaptchaBuilder
     {
-        $length = $settings['length'] ?? 5;
-        $charset = $settings['charset'] ?? 'abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $length = (int)($settings['length'] ?? 5);
+        $length = $length <= 0 ? 5 : $length;
+        $charset = $settings['charset'] ?? '';
+        $charset = $charset ?: 'abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $textColor = $settings['textColor'] ?? null;
         $lineColor = $settings['lineColor'] ?? null;
         $backgroundColor = $settings['backgroundColor'] ?? null;
