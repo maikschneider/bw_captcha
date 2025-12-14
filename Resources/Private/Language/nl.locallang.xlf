@@ -12,6 +12,26 @@
 				<source>Captcha</source>
 				<target>Captcha</target>
 			</trans-unit>
+			<trans-unit id="partial.refresh.title">
+				<source>Load new captcha</source>
+				<target>Nieuw captcha laden</target>
+			</trans-unit>
+			<trans-unit id="partial.refresh.label">
+				<source>Refresh</source>
+				<target>Vernieuwen</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.title">
+				<source>Read captcha aloud</source>
+				<target>Captcha voorlezen</target>
+			</trans-unit>
+			<trans-unit id="partial.audio.label">
+				<source>Read</source>
+				<target>Voorlezen</target>
+			</trans-unit>
+			<trans-unit id="partial.image.alt">
+				<source>Enter the character string shown in the picture</source>
+				<target>Voer de tekenreeks in die in de afbeelding wordt weergegeven</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
