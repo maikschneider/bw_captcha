@@ -17,18 +17,20 @@ class CaptchaBuilderUtility
      */
     public static function getBuilderFromSettings(array $settings): CaptchaBuilder
     {
-        $length = $settings['length'] ?: 5;
-        $charset = $settings['charset'] ?: 'abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $textColor = $settings['textColor'] ?: null;
-        $lineColor = $settings['lineColor'] ?: null;
-        $backgroundColor = $settings['backgroundColor'] ?: null;
-        $distortion = $settings['distortion'] ?: null;
-        $maxFrontLines = $settings['maxFrontLines'] ?: null;
-        $maxBehindLines = $settings['maxBehindLines'] ?: null;
-        $maxAngle = $settings['maxAngle'] ?: null;
-        $maxOffset = $settings['maxOffset'] ?: null;
-        $interpolation = $settings['interpolation'] ?: null;
-        $ignoreAllEffects = $settings['ignoreAllEffects'] ?: null;
+        $length = (int)($settings['length'] ?? 5);
+        $length = $length <= 0 ? 5 : $length;
+        $charset = $settings['charset'] ?? '';
+        $charset = $charset ?: 'abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $textColor = $settings['textColor'] ?? null;
+        $lineColor = $settings['lineColor'] ?? null;
+        $backgroundColor = $settings['backgroundColor'] ?? null;
+        $distortion = $settings['distortion'] ?? null;
+        $maxFrontLines = $settings['maxFrontLines'] ?? null;
+        $maxBehindLines = $settings['maxBehindLines'] ?? null;
+        $maxAngle = $settings['maxAngle'] ?? null;
+        $maxOffset = $settings['maxOffset'] ?? null;
+        $interpolation = $settings['interpolation'] ?? null;
+        $ignoreAllEffects = $settings['ignoreAllEffects'] ?? null;
 
         $phraseBuilder = new PhraseBuilder($length, $charset);
         $captchaBuilder = new CaptchaBuilder(null, $phraseBuilder);

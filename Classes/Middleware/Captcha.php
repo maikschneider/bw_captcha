@@ -9,34 +9,24 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Throwable;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class Captcha implements MiddlewareInterface
 {
     protected ResponseFactoryInterface $responseFactory;
 
-    protected ConfigurationManager $configurationManager;
-
     protected Context $context;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory,
-        ConfigurationManager $configurationManager,
         Context $context,
     ) {
         $this->responseFactory = $responseFactory;
-        $this->configurationManager = $configurationManager;
         $this->context = $context;
     }
 
-    /**
-     * @throws InvalidConfigurationTypeException&Throwable
-     */
     public function process(
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
@@ -48,13 +38,16 @@ class Captcha implements MiddlewareInterface
             return $handler->handle($request);
         }
 
-        $ts = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
-        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
-        $width = (int)$settings['width'];
-        $height = (int)$settings['height'];
-        $lifetime = (int)$settings['lifetime'];
+        $settings = [];
+        /** @var TypoScriptFrontendController $tsfe */
+        $tsfe = $request->getAttribute('frontend.controller');
+        if ($tsfe instanceof TypoScriptFrontendController && $tsfe->tmpl !== null) {
+            $ts = $tsfe->tmpl->setup;
+            $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        }
+        $width = (int)($settings['width'] ?? 150);
+        $height = (int)($settings['height'] ?? 40);
+        $lifetime = (int)($settings['lifetime'] ?? 3600);
         $font = CaptchaBuilderUtility::getRandomFontFileFromSettings($settings);
 
         // create new captcha
@@ -64,7 +57,7 @@ class Captcha implements MiddlewareInterface
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
         // encode encrypted phrase into image
-        if ((int)$settings['audioButton']) {
+        if ((int)($settings['audioButton'] ?? 1)) {
             $processor = new Processor();
             $image = $processor->encode($builder->getGd(), $newPhrase);
             $captchaImage = $image->get();
