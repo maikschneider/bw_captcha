@@ -31,7 +31,6 @@
 		"move-elevator/composer-translation-validator": "^0.5.0",
 		"saschaegerer/phpstan-typo3": "^2.1.1",
 		"ssch/typo3-rector": "^3.9.0",
-		"symfony/translation": "^7.1",
 		"typo3/cms-base-distribution": "^12.4 || ^13.4",
 		"typo3/cms-lowlevel": "^12.4 || ^13.4"
 	},
