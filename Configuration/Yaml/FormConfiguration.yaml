@@ -10,6 +10,8 @@ TYPO3:
                 1623227656: '@blueways/bw-captcha/Backend/FormEditor/CaptchaViewModel.js'
             formEditorPartials:
               FormElement-Captcha: 'Stage/SimpleTemplate'
+            translationFiles:
+              20: 'EXT:bw_captcha/Resources/Private/Language/locallang.xlf'
 
           formElementsDefinition:
             Form:
@@ -25,7 +27,8 @@ TYPO3:
             Captcha:
               implementationClassName: 'Blueways\BwCaptcha\Domain\Model\FormElements\CaptchaElement'
               formEditor:
-                label: 'Captcha'
+                label: formEditor.elements.Captcha.label
+                description: formEditor.elements.Captcha.description
                 group: custom
                 groupSorting: 1000
                 iconIdentifier: 't3-form-captcha-element'
