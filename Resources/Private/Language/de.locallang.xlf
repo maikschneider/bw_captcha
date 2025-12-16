@@ -33,7 +33,7 @@
 				<target>Vorlesen</target>
 			</trans-unit>
 			<trans-unit id="partial.image.alt">
-				<source>Enter the string shown in the image or use the following audio alternative.</source>
+				<source>Enter the string shown in the image or use the following audio alternative</source>
 				<target>Geben Sie die im Bild dargestellte Zeichenfolge ein oder nutzen Sie die folgende Audio-Alternative</target>
 			</trans-unit>
 		</body>
