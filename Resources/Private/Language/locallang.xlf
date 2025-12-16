@@ -26,7 +26,7 @@
 				<source>Read</source>
 			</trans-unit>
 			<trans-unit id="partial.image.alt">
-				<source>Enter the character string shown in the picture</source>
+				<source>Enter the string shown in the image or use the following audio alternative.</source>
 			</trans-unit>
 		</body>
 	</file>
