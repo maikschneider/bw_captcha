@@ -42,7 +42,7 @@ class Captcha implements MiddlewareInterface
         try {
             /** @var FrontendTypoScript $frontendTypoScript */
             $frontendTypoScript = $request->getAttribute('frontend.typoscript');
-            $ts = $frontendTypoScript->getSetupArray();
+            $ts = $frontendTypoScript?->getSetupArray() ?? [];
             $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
         } catch (\RuntimeException) {
             // silent skip, fallback values apply; proper dev logging might be helpful in long term
