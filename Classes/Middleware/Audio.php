@@ -48,7 +48,7 @@ class Audio implements MiddlewareInterface
             $ts = $frontendTypoScript->getSetupArray();
             $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
         } catch (\RuntimeException) {
-            // silent skip, fallback values apply; propper dev logging might be helpful in long term
+            // silent skip, fallback values apply; proper dev logging might be helpful in long term
         }
 
         // get all phrases from session
