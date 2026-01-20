@@ -40,7 +40,7 @@ class Captcha implements MiddlewareInterface
 
         $settings = [];
         try {
-            /** @var FrontendTypoScript $frontendTypoScript */
+            /** @var FrontendTypoScript|null $frontendTypoScript */
             $frontendTypoScript = $request->getAttribute('frontend.typoscript');
             $ts = $frontendTypoScript?->getSetupArray() ?? [];
             $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
