@@ -11,7 +11,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
 class Captcha implements MiddlewareInterface
 {
@@ -39,11 +39,13 @@ class Captcha implements MiddlewareInterface
         }
 
         $settings = [];
-        /** @var TypoScriptFrontendController $tsfe */
-        $tsfe = $request->getAttribute('frontend.controller');
-        if ($tsfe instanceof TypoScriptFrontendController && $tsfe->tmpl !== null) {
-            $ts = $tsfe->tmpl->setup;
+        try {
+            /** @var FrontendTypoScript $frontendTypoScript */
+            $frontendTypoScript = $request->getAttribute('frontend.typoscript');
+            $ts = $frontendTypoScript->getSetupArray();
             $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        } catch (\RuntimeException) {
+            // silent skip, fallback values apply; propper dev logging might be helpful in long term
         }
         $width = (int)($settings['width'] ?? 150);
         $height = (int)($settings['height'] ?? 40);
