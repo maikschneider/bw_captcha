@@ -12,8 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException;
 use TYPO3\CMS\Core\Routing\PageArguments;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 
 class Audio implements MiddlewareInterface
 {
@@ -26,7 +25,6 @@ class Audio implements MiddlewareInterface
     }
 
     /**
-     * @throws InvalidConfigurationTypeException&Throwable
      * @throws InvalidPasswordHashException&Throwable
      */
     public function process(
@@ -44,11 +42,13 @@ class Audio implements MiddlewareInterface
         $body = $request->getParsedBody();
 
         $settings = [];
-        /** @var TypoScriptFrontendController $tsfe */
-        $tsfe = $request->getAttribute('frontend.controller');
-        if ($tsfe instanceof TypoScriptFrontendController && $tsfe->tmpl !== null) {
-            $ts = $tsfe->tmpl->setup;
+        try {
+            /** @var FrontendTypoScript|null $frontendTypoScript */
+            $frontendTypoScript = $request->getAttribute('frontend.typoscript');
+            $ts = $frontendTypoScript?->getSetupArray() ?? [];
             $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? [];
+        } catch (\RuntimeException) {
+            // silent skip, fallback values apply; proper dev logging might be helpful in long term
         }
 
         // get all phrases from session
