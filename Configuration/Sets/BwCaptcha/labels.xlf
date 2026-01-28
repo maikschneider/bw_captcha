@@ -30,7 +30,7 @@
 				<source>The height of the image</source>
 			</trans-unit>
 			<trans-unit id="settings.plugin.tx_bwcaptcha.settings.fontFiles">
-				<source>Custom font file(s) to use (comma-seperated)</source>
+				<source>Custom font file(s) to use (comma-separated)</source>
 			</trans-unit>
 			<trans-unit id="settings.description.plugin.tx_bwcaptcha.settings.fontFiles">
 				<source>Could be:&#xA;- `EXT:my_site/Resources/Public/Fonts/myFont.ttf` (extension path)&#xA;- `1:myfolder/myFont.ttf` (combined identifier)&#xA;- `23` (file UID)&#xA;- `file:23`</source>
