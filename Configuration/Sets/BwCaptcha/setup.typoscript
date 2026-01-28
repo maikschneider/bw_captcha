@@ -15,9 +15,9 @@ plugin.tx_form {
     .captcha--playing .captcha__audio__mute { display: inherit; }
     .captcha--playing .captcha__audio__sound { display: none; }
     @keyframes spin {
-          from {transform:rotate(359deg);}
-          to {transform:rotate(0deg);}
-        }
+      from {transform:rotate(359deg);}
+      to {transform:rotate(0deg);}
+    }
   )
 }
 
