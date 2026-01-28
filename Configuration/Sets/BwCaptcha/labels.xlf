@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-	<file source-language="en" original="" datatype="plaintext" date="2026-01-28T15:28:05+01:00">
+	<file source-language="en" original="EXT:bw_captcha/Configuration/Sets/BwCaptcha/labels.xlf" datatype="plaintext" date="2026-01-28T15:28:05+01:00">
 		<body>
 			<trans-unit id="label">
 				<source>Accessible Form Captcha - bw_captcha</source>
