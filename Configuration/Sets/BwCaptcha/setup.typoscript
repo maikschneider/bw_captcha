@@ -60,7 +60,6 @@ captcha {
 
   config {
     disableAllHeaderCode = 1
-    xhtml_cleaning = 0
     admPanel = 0
     debug = 0
   }
