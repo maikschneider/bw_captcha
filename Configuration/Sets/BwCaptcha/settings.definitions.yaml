@@ -1,0 +1,78 @@
+categories:
+  bw_captcha: ~
+  bw_captcha.settings:
+    parent: bw_captcha
+
+settings:
+  plugin.tx_bwcaptcha.settings.lifetime:
+    default: 3600
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.refreshButton:
+    default: true
+    type: bool
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.length:
+    default: 5
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.charset:
+    default: abcdefghijklmnpqrstuvwxyz123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ
+    type: string
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.width:
+    default: 150
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.height:
+    default: 40
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.fontFiles:
+    default: 'EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf'
+    type: string
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.textColor:
+    default: ''
+    type: string
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.lineColor:
+    default: ''
+    type: string
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.backgroundColor:
+    default: ''
+    type: string
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.distortion:
+    default: false
+    type: bool
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.maxFrontLines:
+    default: 0
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.maxBehindLines:
+    default: 0
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.maxAngle:
+    default: 0
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.maxOffset:
+    default: 0
+    type: int
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.interpolation:
+    default: false
+    type: bool
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.ignoreAllEffects:
+    default: false
+    type: bool
+    category: bw_captcha.settings
+  plugin.tx_bwcaptcha.settings.audioButton:
+    default: true
+    type: bool
+    category: bw_captcha.settings

@@ -1,0 +1,70 @@
+plugin.tx_form {
+  settings {
+    yamlConfigurations {
+      1623227656 = EXT:bw_captcha/Configuration/Yaml/FormConfiguration.yaml
+    }
+  }
+
+  _CSS_DEFAULT_STYLE (
+    .captcha { margin-bottom: .5rem; }
+    .captcha a { margin-left: .5rem; }
+    .captcha--reloading img { opacity: 0.5; }
+    .captcha--reloading a { cursor: auto; }
+    .captcha--spin .captcha__reload svg { animation: spin 0.8s infinite linear; }
+    .captcha__audio__mute { display: none; }
+    .captcha--playing .captcha__audio__mute { display: inherit; }
+    .captcha--playing .captcha__audio__sound { display: none; }
+    @keyframes spin {
+          from {transform:rotate(359deg);}
+          to {transform:rotate(0deg);}
+        }
+  )
+}
+
+plugin.tx_bwcaptcha {
+  settings {
+    lifetime = {$plugin.tx_bwcaptcha.settings.lifetime}
+    refreshButton = {$plugin.tx_bwcaptcha.settings.refreshButton}
+    length = {$plugin.tx_bwcaptcha.settings.length}
+    charset = {$plugin.tx_bwcaptcha.settings.charset}
+    width = {$plugin.tx_bwcaptcha.settings.width}
+    height = {$plugin.tx_bwcaptcha.settings.height}
+    fontFiles = {$plugin.tx_bwcaptcha.settings.fontFiles}
+    textColor = {$plugin.tx_bwcaptcha.settings.textColor}
+    lineColor = {$plugin.tx_bwcaptcha.settings.lineColor}
+    backgroundColor = {$plugin.tx_bwcaptcha.settings.backgroundColor}
+    distortion = {$plugin.tx_bwcaptcha.settings.distortion}
+    maxFrontLines = {$plugin.tx_bwcaptcha.settings.maxFrontLines}
+    maxBehindLines = {$plugin.tx_bwcaptcha.settings.maxBehindLines}
+    maxAngle = {$plugin.tx_bwcaptcha.settings.maxAngle}
+    maxOffset = {$plugin.tx_bwcaptcha.settings.maxOffset}
+    interpolation = {$plugin.tx_bwcaptcha.settings.interpolation}
+    ignoreAllEffects = {$plugin.tx_bwcaptcha.settings.ignoreAllEffects}
+    audioButton = {$plugin.tx_bwcaptcha.settings.audioButton}
+  }
+}
+
+plugin.tx_sfeventmgt {
+  view {
+    partialRootPaths.999999 = EXT:bw_captcha/Resources/Private/SfEventMgt/
+  }
+
+  settings.registration.captcha {
+    bwCaptcha < plugin.tx_bwcaptcha.settings
+  }
+}
+
+captcha = PAGE
+captcha {
+  typeNum = 3413
+
+  config {
+    disableAllHeaderCode = 1
+    xhtml_cleaning = 0
+    admPanel = 0
+    debug = 0
+  }
+}
+
+audio < captcha
+audio.typeNum = 3414
