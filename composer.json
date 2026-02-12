@@ -22,7 +22,7 @@
 	},
 	"require-dev": {
 		"armin/editorconfig-cli": "^2.0",
-		"bk2k/bootstrap-package": "^15.0",
+		"bk2k/bootstrap-package": "^15.0 || ^16.0",
 		"derhansen/sf_event_mgt": "^7.6 || ^8.0",
 		"ergebnis/composer-normalize": "^2.44",
 		"friendsofphp/php-cs-fixer": "^3.12",
