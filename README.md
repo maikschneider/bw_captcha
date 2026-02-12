@@ -55,7 +55,15 @@ renderables:
 
 ## Configuration
 
-After installation, include the static TypoScript template or include **setup** and **constants** manually.
+### Via Site Set (recommended)
+
+Include the site set `blueways/bw-captcha` in your site configuration.
+
+To modify the captcha output, use the site settings module and adjust the settings in the "Accessible Form Captcha" section.
+
+### Via TypoScript
+
+Alternatively, include the static TypoScript template or include **setup** and **constants** manually.
 
 To modify the captcha output, you can use the following TypoScript **constants**:
 
