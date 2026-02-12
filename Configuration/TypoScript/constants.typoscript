@@ -12,7 +12,7 @@ plugin.tx_bwcaptcha {
     width = 150
     # cat=bw_captcha; type=int; label=The height of the image
     height = 40
-    # cat=bw_captcha; type=string; label=Custom font file(s) to use (comma-seperated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"
+    # cat=bw_captcha; type=string; label=Custom font file(s) to use (comma-separated): Could be: "EXT:my_site/Resources/Public/Fonts/myFont.ttf" (extension path), "1:myfolder/myFont.ttf" (combined identifier), "23" (file UID), "file:23"
     fontFiles = EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf
     # cat=bw_captcha; type=string; label=Text color (e.g. 255,0,0)
     textColor =
