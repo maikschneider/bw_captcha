@@ -17,8 +17,7 @@ call_user_func(static function () {
         '));
 
     $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'] ??= [];
-    ArrayUtility::mergeRecursiveWithOverrule(
-        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'],
-        ['now']
-    );
+    if (!in_array('now', $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'], true)) {
+        $GLOBALS['TYPO3_CONF_VARS']['FE']['cacheHash']['excludedParameters'][] = 'now';
+    }
 });
