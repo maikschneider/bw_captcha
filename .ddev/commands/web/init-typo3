@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2086
+set -e
+
+## Description: Initialize TYPO3 installation
+## Usage: init-typo3
+## Example: ddev init-typo3
+
+readonly dbHost="db"
+readonly dbUser="db"
+readonly dbPassword="db"
+readonly dbName="db"
+readonly dbCredentials="-h${dbHost} -u${dbUser} -p${dbPassword}"
+readonly fixturePath="/var/www/html/Tests/Acceptance/Fixtures"
+readonly typo3Binary="/var/www/html/vendor/bin/typo3"
+
+function _progress() {
+    printf "%s... " "$1"
+}
+
+function _done() {
+    printf "\e[32mDone\e[39m\n"
+}
+
+# Create empty database
+_progress "Creating empty database"
+mysql -Nse "SHOW TABLES" $dbCredentials "$dbName" | while read -r table; do
+    mysql -e "DROP TABLE ${table}" $dbCredentials "$dbName"
+done
+_done
+
+# Prepare setup environment
+export TYPO3_DB_DRIVER=mysqli
+export TYPO3_DB_USERNAME="$dbUser"
+export TYPO3_DB_PASSWORD="$dbPassword"
+export TYPO3_DB_PORT=3306
+export TYPO3_DB_HOST="$dbHost"
+export TYPO3_DB_DBNAME="$dbName"
+export TYPO3_SERVER_TYPE=apache
+export TYPO3_PROJECT_NAME="EXT:bw_captcha"
+
+# Set up environment
+_progress "Setting up TYPO3 installation"
+    "$typo3Binary" setup --no-interaction --force --quiet
+_done
+
+# Import DB fixtures
+for file in "$fixturePath"/*.sql; do
+    _progress "Importing DB fixture \"$(basename "$file")\""
+    mysql $dbCredentials "$dbName" < "$file"
+    _done
+done
+
+# Copy site configuration
+_progress "Copy site configuration"
+    mkdir -p /var/www/html/config/sites/main
+    cp "$fixturePath/config.yaml" /var/www/html/config/sites/main/config.yaml
+_done
+
+# Copy form definition
+_progress "Copy form definition"
+    mkdir -p /var/www/html/public/fileadmin/form_definitions
+    cp "$fixturePath/captcha_test.form.yaml" /var/www/html/public/fileadmin/form_definitions/captcha_test.form.yaml
+_done

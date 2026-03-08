@@ -1,0 +1,19 @@
+services:
+  selenium-chrome:
+    image: selenium/standalone-chromium:138.0
+    container_name: ddev-${DDEV_SITENAME}-selenium-chrome
+    expose:
+      - 7900
+    environment:
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+      - HTTPS_EXPOSE=7900:7900
+      - HTTP_EXPOSE=7910:7900
+      - VNC_NO_PASSWORD=1
+      - SE_NODE_MAX_SESSIONS=12
+      - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: $DDEV_APPROOT
+    volumes:
+      - ${DDEV_APPROOT}:/var/www/html:r
+      - ".:/mnt/ddev_config"

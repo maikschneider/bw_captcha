@@ -1,0 +1,3 @@
+INSERT INTO `sys_template` (`uid`, `pid`, `tstamp`, `crdate`, `deleted`, `hidden`, `sorting`, `title`, `root`, `clear`, `include_static_file`, `constants`, `config`)
+VALUES
+	(1, 1, 1744190674, 1744190647, 0, 0, 256, 'Main Template', 1, 3, 'EXT:fluid_styled_content/Configuration/TypoScript/,EXT:bw_captcha/Configuration/TypoScript/', '', 'page = PAGE\npage.10 = FLUIDTEMPLATE\npage.10 {\n  templateName = Default\n  templateRootPaths.10 = EXT:fluid_styled_content/Resources/Private/Templates/\n  partialRootPaths.10 = EXT:fluid_styled_content/Resources/Private/Partials/\n  layoutRootPaths.10 = EXT:fluid_styled_content/Resources/Private/Layouts/\n  dataProcessing.10 = TYPO3\\CMS\\Frontend\\DataProcessing\\DatabaseQueryProcessor\n}\npage.10 < styles.content.get');

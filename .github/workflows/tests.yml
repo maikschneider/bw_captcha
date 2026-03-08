@@ -1,0 +1,72 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - main
+      - 'renovate/**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Tests (PHP ${{ matrix.php-version }}, TYPO3 ${{ matrix.typo3-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        typo3-version: [ "13.4" ]
+        php-version: [ "8.2" ]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Prepare environment
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql, gd
+
+      # Setup DDEV
+      - name: Setup DDEV
+        uses: ddev/github-action-setup-ddev@v1
+        with:
+          autostart: false
+      - name: Configure and start DDEV
+        run: |
+          ddev config --project-type=typo3 --php-version=${{ matrix.php-version }}
+          ddev start
+
+      # Install dependencies
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          composer-options: --with=typo3/cms-core:"^${{ matrix.typo3-version }}"
+
+      # Init TYPO3
+      - name: Init TYPO3
+        run: ddev init-typo3
+
+      # Run tests
+      - name: Run acceptance tests
+        uses: nick-fields/retry@v3
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_minutes: 10
+          command: ddev composer ci:test:acceptance
+          new_command_on_retry: ddev composer test:acceptance -- -g failed
+
+      # Save acceptance reports
+      - uses: actions/upload-artifact@v4
+        with:
+          name: acceptance-reports-${{ matrix.php-version }}-${{ matrix.typo3-version }}
+          path: var/log/codeception/_output
+        if: failure()
