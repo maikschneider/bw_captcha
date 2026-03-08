@@ -5,3 +5,4 @@ public
 vendor
 bin
 var
+Tests/Acceptance/Support/_generated/AcceptanceTesterActions.php

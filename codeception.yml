@@ -1,0 +1,36 @@
+namespace: Blueways\BwCaptcha\Tests\Acceptance\Support
+actor: AcceptanceTester
+paths:
+  tests: Tests
+  output: var/log/codeception/_output
+  data: Tests/Acceptance/Fixtures
+  support: Tests/Acceptance/Support
+settings:
+  shuffle: false
+  lint: true
+  colors: true
+  memory_limit: 1024M
+extensions:
+  enabled:
+    - Codeception\Extension\RunFailed
+  config:
+    Codeception\Extension\RunFailed:
+      file: var/log/codeception/_output/_failed
+modules:
+  config:
+    Asserts: ~
+    WebDriver:
+      url: 'https://bw-captcha.ddev.site'
+      browser: chrome
+      host: selenium-chrome
+      port: 4444
+      window_size: 1920x1080
+      wait: 2
+      capabilities:
+        acceptInsecureCerts: true
+        goog:chromeOptions:
+          args:
+            - "--headless"
+            - "--disable-gpu"
+            - "--no-sandbox"
+            - "--disable-dev-shm-usage"

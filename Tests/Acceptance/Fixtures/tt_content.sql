@@ -1,0 +1,3 @@
+INSERT INTO `tt_content` (`uid`, `pid`, `CType`, `header`, `bodytext`, `colPos`, `sys_language_uid`, `l18n_parent`, `pi_flexform`)
+VALUES
+	(1, 2, 'form_formframework', 'Captcha Test Form', '', 0, 0, 0, '<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\" ?>\n<T3FlexForms>\n    <data>\n        <sheet index=\"sDEF\">\n            <language index=\"lDEF\">\n                <field index=\"settings.persistenceIdentifier\">\n                    <value index=\"vDEF\">1:/form_definitions/captcha_test.form.yaml</value>\n                </field>\n            </language>\n        </sheet>\n    </data>\n</T3FlexForms>');

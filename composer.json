@@ -23,6 +23,10 @@
 	"require-dev": {
 		"armin/editorconfig-cli": "^2.0",
 		"bk2k/bootstrap-package": "^15.0",
+		"codeception/codeception": "^5.1",
+		"codeception/module-asserts": "^3.0",
+		"codeception/module-db": "^3.2",
+		"codeception/module-webdriver": "^4.0",
 		"derhansen/sf_event_mgt": "^7.6 || ^8.0",
 		"ergebnis/composer-normalize": "^2.44",
 		"friendsofphp/php-cs-fixer": "^3.12",
@@ -32,13 +36,19 @@
 		"saschaegerer/phpstan-typo3": "^2.1.1",
 		"ssch/typo3-rector": "^3.9.0",
 		"typo3/cms-base-distribution": "^12.4 || ^13.4",
-		"typo3/cms-lowlevel": "^12.4 || ^13.4"
+		"typo3/cms-lowlevel": "^12.4 || ^13.4",
+		"typo3/testing-framework": "^8.0 || ^9.0"
 	},
 	"autoload": {
 		"psr-4": {
 			"Blueways\\BwCaptcha\\": "Classes",
 			"Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha",
 			"MaikSchneider\\Steganography\\": "Libraries/Steganography/src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Blueways\\BwCaptcha\\Tests\\": "Tests/"
 		}
 	},
 	"config": {
@@ -76,6 +86,7 @@
 			"@ci:typoscript:lint",
 			"@ci:yaml:lint"
 		],
+		"ci:test:acceptance": "codecept run Acceptance",
 		"ci:typoscript:lint": "typoscript-lint --fail-on-warnings",
 		"ci:yaml:lint": "find ./ ! -path './vendor/*' ! -path '*/node_modules/*' \\( -name '*.yaml' -o -name '*.yml' \\) | xargs -r yaml-lint",
 		"composer:normalize": "@composer normalize --no-check-lock",
@@ -96,6 +107,7 @@
 			"@typoscript:lint",
 			"@yaml:lint"
 		],
+		"test:acceptance": "vendor/bin/codecept run Acceptance",
 		"typoscript:lint": "typoscript-lint",
 		"yaml:lint": "find ./ ! -path './vendor/*' ! -path '*/node_modules/*' \\( -name '*.yaml' -o -name '*.yml' \\) | xargs -r yaml-lint"
 	}

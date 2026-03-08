@@ -1,0 +1,23 @@
+actor: AcceptanceTester
+modules:
+  enabled:
+    - WebDriver
+    - Asserts
+    - Db
+  config:
+    WebDriver:
+      url: 'https://bw-captcha.ddev.site'
+      browser: chrome
+      host: selenium-chrome
+      port: 4444
+    Db:
+      dsn: 'mysql:host=db;dbname=db'
+      user: 'db'
+      password: 'db'
+      populate: false
+      cleanup: false
+      populator: 'bash .ddev/commands/web/init-typo3'
+step_decorators:
+  - \Codeception\Step\ConditionalAssertion
+  - \Codeception\Step\TryTo
+  - \Codeception\Step\Retry
