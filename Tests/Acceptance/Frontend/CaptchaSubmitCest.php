@@ -22,7 +22,7 @@ class CaptchaSubmitCest
         $I->click('button[type="submit"]');
         $I->wait(2);
 
-        $I->see('not valid');
+        $I->see('not correct');
     }
 
     public function emptyCaptchaInputShowsError(AcceptanceTester $I): void
@@ -34,7 +34,7 @@ class CaptchaSubmitCest
         $I->click('button[type="submit"]');
         $I->wait(2);
 
-        $I->see('empty');
+        $I->see('not correct');
     }
 
     public function successfulCaptchaSubmitWithFixedPassword(AcceptanceTester $I): void
@@ -47,13 +47,18 @@ class CaptchaSubmitCest
         $captchaPhrases = [$lifetime => $knownPhrase];
         $sessionData = serialize(['captchaPhrases' => $captchaPhrases]);
 
-        $I->updateInDatabase('fe_sessions', ['ses_data' => $sessionData], ['1' => '1']);
+        // Use the current frontend session cookie to target the correct fe_sessions row
+        $sessionId = $I->grabCookie('fe_typo_user');
+        if ($sessionId === null) {
+            $I->fail('Session cookie "fe_typo_user" not found; cannot inject captcha phrase.');
+        }
+        $I->updateInDatabase('fe_sessions', ['ses_data' => $sessionData], ['ses_id' => $sessionId]);
 
         $I->fillField('input[id*="captcha"]', $knownPhrase);
         $I->click('button[type="submit"]');
         $I->wait(2);
 
         // After successful submit, the form should not show captcha validation error
-        $I->dontSee('not valid');
+        $I->dontSee('not correct');
     }
 }

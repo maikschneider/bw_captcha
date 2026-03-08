@@ -24,9 +24,11 @@ function _done() {
 
 # Create empty database
 _progress "Creating empty database"
+mysql -e "SET FOREIGN_KEY_CHECKS=0" $dbCredentials "$dbName"
 mysql -Nse "SHOW TABLES" $dbCredentials "$dbName" | while read -r table; do
-    mysql -e "DROP TABLE ${table}" $dbCredentials "$dbName"
+    mysql -e "DROP TABLE \`${table}\`" $dbCredentials "$dbName"
 done
+mysql -e "SET FOREIGN_KEY_CHECKS=1" $dbCredentials "$dbName"
 _done
 
 # Prepare setup environment
@@ -36,7 +38,7 @@ export TYPO3_DB_PASSWORD="$dbPassword"
 export TYPO3_DB_PORT=3306
 export TYPO3_DB_HOST="$dbHost"
 export TYPO3_DB_DBNAME="$dbName"
-export TYPO3_SERVER_TYPE=apache
+export TYPO3_SERVER_TYPE=other
 export TYPO3_PROJECT_NAME="EXT:bw_captcha"
 
 # Set up environment

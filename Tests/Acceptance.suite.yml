@@ -14,8 +14,8 @@ modules:
       dsn: 'mysql:host=db;dbname=db'
       user: 'db'
       password: 'db'
-      populate: true
-      cleanup: true
+      populate: false
+      cleanup: false
       populator: 'bash .ddev/commands/web/init-typo3'
 step_decorators:
   - \Codeception\Step\ConditionalAssertion
