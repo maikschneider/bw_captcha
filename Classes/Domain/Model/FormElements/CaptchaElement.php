@@ -2,18 +2,13 @@
 
 namespace Blueways\BwCaptcha\Domain\Model\FormElements;
 
-use Throwable;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement;
 
 class CaptchaElement extends AbstractFormElement
 {
-    /**
-     * @throws InvalidConfigurationTypeException&Throwable
-     */
     public function initializeFormElement(): void
     {
         parent::initializeFormElement();
