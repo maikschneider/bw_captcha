@@ -1,9 +1,11 @@
 name: Send notifications
 
-on: [ release, issues, issue_comment, watch, pull_request_target ]
+on: [release, issues, issue_comment, watch, pull_request_target, pull_request_review_comment]
 
 jobs:
   notification:
     uses: maikschneider/reusable-workflows/.github/workflows/notifications.yml@main
     secrets:
       teams-webhook-url: ${{ secrets.TEAMS_WEBHOOK_URL }}
+    with:
+      image-url: 'https://raw.githubusercontent.com/maikschneider/bw_captcha/refs/heads/main/Resources/Public/Icons/Extension.svg'
