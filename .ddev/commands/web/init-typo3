@@ -24,11 +24,11 @@ function _done() {
 
 # Create empty database
 _progress "Creating empty database"
-mysql -e "SET FOREIGN_KEY_CHECKS=0" $dbCredentials "$dbName"
-mysql -Nse "SHOW TABLES" $dbCredentials "$dbName" | while read -r table; do
-    mysql -e "DROP TABLE \`${table}\`" $dbCredentials "$dbName"
-done
-mysql -e "SET FOREIGN_KEY_CHECKS=1" $dbCredentials "$dbName"
+    mysql -e "SET FOREIGN_KEY_CHECKS=0" $dbCredentials "$dbName"
+    mysql -Nse "SHOW TABLES" $dbCredentials "$dbName" | while read -r table; do
+        mysql -e "DROP TABLE \`${table}\`" $dbCredentials "$dbName"
+    done
+    mysql -e "SET FOREIGN_KEY_CHECKS=1" $dbCredentials "$dbName"
 _done
 
 # Prepare setup environment
@@ -49,7 +49,7 @@ _done
 # Import DB fixtures
 for file in "$fixturePath"/*.sql; do
     _progress "Importing DB fixture \"$(basename "$file")\""
-    mysql $dbCredentials "$dbName" < "$file"
+        mysql $dbCredentials "$dbName" < "$file"
     _done
 done
 

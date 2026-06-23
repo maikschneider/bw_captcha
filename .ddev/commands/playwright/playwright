@@ -10,12 +10,12 @@ export PLAYWRIGHT_BROWSERS_PATH=0
 export NODE_PATH=/deps/node_modules
 
 if [[ "$1" == "show-report" ]]; then
-  echo ""
-  echo -e "\033[1;44m\033[1;97m  Playwright Report  \033[0m"
-  echo -e "\033[1;96m  https://${VIRTUAL_HOST}:9323\033[0m"
-  echo ""
+echo ""
+echo -e "\033[1;44m\033[1;97m  Playwright Report  \033[0m"
+echo -e "\033[1;96m  https://${VIRTUAL_HOST}:9323\033[0m"
+echo ""
 
-  playwright show-report --host=0.0.0.0 Tests/Playwright/playwright-report
+playwright show-report --host=0.0.0.0 Tests/Playwright/playwright-report
 fi
 
 playwright "$@"

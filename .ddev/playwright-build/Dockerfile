@@ -26,7 +26,7 @@ RUN (groupadd --gid "$gid" "$username" || groupadd "$username" || true) && \
 ENV CAROOT=/mnt/ddev-global-cache/mkcert
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-      --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get install -y sudo mariadb-client
 
@@ -40,7 +40,7 @@ RUN mkdir -p /usr/local/bin && \
     chmod +x /usr/local/bin/mkcert
 
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-      --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update \
     && apt-get install -y icewm xauth
 
@@ -48,8 +48,8 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     add-apt-repository -y universe && apt-get update
 
 RUN wget https://github.com/kasmtech/KasmVNC/releases/download/v${KASMVNC_VERSION}/kasmvncserver_${KASMVNC_DIST}_${KASMVNC_VERSION}_${TARGETARCH}.deb && \
-      apt-get install -y ./kasmvncserver*.deb && \
-      rm -f kasmvncserver*.deb
+    apt-get install -y ./kasmvncserver*.deb && \
+    rm -f kasmvncserver*.deb
 
 RUN mv /etc/apt/docker-clean-disabled /etc/apt/apt.conf.d/docker-clean
 
