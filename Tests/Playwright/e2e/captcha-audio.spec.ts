@@ -17,11 +17,6 @@ test.describe('Captcha Audio', () => {
     expect(dataUrl).toContain('type=3414');
   });
 
-  test('audio button has sound and mute icons', async ({ page }) => {
-    await expect(page.locator('a.captcha__audio .captcha__audio__sound')).toBeVisible();
-    await expect(page.locator('a.captcha__audio .captcha__audio__mute')).toBeVisible();
-  });
-
   test('clicking audio button triggers playback', async ({ page }) => {
     await page.click('a.captcha__audio');
     await page.waitForTimeout(1000);

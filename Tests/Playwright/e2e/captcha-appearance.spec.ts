@@ -20,7 +20,7 @@ test.describe('Captcha Appearance', () => {
   });
 
   test('captcha input field is visible', async ({ page }) => {
-    await expect(page.locator('input[id*="captcha"]')).toBeVisible();
+    await expect(page.locator('input[id="captcha_test-1-captcha-1"]')).toBeVisible();
   });
 
   test('refresh button is visible', async ({ page }) => {

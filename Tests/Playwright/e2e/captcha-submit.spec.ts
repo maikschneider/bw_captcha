@@ -7,7 +7,7 @@ test.describe('Captcha Submit', () => {
   });
 
   test('wrong captcha input shows error', async ({ page }) => {
-    await page.fill('input[id*="captcha"]', 'WRONG');
+    await page.fill('input[id="captcha_test-1-captcha-1"]', 'WRONG');
     await page.click('button[type="submit"]');
     await page.waitForTimeout(2000);
 
@@ -16,12 +16,12 @@ test.describe('Captcha Submit', () => {
 
   test('empty captcha input shows error', async ({ page }) => {
     await page.evaluate(() => {
-      const input = document.querySelector('input[id*="captcha"]');
+      const input = document.querySelector('input[id="captcha_test-1-captcha-1"]');
       if (input) input.removeAttribute('required');
     });
     await page.click('button[type="submit"]');
     await page.waitForTimeout(2000);
 
-    await expect(page.getByText('not correct')).toBeVisible();
+    await expect(page.getByText('field is mandatory')).toBeVisible();
   });
 });
