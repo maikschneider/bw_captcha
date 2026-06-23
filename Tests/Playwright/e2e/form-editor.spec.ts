@@ -18,9 +18,15 @@ test.describe('Backend Form Editor', () => {
 
     // Open the test form
     await contentFrame.locator('a', { hasText: 'Captcha Test Form' }).click();
-    await expect(contentFrame.locator('.formeditor')).toBeVisible({ timeout: 30000 });
+    await expect(contentFrame.locator('.formeditor-module')).toBeVisible({ timeout: 30000 });
 
-    // Verify the Captcha element is visible
-    await expect(contentFrame.getByText('captcha-1')).toBeVisible();
+    // Verify the Captcha element is present in the editor at its tree path,
+    // and renders with the extension's own icon (proves the element type registered).
+    const captchaElement = contentFrame.locator(
+      '.formeditor-element[data-element-identifier-path="captcha_test/page-1/captcha-1"]'
+    );
+    await expect(captchaElement).toBeVisible();
+    // v13 renders one captcha icon, v14 renders more than one inside the element — assert at least one.
+    await expect(captchaElement.locator('.icon-t3-form-captcha-element').first()).toBeVisible();
   });
 });
