@@ -32,7 +32,7 @@ if (PHP_SAPI !== 'cli') {
 $finder = (new PhpCsFixer\Finder())
     ->ignoreVCSIgnored(true)
     ->in(realpath(__DIR__))
-    ->exclude('Libraries');
+    ->exclude('Resources/Private/Libs');
 // Return a Code Sniffing configuration using
 // all sniffers needed for PSR-2
 // and additionally:
