@@ -56,19 +56,20 @@ jobs:
       - name: Init TYPO3
         run: ddev init-typo3
 
-      # Run tests
+      # Run Playwright tests
       - name: Run acceptance tests
         uses: nick-fields/retry@v3
         with:
           max_attempts: 3
           retry_on: error
           timeout_minutes: 10
-          command: ddev composer ci:test:acceptance
-          new_command_on_retry: ddev composer test:acceptance -- -g failed
+          command: ddev playwright test --config=playwright.config.ts
 
-      # Save acceptance reports
+      # Save Playwright reports
       - uses: actions/upload-artifact@v4
         with:
-          name: acceptance-reports-${{ matrix.php-version }}-${{ matrix.typo3-version }}
-          path: var/log/codeception/_output
+          name: playwright-reports-${{ matrix.php-version }}-${{ matrix.typo3-version }}
+          path: |
+            Tests/Playwright/test-results
+            Tests/Playwright/playwright-report
         if: failure()
