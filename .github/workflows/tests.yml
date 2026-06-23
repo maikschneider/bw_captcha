@@ -48,7 +48,7 @@ jobs:
 
       # Install dependencies
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@4.0.0
         with:
           composer-options: --with=typo3/cms-core:"^${{ matrix.typo3-version }}"
 
