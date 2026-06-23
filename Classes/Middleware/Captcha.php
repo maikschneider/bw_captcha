@@ -59,9 +59,10 @@ class Captcha implements MiddlewareInterface
         $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
         // encode encrypted phrase into image
-        if ((int)($settings['audioButton'] ?? 1)) {
+        $gd = $builder->getGd();
+        if ((int)($settings['audioButton'] ?? 1) && $gd !== null) {
             $processor = new Processor();
-            $image = $processor->encode($builder->getGd(), $newPhrase);
+            $image = $processor->encode($gd, $newPhrase);
             $captchaImage = $image->get();
             $mimeType = 'image/png';
         } else {
@@ -81,7 +82,7 @@ class Captcha implements MiddlewareInterface
             ->withHeader('Expires', '0');
 
         // render captcha image
-        $response->getBody()->write($captchaImage);
+        $response->getBody()->write((string)$captchaImage);
         return $response;
     }
 
