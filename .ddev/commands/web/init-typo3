@@ -46,6 +46,12 @@ _progress "Setting up TYPO3 installation"
     "$typo3Binary" setup --no-interaction --force --quiet
 _done
 
+# Trust the DDEV/CI hostname. Written to settings.php (loaded by ConfigurationManager).
+# Locally DDEV's additional.php also sets this, but in CI that override is not applied.
+_progress "Configuring trusted hosts pattern"
+    "$typo3Binary" configuration:set SYS/trustedHostsPattern '.*.*' >/dev/null
+_done
+
 # Import DB fixtures
 for file in "$fixturePath"/*.sql; do
     _progress "Importing DB fixture \"$(basename "$file")\""
