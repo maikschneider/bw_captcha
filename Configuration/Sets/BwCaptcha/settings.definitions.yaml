@@ -29,7 +29,7 @@ settings:
     type: int
     category: bw_captcha.settings
   plugin.tx_bwcaptcha.settings.fontFiles:
-    default: 'EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Libraries/Captcha/src/Gregwar/Captcha/Font/captcha5.ttf'
+    default: 'EXT:bw_captcha/Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar/Captcha/Font/captcha0.ttf,EXT:bw_captcha/Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar/Captcha/Font/captcha1.ttf,EXT:bw_captcha/Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar/Captcha/Font/captcha3.ttf,EXT:bw_captcha/Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar/Captcha/Font/captcha4.ttf,EXT:bw_captcha/Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar/Captcha/Font/captcha5.ttf'
     type: string
     category: bw_captcha.settings
   plugin.tx_bwcaptcha.settings.textColor:
