@@ -16,7 +16,7 @@
 		}
 	],
 	"require": {
-		"php": "^8.1",
+		"php": "^8.2",
 		"ext-gd": "*",
 		"gregwar/captcha": "^2.1",
 		"maikschneider/steganography": "^1.0",
