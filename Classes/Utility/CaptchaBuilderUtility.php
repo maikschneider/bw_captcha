@@ -13,7 +13,7 @@ class CaptchaBuilderUtility
 {
     /**
      * @param array<string, string> $settings
-     * @return \Gregwar\Captcha\CaptchaBuilder
+     * @return CaptchaBuilder
      */
     public static function getBuilderFromSettings(array $settings): CaptchaBuilder
     {
@@ -37,15 +37,15 @@ class CaptchaBuilderUtility
 
         if ($textColor) {
             $textColor = GeneralUtility::intExplode(',', $textColor);
-            $captchaBuilder->setTextColor($textColor[0], $textColor[1], $textColor[2]);
+            $captchaBuilder->setTextColor(self::clampColor($textColor[0]), self::clampColor($textColor[1]), self::clampColor($textColor[2]));
         }
         if ($lineColor) {
             $lineColor = GeneralUtility::intExplode(',', $lineColor);
-            $captchaBuilder->setLineColor($lineColor[0], $lineColor[1], $lineColor[2]);
+            $captchaBuilder->setLineColor(self::clampColor($lineColor[0]), self::clampColor($lineColor[1]), self::clampColor($lineColor[2]));
         }
         if ($backgroundColor) {
             $backgroundColor = GeneralUtility::intExplode(',', $backgroundColor);
-            $captchaBuilder->setBackgroundColor($backgroundColor[0], $backgroundColor[1], $backgroundColor[2]);
+            $captchaBuilder->setBackgroundColor(self::clampColor($backgroundColor[0]), self::clampColor($backgroundColor[1]), self::clampColor($backgroundColor[2]));
         }
         if ($distortion) {
             $captchaBuilder->setDistortion(filter_var($distortion, FILTER_VALIDATE_BOOLEAN));
@@ -70,6 +70,16 @@ class CaptchaBuilderUtility
         }
 
         return $captchaBuilder;
+    }
+
+    /**
+     * Clamps a color channel value into the valid 0-255 range expected by the captcha builder.
+     *
+     * @return int<0, 255>
+     */
+    private static function clampColor(int $value): int
+    {
+        return max(0, min(255, $value));
     }
 
     /**

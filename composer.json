@@ -16,14 +16,17 @@
 		}
 	],
 	"require": {
-		"php": "^8.1",
+		"php": "^8.2",
 		"ext-gd": "*",
+		"gregwar/captcha": "^2.1",
+		"maikschneider/steganography": "^1.0",
 		"typo3/cms-core": "^12.0 || ^13.0 || ^14.0"
 	},
 	"require-dev": {
 		"armin/editorconfig-cli": "^2.0",
 		"bk2k/bootstrap-package": "^15.0 || ^16.0",
 		"derhansen/sf_event_mgt": "^7.6 || ^8.0 || ^9.0",
+		"eliashaeussler/typo3-vendor-bundler": "^4.0",
 		"ergebnis/composer-normalize": "^2.44",
 		"friendsofphp/php-cs-fixer": "^3.12",
 		"helhum/typo3-console": "^7.0 || ^8.0 || ^9.0",
@@ -36,13 +39,20 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Blueways\\BwCaptcha\\": "Classes",
-			"Gregwar\\Captcha\\": "Libraries/Captcha/src/Gregwar/Captcha",
-			"MaikSchneider\\Steganography\\": "Libraries/Steganography/src"
+			"Blueways\\BwCaptcha\\": [
+				"Classes"
+			],
+			"Gregwar\\": [
+				"Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar"
+			],
+			"MaikSchneider\\Steganography\\": [
+				"Resources/Private/Libs/vendor/maikschneider/steganography/src"
+			]
 		}
 	},
 	"config": {
 		"allow-plugins": {
+			"eliashaeussler/typo3-vendor-bundler": true,
 			"ergebnis/composer-normalize": true,
 			"move-elevator/composer-translation-validator": true,
 			"typo3/class-alias-loader": true,
@@ -54,6 +64,10 @@
 		"typo3/cms": {
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"extension-key": "bw_captcha",
+			"vendor-libraries": {
+				"root-path": "Resources/Private/Libs",
+				"sbom-file": "Resources/Private/Libs/sbom.json"
+			},
 			"web-dir": "public"
 		}
 	},
