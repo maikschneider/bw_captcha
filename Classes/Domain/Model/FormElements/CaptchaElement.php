@@ -2,18 +2,13 @@
 
 namespace Blueways\BwCaptcha\Domain\Model\FormElements;
 
-use Throwable;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Form\Domain\Model\FormElements\AbstractFormElement;
 
 class CaptchaElement extends AbstractFormElement
 {
-    /**
-     * @throws InvalidConfigurationTypeException&Throwable
-     */
     public function initializeFormElement(): void
     {
         parent::initializeFormElement();
@@ -35,7 +30,10 @@ class CaptchaElement extends AbstractFormElement
         $ts = $configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
         );
-        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'];
+        $settings = $ts['plugin.']['tx_bwcaptcha.']['settings.'] ?? null;
+        if ($settings === null) {
+            return;
+        }
         $this->setProperty('showRefresh', (bool)$settings['refreshButton']);
         $this->setProperty('showAudio', (bool)$settings['audioButton']);
     }
