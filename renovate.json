@@ -4,6 +4,6 @@
 		"config:base"
 	],
 	"ignorePaths": [
-		"Libraries/**"
+		"Resources/Private/Libs/**"
 	]
 }
