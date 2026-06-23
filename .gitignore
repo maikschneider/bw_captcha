@@ -3,5 +3,6 @@ public
 !Resources/Public
 .idea
 vendor
+!Resources/Private/Libs/vendor
 bin
 var

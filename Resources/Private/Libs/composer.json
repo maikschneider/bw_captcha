@@ -1,0 +1,16 @@
+{
+    "name": "blueways/bw-captcha-libs",
+    "config": {
+        "allow-plugins": false,
+        "lock": false
+    },
+    "require": {
+        "gregwar/captcha": "v2.1.0",
+        "maikschneider/steganography": "v1.0.2"
+    },
+    "provide": {
+        "symfony/deprecation-contracts": "*",
+        "symfony/finder": "*",
+        "symfony/options-resolver": "*"
+    }
+}

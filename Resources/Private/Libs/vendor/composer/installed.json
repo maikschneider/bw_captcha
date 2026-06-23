@@ -1,0 +1,123 @@
+{
+    "packages": [
+        {
+            "name": "gregwar/captcha",
+            "version": "v2.1.0",
+            "version_normalized": "2.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gregwar/Captcha.git",
+                "reference": "3c2f6f0c301b94d9ec18ba769015a8a32b95765c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/3c2f6f0c301b94d9ec18ba769015a8a32b95765c",
+                "reference": "3c2f6f0c301b94d9ec18ba769015a8a32b95765c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "php": "^8.2",
+                "symfony/finder": "*"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "2.1.17",
+                "phpstan/phpstan-phpunit": "2.0.6",
+                "phpunit/phpunit": "^9.6",
+                "squizlabs/php_codesniffer": "4.0.1"
+            },
+            "time": "2026-06-16T13:04:08+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Gregwar\\": "src/Gregwar"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Grégoire Passault",
+                    "email": "g.passault@gmail.com",
+                    "homepage": "http://www.gregwar.com/"
+                },
+                {
+                    "name": "Jeremy Livingston",
+                    "email": "jeremy.j.livingston@gmail.com"
+                }
+            ],
+            "description": "Captcha generator",
+            "homepage": "https://github.com/Gregwar/Captcha",
+            "keywords": [
+                "bot",
+                "captcha",
+                "spam"
+            ],
+            "support": {
+                "issues": "https://github.com/Gregwar/Captcha/issues",
+                "source": "https://github.com/Gregwar/Captcha/tree/v2.1.0"
+            },
+            "install-path": "../gregwar/captcha"
+        },
+        {
+            "name": "maikschneider/steganography",
+            "version": "v1.0.2",
+            "version_normalized": "1.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maikschneider/steganography.git",
+                "reference": "6a796c6367d38ac06837d309fba78ffaa4738681"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maikschneider/steganography/zipball/6a796c6367d38ac06837d309fba78ffaa4738681",
+                "reference": "6a796c6367d38ac06837d309fba78ffaa4738681",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-zlib": "*",
+                "symfony/options-resolver": ">4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.12",
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^0.18.0"
+            },
+            "time": "2023-10-08T10:39:48+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "MaikSchneider\\Steganography\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maik Schneider",
+                    "email": "schneider.maik@me.com"
+                }
+            ],
+            "description": "Simple implementation of Steganography (Hiding a hidden message within an image)",
+            "keywords": [
+                "steganography"
+            ],
+            "support": {
+                "source": "https://github.com/maikschneider/steganography/tree/v1.0.2"
+            },
+            "install-path": "../maikschneider/steganography"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

@@ -39,7 +39,15 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Blueways\\BwCaptcha\\": "Classes"
+			"Blueways\\BwCaptcha\\": [
+				"Classes"
+			],
+			"Gregwar\\": [
+				"Resources/Private/Libs/vendor/gregwar/captcha/src/Gregwar"
+			],
+			"MaikSchneider\\Steganography\\": [
+				"Resources/Private/Libs/vendor/maikschneider/steganography/src"
+			]
 		}
 	},
 	"config": {
@@ -56,6 +64,10 @@
 		"typo3/cms": {
 			"cms-package-dir": "{$vendor-dir}/typo3/cms",
 			"extension-key": "bw_captcha",
+			"vendor-libraries": {
+				"root-path": "Resources/Private/Libs",
+				"sbom-file": "Resources/Private/Libs/sbom.json"
+			},
 			"web-dir": "public"
 		}
 	},
