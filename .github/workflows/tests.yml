@@ -66,7 +66,7 @@ jobs:
           command: ddev playwright test --config=playwright.config.ts
 
       # Save Playwright reports
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: playwright-reports-${{ matrix.php-version }}-${{ matrix.typo3-version }}
           path: |
