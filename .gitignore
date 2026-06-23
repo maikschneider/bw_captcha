@@ -6,3 +6,6 @@ vendor
 !Resources/Private/Libs/vendor
 bin
 var
+node_modules
+Tests/Playwright/test-results
+Tests/Playwright/playwright-report

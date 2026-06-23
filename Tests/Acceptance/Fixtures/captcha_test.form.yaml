@@ -1,0 +1,34 @@
+type: Form
+identifier: captcha_test
+label: 'Captcha Test Form'
+prototypeName: standard
+renderingOptions:
+  submitButtonLabel: Submit
+renderables:
+  -
+    type: Page
+    identifier: page-1
+    label: 'Step'
+    renderables:
+      -
+        type: Text
+        identifier: name
+        label: Name
+        properties:
+          fluidAdditionalAttributes:
+            placeholder: 'Your name'
+      -
+        type: Captcha
+        identifier: captcha-1
+        label: Captcha
+        properties:
+          fluidAdditionalAttributes:
+            autocomplete: 'off'
+            required: required
+finishers:
+  -
+    identifier: EmailToReceiver
+    options:
+      subject: 'Test Form Submission'
+      recipientAddress: admin@example.com
+      senderAddress: noreply@example.com

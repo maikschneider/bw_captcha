@@ -1,0 +1,37 @@
+#ddev-generated
+services:
+  playwright:
+    image: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright:1.59.1}-${DDEV_SITENAME}-built
+    build:
+      context: playwright-build
+      args:
+        PLAYWRIGHT_DOCKER_IMAGE: ${PLAYWRIGHT_DOCKER_IMAGE:-ghcr.io/xima-media/playwright:1.59.1}
+        KASMVNC_VERSION: ${KASMVNC_VERSION:-1.4.0}
+        username: ${DDEV_USER}
+        uid: ${DDEV_UID}
+        gid: ${DDEV_GID}
+    container_name: ddev-${DDEV_SITENAME}-playwright
+    user: "${DDEV_UID}:${DDEV_GID}"
+    hostname: ${DDEV_SITENAME}-playwright
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: ${DDEV_APPROOT}
+    environment:
+      - PLAYWRIGHT_TEST_DIR=.
+      - NETWORK_IFACE=eth0
+      - DISPLAY=:1
+      - VIRTUAL_HOST=$DDEV_HOSTNAME
+      - HTTP_EXPOSE=8443:8444,9322:9323
+      - HTTPS_EXPOSE=8444:8444,9323:9323
+    expose:
+      - "8444"
+      - "9323"
+    depends_on:
+      - web
+    volumes:
+      - .:/mnt/ddev_config
+      - ddev-global-cache:/mnt/ddev-global-cache
+      - ../:/var/www/html:rw
+    working_dir: /var/www/html
+    x-ddev:
+      ssh-shell: bash
