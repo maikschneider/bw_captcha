@@ -48,7 +48,10 @@
 			"MaikSchneider\\Steganography\\": [
 				"Resources/Private/Libs/vendor/maikschneider/steganography/src"
 			]
-		}
+		},
+		"exclude-from-classmap": [
+			"Resources/Private/Libs/vendor/"
+		]
 	},
 	"config": {
 		"allow-plugins": {
