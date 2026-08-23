@@ -2,6 +2,8 @@
 
 namespace Blueways\BwCaptcha\Validation\Validator;
 
+use Blueways\BwCaptcha\Utility\PhraseSessionUtility;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
@@ -19,34 +21,11 @@ class CaptchaValidator extends AbstractValidator
      */
     protected function isValid($value): void
     {
-        $captchaPhrases = $this->getFeUser()->getKey('ses', 'captchaPhrases');
+        $feUser = $this->getFeUser();
 
-        if (!$captchaPhrases || !is_array($captchaPhrases) || !is_string($value)) {
+        if ($feUser === null || !is_string($value) || !PhraseSessionUtility::consume($feUser, $value)) {
             $this->displayError();
-            return;
         }
-
-        $time = time();
-        $captchaPhrases = array_filter(
-            $captchaPhrases,
-            function ($captchaLifetime) use ($time) {
-                return $captchaLifetime > $time;
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        foreach ($captchaPhrases as $lifetime => $captchaPhrase) {
-            $isValid = !empty($captchaPhrase) && $captchaPhrase === $value;
-            if ($isValid) {
-                // remove solved captcha
-                unset($captchaPhrases[$lifetime]);
-                $this->getFeUser()->setKey('ses', 'captchaPhrases', $captchaPhrases);
-                $this->getFeUser()->storeSessionData();
-                return;
-            }
-        }
-
-        $this->displayError();
     }
 
     protected function displayError(): void
@@ -60,8 +39,11 @@ class CaptchaValidator extends AbstractValidator
         );
     }
 
-    protected function getFeUser(): FrontendUserAuthentication
+    protected function getFeUser(): ?FrontendUserAuthentication
     {
-        return $GLOBALS['TYPO3_REQUEST']->getAttribute('frontend.user');
+        $request = $GLOBALS['TYPO3_REQUEST'] ?? null;
+        $feUser = $request instanceof ServerRequestInterface ? $request->getAttribute('frontend.user') : null;
+
+        return $feUser instanceof FrontendUserAuthentication ? $feUser : null;
     }
 }
