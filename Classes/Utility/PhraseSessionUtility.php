@@ -21,12 +21,12 @@ class PhraseSessionUtility
 
     public static function createHandle(): string
     {
-        return bin2hex(random_bytes(8));
+        return 'h' . bin2hex(random_bytes(8));
     }
 
     public static function isHandle(string $handle): bool
     {
-        return preg_match('/^[0-9a-f]{16}$/', $handle) === 1;
+        return preg_match('/^h[0-9a-f]{16}$/', $handle) === 1;
     }
 
     public static function store(
