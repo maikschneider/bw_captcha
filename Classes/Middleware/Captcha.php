@@ -3,6 +3,7 @@
 namespace Blueways\BwCaptcha\Middleware;
 
 use Blueways\BwCaptcha\Utility\CaptchaBuilderUtility;
+use Blueways\BwCaptcha\Utility\PhraseSessionUtility;
 use MaikSchneider\Steganography\Processor;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -12,6 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Routing\PageArguments;
 use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class Captcha implements MiddlewareInterface
 {
@@ -31,9 +33,9 @@ class Captcha implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        /** @var PageArguments $pageArguments */
+        /** @var PageArguments|null $pageArguments */
         $pageArguments = $request->getAttribute('routing', null);
-        if ($pageArguments->getPageType() !== '3413') {
+        if ($pageArguments?->getPageType() !== '3413') {
             // pipe request to other middleware handlers
             return $handler->handle($request);
         }
@@ -56,16 +58,30 @@ class Captcha implements MiddlewareInterface
         $builder = CaptchaBuilderUtility::getBuilderFromSettings($settings);
         $builder->build($width, $height, $font);
         $newPhrase = $builder->getPhrase() ?? '';
-        $this->storePhraseToSession($newPhrase, $request, $lifetime);
 
-        // encode encrypted phrase into image
+        /** @var FrontendUserAuthentication|null $feUser */
+        $feUser = $request->getAttribute('frontend.user');
+        $handle = null;
+        if ($feUser !== null) {
+            $handle = PhraseSessionUtility::createHandle();
+            PhraseSessionUtility::store($feUser, $handle, $newPhrase, $lifetime);
+        }
+
+        // encode the handle of the phrase into the image, so that the audio middleware
+        // can look up the solution of exactly this image in the session
         $gd = $builder->getGd();
-        if ((int)($settings['audioButton'] ?? 1) && $gd !== null) {
-            $processor = new Processor();
-            $image = $processor->encode($gd, $newPhrase);
-            $captchaImage = $image->get();
-            $mimeType = 'image/png';
-        } else {
+        $captchaImage = null;
+        $mimeType = 'image/jpeg';
+        if ($handle !== null && (int)($settings['audioButton'] ?? 1) && $gd !== null) {
+            try {
+                $captchaImage = (new Processor())->encode($gd, $handle)->get();
+                $mimeType = 'image/png';
+            } catch (\Throwable) {
+                // image too small to carry the handle: the audio middleware falls back to the latest phrase
+                $captchaImage = null;
+            }
+        }
+        if ($captchaImage === null || $captchaImage === false) {
             $captchaImage = $builder->get();
             $mimeType = 'image/jpeg';
         }
@@ -84,35 +100,5 @@ class Captcha implements MiddlewareInterface
         // render captcha image
         $response->getBody()->write((string)$captchaImage);
         return $response;
-    }
-
-    protected function storePhraseToSession(
-        string $newPhrase,
-        ServerRequestInterface $request,
-        int $lifetime = 3600
-    ): void {
-        if ($request->getAttribute('frontend.user') === null) {
-            return;
-        }
-
-        // write data to session
-        $feUser = $request->getAttribute('frontend.user');
-        $captchaPhrases = $feUser->getKey('ses', 'captchaPhrases');
-        if (empty($captchaPhrases)) {
-            $captchaPhrases = [];
-        }
-
-        $time = time();
-        $captchaPhrases = array_filter(
-            $captchaPhrases,
-            function ($captchaLifetime) use ($time) {
-                return $captchaLifetime > $time;
-            },
-            ARRAY_FILTER_USE_KEY
-        );
-
-        $captchaPhrases[$time + $lifetime] = $newPhrase;
-        $feUser->setKey('ses', 'captchaPhrases', $captchaPhrases);
-        $feUser->storeSessionData();
     }
 }
